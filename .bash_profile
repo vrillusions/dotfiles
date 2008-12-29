@@ -8,6 +8,8 @@
 # unset or set to -1 to disable, positive number waits between specified number in seconds
 unset MAILCHECK
 
+export CLICOLOR=true
+
 # include .bashrc if it exists
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
@@ -78,7 +80,7 @@ sp () {
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    [ -x dircolors ] && eval "`dircolors -b`"
+    [ -n "`dircolors 2>/dev/null`" ] && eval "`dircolors -b`"
     alias ls='ls --color=auto'
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
