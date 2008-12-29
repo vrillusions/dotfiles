@@ -1,0 +1,9 @@
+#my custom one
+#hardstatus alwayslastline "%-Lw%{= BW}[%C %H] %-Lw%{= BW}%50>%n%f* %+%{-}%+Lw%<"
+
+#from http://www.papernapkin.org/pastebin/view/3467/
+#hardstatus alwayslastline "[%C %H] %-Lw%{ WB}%50>%n%f* %+%{-}%+Lw%<"
+
+#from http://shurl.net/1Is
+hardstatus alwayslastline '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[%m/%d %c]%{W}'
+
