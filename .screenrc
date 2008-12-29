@@ -2,6 +2,7 @@
 #bindkey -k F1 prev
 #bindkey -k F2 next
 
+# Don't show startup message
 startup_message off
 
 #my custom one
