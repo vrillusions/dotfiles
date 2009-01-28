@@ -6,6 +6,7 @@
 	status = auto
 	branch = auto
 [diff]
+	# Disables the rename limit
 	renamelimit = 0
 [alias]
 	st = status
