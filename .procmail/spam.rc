@@ -1,0 +1,11 @@
+# spam.rc: procmail recipes to process email through SpamAssassin
+
+:0fw: spamassassin.lock
+| /usr/bin/spamc
+
+#Just want the filters.rc file to handle the moving
+## Dump all tagged spam into separate folder
+#:0:
+#* ^X-Spam-Status: Yes
+#.Spam/
+

@@ -1,0 +1,15 @@
+DEFAULT=$HOME/Maildir/
+MAILDIR=$HOME/Maildir
+PMDIR=$HOME/.procmail
+LOGFILE=$PMDIR/log
+#LOGABSTRACT=all
+SHELL=/bin/sh
+
+INCLUDERC=$PMDIR/spam.rc
+INCLUDERC=$PMDIR/filters.rc
+
+# Shouldn't need this, leaving here just in case down the road
+# Anything that hasn't been filtered yet is delivered to your inbox by this
+# recipe.  The '/' at end of pathname indicates a Maildir format mailbox
+#:0
+#$HOME/Maildir/
