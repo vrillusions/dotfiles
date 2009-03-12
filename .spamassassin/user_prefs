@@ -1,0 +1,72 @@
+# SpamAssassin user preferences file.  See 'perldoc Mail::SpamAssassin::Conf'
+# for details of what can be tweaked.
+###########################################################################
+
+# Please note that these settings will not work for everyone. You must tweak
+# this file according to the type of spam you receive to get rid of it.
+
+# ------------------ General -------------------------------------------
+
+# How many hits before a mail is considered spam.
+required_score 3.2
+
+# How to report spam 0 just modifies headers, 1 does a report and attaches
+# original message, 2 does the report inline at the top of the message.  Default
+# is 1
+report_safe 0
+
+# languages to accept
+# (spamd complains "failed to parse, now a plugin, skipping: ok_languages en"
+#ok_languages en 
+
+# ------------------ Bayes ---------------------------------------------
+
+# Do not autolearn from Bayes
+bayes_auto_learn 0
+
+# Do not autowhitelist e-mail addresses
+use_auto_whitelist 0
+
+# Bayes will ignore these headers
+bayes_ignore_header X-Virus-Scanned
+bayes_ignore_header X-Spam-Checker-Version
+bayes_ignore_header X-Spam-Status
+bayes_ignore_header X-Spam-Level
+bayes_ignore_header X-Spam-Flag
+
+# ------------------ Whitelisting --------------------------------------
+
+# Whitelist and blacklist addresses are now file-glob-style patterns, so
+# "friend@somewhere.com", "*@isp.com", or "*.domain.net" will all work.
+# whitelist_from someone@somewhere.com
+
+# Abuse replies
+# whitelist_from abuse@*
+
+# ------------------ Scores and rules ----------------------------------
+
+# Add your own customised scores for some tests below. The default scores are
+# read from the installed spamassassin rules files, but you can override them.
+# To see the list of tests and their default scores, go to
+# http://spamassassin.org/tests.html.
+#
+# score SYMBOLIC_TEST_NAME n.nn
+
+score FORGED_YAHOO_RCVD 2.5
+
+# ADV: code always indicates spam
+score ADVERT_CODE 11
+
+# 99% possibly spam is (more than likely) spam
+score BAYES_99 11
+# 0% possibly spam is probably not spam
+score BAYES_00 -5
+# Found in spamcop blacklist, say it's spam, but not high enough to trigger the delete
+score RCVD_IN_BL_SPAMCOP_NET 4
+
+score INVALID_DATE_TZ_ABSURD 2.0
+score FROM_ENDS_IN_NUMS 2.0
+score DRUGS_ERECTILE 2.5
+score MIME_HTML_ONLY 1.5
+score FROM_ENDS_IN_NUMS 1.5
+score AWL -1.00
