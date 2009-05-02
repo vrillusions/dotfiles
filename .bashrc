@@ -52,7 +52,8 @@ esac
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-alias irssi='screen -S irssi irssi'
+alias irssi='TERM=screen screen -S irssi irssi'
+alias screen='TERM=screen screen'
 
 # Spellcheck Function
 # Type `sp someword` to spellcheck it
