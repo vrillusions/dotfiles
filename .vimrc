@@ -31,7 +31,9 @@ set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set nohlsearch		" do not highlight searched for phrases
 set incsearch           " do incremental searching
-set mouse=a		" use mouse everywhere
+if has('mouse')
+  set mouse=a		" use mouse everywhere (when terminal supports it)
+endif
 set showmatch		" show matching brackets
 "set cmdheight=2		" the command bar is 2 high
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]     " a ton of info
