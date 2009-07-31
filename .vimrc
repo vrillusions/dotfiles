@@ -93,6 +93,7 @@ endif " has("autocmd")
 
 " Source some additional files
 source $HOME/.vim/abbreviations.vim    " custom abbreviations
+source $HOME/.vim/filetype.vim         " custom filetype associations
 
 " Rest of my various customizations
 " 
