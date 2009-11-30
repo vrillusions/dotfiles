@@ -104,4 +104,7 @@ map <A-UP> gk
 imap <A-UP> <ESC>gki
 imap <A-DOWN> <ESC>gji
 
+" If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
+" password
+cmap w!! %!sudo tee > /dev/null %
 
