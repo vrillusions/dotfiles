@@ -88,6 +88,7 @@ else
 
 "  set autoindent                " always set autoindenting on
 set nosmartindent
+set textwidth=0
 
 endif " has("autocmd")
 
