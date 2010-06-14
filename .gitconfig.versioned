@@ -17,8 +17,6 @@
 	co = checkout
 	df = diff
 	lg = log -p
-[url "ssh://rikku/~vr/public_html/git/"]
-	insteadOf = rikkuhome:
 [advice]
 	statusHints = false
 [gc]
