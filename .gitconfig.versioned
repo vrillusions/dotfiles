@@ -5,6 +5,8 @@
 	diff = auto
 	status = auto
 	branch = auto
+	ui = auto
+	grep = auto
 [diff]
 	# Disables the rename limit
 	renamelimit = 0
@@ -15,3 +17,9 @@
 	co = checkout
 	df = diff
 	lg = log -p
+[url "ssh://rikku/~vr/public_html/git/"]
+	insteadOf = rikkuhome:
+[advice]
+	statusHints = false
+[gc]
+	auto = 1024
