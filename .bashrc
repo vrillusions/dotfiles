@@ -36,8 +36,12 @@ fi
 #    ;;
 #esac
 
+# git and svn prompts
+source ~/.bash/git.bash
+source ~/.bash/svn.bash
+
 # Comment in the above and uncomment this below for a color prompt
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in

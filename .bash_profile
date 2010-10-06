@@ -23,3 +23,12 @@ fi
 if [ -f ~/.bash_profile_local ]; then
     . ~/.bash_profile_local
 fi
+
+##
+# Your previous /Users/teddy/.bash_profile file was backed up as /Users/teddy/.bash_profile.macports-saved_2010-08-02_at_11:09:59
+##
+
+# MacPorts Installer addition on 2010-08-02_at_11:09:59: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
