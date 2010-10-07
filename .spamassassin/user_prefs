@@ -25,7 +25,8 @@ report_safe 0
 bayes_auto_learn 0
 
 # Do not autowhitelist e-mail addresses
-use_auto_whitelist 0
+# spamd says this isn't valid
+#use_auto_whitelist 0
 
 # Bayes will ignore these headers
 bayes_ignore_header X-Virus-Scanned
