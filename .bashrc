@@ -114,7 +114,8 @@ fi
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 # That works on mac but on linux it's LS_COLORS and uses a different format.
 # I just used http://geoff.greer.fm/lscolors/ to generate both of these
-export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+# commenting out since in ubuntu there are many more options I need to check
+#export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
 
 # some more ls aliases
