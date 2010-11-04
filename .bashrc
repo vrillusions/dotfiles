@@ -77,6 +77,46 @@ if [ -x /usr/bin/dircolors ]; then
     #alias vdir='ls --color=auto --format=long'
 fi
 
+# LSCOLORS variable
+# default string: exfxcxdxbxegedabagacad
+# Color designations:
+#  a black
+#  b red
+#  c green
+#  d brown
+#  e blue
+#  f magenta
+#  g cyan
+#  h light grey
+#  A bold black, usually shows up as dark grey
+#  B bold red
+#  C bold green
+#  D bold brown, usually shows up as yellow
+#  E bold blue
+#  F bold magenta
+#  G bold cyan
+#  H bold light grey; looks like bright white
+#  x default foreground or background
+# Order of attributes:
+#  1. directory
+#  2. symbolic link
+#  3. socket
+#  4. pipe
+#  5. executable
+#  6. block special
+#  7. character special
+#  8. executable with setuid bit set
+#  9. executable with setgid bit set
+#  10. directory writable to others, with sticky bit
+#  11. directory writable to others, without sticky bit
+# So default is blue foreground and default background for directories, etc
+# changing the directory color since it's hard to read on dark backgrounds
+export LSCOLORS="gxfxcxdxbxegedabagacad"
+# That works on mac but on linux it's LS_COLORS and uses a different format.
+# I just used http://geoff.greer.fm/lscolors/ to generate both of these
+export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+
+
 # some more ls aliases
 #alias ll='ls -l'
 #alias la='ls -A'
