@@ -1,5 +1,4 @@
 __svn_prompt() {
-	local dir="$(git rev-parse --git-dir 2>/dev/null)"
 	if [[ -d .svn ]]; then
 		if [[ $(svn status | wc -l | sed -e 's/ //g') -gt 0 ]]; then
 			svn_dirty="!"
