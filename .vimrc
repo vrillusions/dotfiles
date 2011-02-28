@@ -1,18 +1,5 @@
-" An example for a vimrc file.
-"
-" Maintainer:   Bram Moolenaar <Bram@vim.org>
-" Last change:  2002 Sep 19
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"             for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"           for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+" A lot of this taken from default vimrc and from other people's examples
+" I found that I like.
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -24,7 +11,7 @@ set backspace=indent,eol,start
 if has("vms")
   set nobackup          " do not keep a backup file, use versions instead
 else
-  "set backup           " keep a backup file
+  set backup           " keep a backup file
 endif
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
@@ -35,21 +22,9 @@ if has('mouse')
   set mouse=a		" use mouse everywhere (when terminal supports it)
 endif
 set showmatch		" show matching brackets
-"set cmdheight=2		" the command bar is 2 high
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]     " a ton of info
 set laststatus=2	" always show status line
 set background=dark	" we are using a dark background
-"iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" This is an alternative that also works in block mode, but the deleted
-" text is lost and it only works for putting the current register.
-"vnoremap p "_dp
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -108,4 +83,9 @@ imap <A-DOWN> <ESC>gji
 " If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
 " password
 cmap w!! %!sudo tee > /dev/null %
+
+" Directories for swp and backup files
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
 
