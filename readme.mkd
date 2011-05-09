@@ -1,0 +1,20 @@
+# Overview
+
+Have kept this in subversion for a while but finally cleaned up all the sensitive information (`git rebase --interactive` ftw) and making it public.  Not as robust as others I've seen but it works for me.
+
+# Setup
+
+While I don't expect anyone to use this on their system but pick and choose what they want, here's how I set it up on a new computer.
+
+- after clone, run `./createlinks.sh`
+  - for some files I maintain a separate versioned file like my gitconfig since my actual one has a signing key and author fields could change if I'm at work.  This will notice I don't have a gitconfig and copy from gitconfig.versioned.  This will be done to other files as well
+  - creates symlinks for the specified files.
+
+# Post-install options
+
+One thing I miss with git is new commits aren't always pushed to central server.  I'm used to this in git and tend to push rather frequently because of it.  But for my own reference I can emulate the auto push functionality in a post-commit hook:
+
+    echo 'git push' > .git/hooks/post-commit
+    chmod 755 .git/hooks/post-commit
+
+I'd rather manually push as I'm used to git now but someone coming along may find that information useful.
