@@ -1,0 +1,20 @@
+# Incrementally search forward and backward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# Fixes left and right in case it doesn't work
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Use "<esc> O" to add a new option to a command
+# Should work with "\M-o" for meta but doesn't
+"\eo": "\C-p\C-a\ef "
+
+# Bash completion settings
+#set match-hidden-files off
+set completion-ignore-case on
+# puts / after directories and * after programs
+set visible-stats on
+# don't beep, just show me the matching files
+set show-all-if-ambiguous on
+# Make meta+s cycle through (disabled because it doesn't work in ubuntu)
+#"\M-s": menu-complete

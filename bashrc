@@ -129,6 +129,20 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+# append history instead of overwrite
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+# give us lots of history
+export HISTSIZE=10000
+export HISTFILESIZE=1000000
+
+# fix typos when changing directories
+shopt -s cdspell
+
+# set cdpath, makes changing to sibling directories easier
+CDPATH='.:..:../..:~'
+
 # include .bashrc_local if it exists
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local

@@ -22,6 +22,7 @@ cd
 relink .bash         $DOTFILES/bash
 relink .bashrc       $DOTFILES/bashrc
 relink .bash_profile $DOTFILES/bash_profile
+relink .inputrc      $DOTFILES/inputrc
 
 relink .vim          $DOTFILES/vim
 relink .vimrc        $DOTFILES/vimrc
