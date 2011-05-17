@@ -11,20 +11,21 @@ set backspace=indent,eol,start
 if has("vms")
   set nobackup          " do not keep a backup file, use versions instead
 else
-  set backup           " keep a backup file
+  set backup            " keep a backup file
 endif
-set history=50          " keep 50 lines of command line history
+set history=50          " how many lines of command line history to keep
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
-set nohlsearch		" do not highlight searched for phrases
+set nohlsearch          " do not highlight searched for phrases
 set incsearch           " do incremental searching
 if has('mouse')
-  set mouse=a		" use mouse everywhere (when terminal supports it)
+  set mouse=a           " use mouse everywhere (when terminal supports it)
 endif
-set showmatch		" show matching brackets
+set showmatch           " show matching brackets
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]     " a ton of info
-set laststatus=2	" always show status line
-set background=dark	" we are using a dark background
+set statusline=%<%F%h%m%r%h%w%y\ fmt:%{&ff}\ %=\ %l\,%c%V\ %P
+set laststatus=2        " always show status line
+set background=dark     " we are using a dark background
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -33,46 +34,25 @@ if &t_Co > 2 || has("gui_running")
   " set hlsearch
 endif
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
-
-else
+" load ftplugin and indent files
+filetype plugin on
+filetype indent on
 
 "  set autoindent                " always set autoindenting on
 set nosmartindent
 set textwidth=0
 
-endif " has("autocmd")
-
 " Source some additional files
 source $HOME/.vim/abbreviations.vim    " custom abbreviations
 source $HOME/.vim/filetype.vim         " custom filetype associations
 
+" Be quiet
+set noerrorbells
+set vb
+set t_vb=
+
 " Rest of my various customizations
-" 
+"
 " when holding the alt key want to go up and down a line as I visual see it
 " instead of going up and down actual lines (such as if a line wraps)
 map <A-DOWN> gj
@@ -88,4 +68,36 @@ cmap w!! %!sudo tee > /dev/null %
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
+" Vim v7.3 settings 
+if v:version >= 703
+  " Enable persistant undu
+  set undodir=~/.vim/undofiles
+  set undofile
 
+  " Mark ideal text width (set by textwidth)
+  set colorcolumn=+1
+endif
+
+"jump to last cursor position when opening a file
+"dont do it when writing a commit log entry
+autocmd BufReadPost * call SetCursorPosition()
+function! SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  end
+endfunction
+
+"spell check when writing commit logs
+autocmd filetype svn,*commit* set spell
+
+"display tabs and trailing spaces
+set list
+set listchars=tab:»·,trail:·,nbsp:·
+
+" Load local settings if exists
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
