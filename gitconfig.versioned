@@ -1,8 +1,8 @@
 [user]
 	name = Todd Eddy
 	email = vr@vrillusions.com
-# Set autocrlf to true if on windows
 [core]
+	# Set autocrlf to true if on windows
 	autocrlf = input
 [color]
 	diff = auto
