@@ -20,6 +20,7 @@
 	co = checkout
 	df = diff
 	lg = log -p
+	lgs = log --oneline --decorate
 [advice]
 	statusHints = false
 [gc]
