@@ -34,9 +34,12 @@ if &t_Co > 2 || has("gui_running")
   " set hlsearch
 endif
 
-" load ftplugin and indent files
-filetype plugin on
-filetype indent on
+if has('filetype')
+  " load ftplugin and indent files
+  filetype plugin on
+  filetype indent on
+  source $HOME/.vim/filetype.vim         " custom filetype associations
+endif
 
 "  set autoindent                " always set autoindenting on
 set nosmartindent
@@ -44,7 +47,6 @@ set textwidth=0
 
 " Source some additional files
 source $HOME/.vim/abbreviations.vim    " custom abbreviations
-source $HOME/.vim/filetype.vim         " custom filetype associations
 
 " Be quiet
 set noerrorbells
@@ -78,20 +80,22 @@ if v:version >= 703
   set colorcolumn=+1
 endif
 
-"jump to last cursor position when opening a file
-"dont do it when writing a commit log entry
-autocmd BufReadPost * call SetCursorPosition()
-function! SetCursorPosition()
-  if &filetype !~ 'svn\|commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
-    endif
-  end
-endfunction
+if has('autocmd')
+  "jump to last cursor position when opening a file
+  "dont do it when writing a commit log entry
+  autocmd BufReadPost * call SetCursorPosition()
+  function! SetCursorPosition()
+    if &filetype !~ 'svn\|commit\c'
+      if line("'\"") > 0 && line("'\"") <= line("$")
+        exe "normal! g`\""
+        normal! zz
+      endif
+    end
+  endfunction
 
-"spell check when writing commit logs
-autocmd filetype svn,*commit* set spell
+  "spell check when writing commit logs
+  autocmd filetype svn,*commit* set spell
+endif
 
 "display tabs and trailing spaces
 set list
