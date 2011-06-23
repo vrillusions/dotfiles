@@ -3,7 +3,7 @@ __git_prompt() {
 	if [ -x "$gitcmd" ]; then
 		local dir="$(git rev-parse --git-dir 2>/dev/null)"
 		if [ -n "$dir" ]; then
-			if [[ $((git status 2> /dev/null) | tail -n1) != "nothing to commit" ]]; then
+			if [[ $((git status 2> /dev/null) | tail -n1) != "nothing to commit"* ]]; then
 				git_dirty="!"
 			else
 				git_dirty=""
