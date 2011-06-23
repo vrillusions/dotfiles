@@ -19,18 +19,19 @@ fi
 
 cd
 
-relink .bash         $DOTFILES/bash
-relink .bashrc       $DOTFILES/bashrc
-relink .bash_profile $DOTFILES/bash_profile
-relink .inputrc      $DOTFILES/inputrc
+relink .bash                   $DOTFILES/bash
+relink .bashrc                 $DOTFILES/bashrc
+relink .bash_profile           $DOTFILES/bash_profile
+relink .inputrc                $DOTFILES/inputrc
 
-relink .vim          $DOTFILES/vim
-relink .vimrc        $DOTFILES/vimrc
+relink .vim                    $DOTFILES/vim
+relink .vimrc                  $DOTFILES/vimrc
 
-relink .screenrc     $DOTFILES/screenrc
+relink .screenrc               $DOTFILES/screenrc
+relink .SciTEUser.properties   $DOTFILES/SciTEUser.properties
 
-relink .gitconfig    $DOTFILES/gitconfig
-#relink .gitignore    $DOTFILES/gitignore
+relink .gitconfig              $DOTFILES/gitconfig
+#relink .gitignore              $DOTFILES/gitignore
 
 echo
 echo "Note: you need to manually link procmail and spamassassin files on mail server."
