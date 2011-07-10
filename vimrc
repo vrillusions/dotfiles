@@ -1,8 +1,7 @@
-" A lot of this taken from default vimrc and from other people's examples
-" I found that I like.
+" Tried to make this as backwards compatible as possible. Even in vi only
+" environments this shouldn't give errors, but haven't tested a lot.
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Use Vim settings, rather then Vi settings
 set nocompatible
 
 " allow backspacing over everything in insert mode
@@ -23,9 +22,21 @@ if has('mouse')
 endif
 set showmatch           " show matching brackets
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]     " a ton of info
+" just useful info (don't need ASCII and HEX values often)
 set statusline=%<%F%h%m%r%h%w%y\ fmt:%{&ff}\ %=\ %l\,%c%V\ %P
 set laststatus=2        " always show status line
 set background=dark     " we are using a dark background
+set backupdir=~/.vim/backup  " where to save backups
+set directory=~/.vim/backup  " where to save .swp files
+set list                " display tabs and trailing spaces
+set listchars=tab:»·,trail:·,nbsp:·  " what characters to use
+"set autoindent          " always set autoindenting on
+set nosmartindent       " smartindent never seemed to work right for me
+set textwidth=0         " 0 disables automatic line wrapping
+set noerrorbells        " be quiet
+set vb                  " I really mean it
+set t_vb=               " not a sound
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -41,20 +52,9 @@ if has('filetype')
   source $HOME/.vim/filetype.vim         " custom filetype associations
 endif
 
-"  set autoindent                " always set autoindenting on
-set nosmartindent
-set textwidth=0
-
 " Source some additional files
 source $HOME/.vim/abbreviations.vim    " custom abbreviations
 
-" Be quiet
-set noerrorbells
-set vb
-set t_vb=
-
-" Rest of my various customizations
-"
 " when holding the alt key want to go up and down a line as I visual see it
 " instead of going up and down actual lines (such as if a line wraps)
 map <A-DOWN> gj
@@ -65,10 +65,6 @@ imap <A-DOWN> <ESC>gji
 " If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
 " password
 cmap w!! %!sudo tee > /dev/null %
-
-" Directories for swp and backup files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
 
 " Vim v7.3 settings 
 if v:version >= 703
@@ -96,10 +92,6 @@ if has('autocmd')
   "spell check when writing commit logs
   autocmd filetype svn,*commit* set spell
 endif
-
-"display tabs and trailing spaces
-set list
-set listchars=tab:»·,trail:·,nbsp:·
 
 " Load local settings if exists
 if filereadable(expand("~/.vimrc.local"))
