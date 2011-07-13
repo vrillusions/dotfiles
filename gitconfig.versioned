@@ -21,6 +21,8 @@
 	df = diff
 	lg = log -p
 	lgs = log --oneline --decorate
+	si = submodule init
+	su = submodule update
 [advice]
 	statusHints = false
 [gc]
