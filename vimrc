@@ -4,6 +4,14 @@
 " Use Vim settings, rather then Vi settings
 set nocompatible
 
+if has("win32") || has("win64")
+  " I use ~/.vim on windows too
+  set runtimepath=~/.vim,~/vimfiles,$VIMRUNTIME
+endif
+
+" need to specify this early or vim might complain on listchars
+set enc=utf-8
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
