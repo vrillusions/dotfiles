@@ -53,14 +53,6 @@ if &t_Co > 2 || has("gui_running")
   " set hlsearch
 endif
 
-if has('filetype')
-  " turn on filetype and filetype plugins, not indent (I just put those in ftplugin)
-  " this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
-  " filetype from $VIMRUNTIME/ftplugin/ directory
-  filetype plugin on
-  "filetype indent on    " I just use ftplugin for everything including indents
-endif
-
 " Source some additional files
 source $HOME/.vim/abbreviations.vim    " custom abbreviations
 
@@ -86,6 +78,12 @@ if v:version >= 703
 endif
 
 if has('autocmd')
+  " turn on filetype and filetype plugins, not indent (I just put those in ftplugin)
+  " this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
+  " filetype from $VIMRUNTIME/ftplugin/ directory
+  filetype plugin on
+  "filetype indent on    " I just use ftplugin for everything including indents
+
   "jump to last cursor position when opening a file
   "dont do it when writing a commit log entry
   autocmd BufReadPost * call SetCursorPosition()
