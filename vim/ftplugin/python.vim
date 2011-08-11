@@ -8,6 +8,7 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 setlocal smartindent
+setlocal autoindent
 setlocal fileencoding=utf-8 
 
 " python specific abbreviations
