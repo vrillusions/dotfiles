@@ -90,7 +90,13 @@ alias screen='TERM=screen screen'
 # Spellcheck Function
 # Type `sp someword` to spellcheck it
 sp () {
-    echo $1 | ispell -a
+    if [ "$(which ispell)" != "" ]; then
+        echo "$1" | ispell -a
+    elif [ "$(which aspell)" != "" ]; then
+        echo "$1" | aspell -a
+    else
+        echo "Could not find ispell or aspell"
+    fi
 }
 
 # enable programmable completion features (you don't need to enable
