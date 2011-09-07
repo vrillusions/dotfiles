@@ -19,17 +19,18 @@ export EDITOR=vim
 source ~/.bash/git.bash
 source ~/.bash/svn.bash
 
-# Comment in the above and uncomment this below for a color prompt
-PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
     ;;
 *)
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
     ;;
 esac
+
+# Comment in the above and uncomment this below for a color prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
