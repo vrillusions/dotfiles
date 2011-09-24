@@ -100,12 +100,14 @@ sp () {
     fi
 }
 
+# MOST COMPUTERS PULL THIS AUTOMATICALLY, ADD TO ~/.bashrc_local IF
+# IT'S NOT DONE ON THIS SYSTEM
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ]; then
+#    . /etc/bash_completion
+#fi
 
 # --- BEGIN SOME BASH SPECIFIC OPTIONS --- 
 # don't put duplicate lines in the history. See bash(1) for more options
