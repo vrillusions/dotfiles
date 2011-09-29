@@ -23,6 +23,7 @@
 	lgs = log --oneline --decorate
 	si = submodule init
 	su = submodule update
+	cpx = cherry-pick -x
 [advice]
 	statusHints = false
 [gc]
