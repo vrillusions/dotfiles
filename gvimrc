@@ -1,3 +1,7 @@
+" Pickup new changes if not changed in vim. Used to this in gui editors but
+" not command line, so it's only mentioned here.
+set autoread
+
 " use light solarized color scheme
 set background=light
 colorscheme solarized
