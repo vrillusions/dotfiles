@@ -14,3 +14,7 @@ au BufNewFile,BufRead *.rst.txt setfiletype rst
 " text filetype
 au BufRead,BufNewFile *.{txt,TXT} setfiletype text
 au BufRead,BufNewFile README setfiletype text
+
+" Git config
+" set it for gitconfig and gitconfig.versioned in dotfiles
+au BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
