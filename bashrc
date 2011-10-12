@@ -34,8 +34,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Comment in the above and uncomment this below for a color prompt
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
