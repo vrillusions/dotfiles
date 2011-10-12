@@ -24,6 +24,7 @@
 	si = submodule init
 	su = submodule update
 	cpx = cherry-pick -x
+	pr = pull --rebase
 [advice]
 	statusHints = false
 [gc]
