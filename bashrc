@@ -15,18 +15,22 @@ export EDITOR=vim
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# git and svn prompts
-source ~/.bash/git.bash
+# svn prompt
 source ~/.bash/svn.bash
+
+# git prompt
+export GIT_PS1_SHOWDIRTYSTATE=true      # adds a * if there are unstaged changes, + if staged changes
+export GIT_PS1_SHOWUNTRACKEDFILES=true  # adds a % if there are untracked files
+source ~/.bash/git-completion.bash
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
+    PS1='\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_ps1 "(%s)")$(__svn_prompt)\[\033[00m\]\$ '
     ;;
 *)
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_prompt)$(__svn_prompt)\[\033[00m\]\$ '
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[32m\] $(__git_ps1 "(%s)")$(__svn_prompt)\[\033[00m\]\$ '
     ;;
 esac
 
