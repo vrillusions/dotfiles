@@ -25,6 +25,7 @@
 	su = submodule update
 	cpx = cherry-pick -x
 	pr = pull --rebase
+	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 [advice]
 	statusHints = false
 [gc]
