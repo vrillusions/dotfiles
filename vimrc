@@ -99,6 +99,9 @@ if has('autocmd')
 
   "spell check when writing commit logs
   autocmd filetype svn,*commit* set spell
+  
+  " Load a template when creating a new file
+  autocmd! BufNewFile * silent! 0r ~/.vim/templates/tmpl.%:e
 endif
 
 " Load local settings if exists
