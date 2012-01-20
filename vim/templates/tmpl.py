@@ -6,10 +6,12 @@ This is a template for python.
 
 """
 
-__version__ = 'alpha'
 
 import sys
 import traceback
+
+
+__version__ = 'alpha'
 
 
 def main():
