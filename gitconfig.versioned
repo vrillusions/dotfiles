@@ -24,8 +24,11 @@
 	si = submodule init
 	su = submodule update
 	cpx = cherry-pick -x
+	ps = push --recurse-submodules=check
 	pr = pull --rebase
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+	datetag = !git tag `date \"+%Y%m%d%H%M\"`
+	sst = submodule status
 [advice]
 	statusHints = false
 [gc]
