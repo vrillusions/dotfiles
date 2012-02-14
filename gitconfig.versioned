@@ -27,7 +27,7 @@
 	ps = push --recurse-submodules=check
 	pr = pull --rebase
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
-	datetag = !git tag `date \"+%Y%m%d%H%M\"`
+	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	sst = submodule status
 [advice]
 	statusHints = false
