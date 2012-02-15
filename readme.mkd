@@ -18,3 +18,11 @@ One thing I miss with git is new commits aren't always pushed to central server.
     chmod 755 .git/hooks/post-commit
 
 I'd rather manually push as I'm used to git now but someone coming along may find that information useful.
+
+# Patching gitconfig file with updates
+
+Should still keep backups but for reference here's how to patch my local gitconfig with the versioned one.
+
+    diff -u -I .*signingkey.* gitconfig gitconfig.versioned | patch -P0 gitconfig
+
+Leave out the patch part to see what changes would be applied.
