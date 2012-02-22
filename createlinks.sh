@@ -28,7 +28,6 @@ relink .vim                    $DOTFILES/vim
 relink .vimrc                  $DOTFILES/vimrc
 
 relink .screenrc               $DOTFILES/screenrc
-relink .SciTEUser.properties   $DOTFILES/SciTEUser.properties
 
 relink .gitconfig              $DOTFILES/gitconfig
 #relink .gitignore              $DOTFILES/gitignore
