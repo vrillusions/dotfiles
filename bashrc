@@ -90,6 +90,12 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 alias irssi='TERM=screen screen -S irssi irssi'
 alias screen='TERM=screen screen'
 
+alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 # Spellcheck Function
 # Type `sp someword` to spellcheck it
 sp () {
