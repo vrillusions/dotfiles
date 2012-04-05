@@ -28,6 +28,7 @@ relink .vim                    $DOTFILES/vim
 relink .vimrc                  $DOTFILES/vimrc
 
 relink .screenrc               $DOTFILES/screenrc
+relink .lftprc                 $DOTFILES/lftprc
 
 relink .gitconfig              $DOTFILES/gitconfig
 #relink .gitignore              $DOTFILES/gitignore

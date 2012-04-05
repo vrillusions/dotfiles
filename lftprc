@@ -1,0 +1,4 @@
+# print out information on what it is doing
+# 3 - show only greeting and error messages
+# 4 - shows other commands as well
+debug 3
