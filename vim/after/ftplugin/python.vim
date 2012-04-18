@@ -5,6 +5,8 @@ setlocal tabstop=4
 setlocal softtabstop=4 
 setlocal shiftwidth=4
 setlocal textwidth=80
+setlocal formatoptions-=t   " don't autowrap code at textwidth
+setlocal formatoptions+=c   " but I want comments to autowrap
 setlocal smarttab
 setlocal expandtab
 setlocal smartindent
