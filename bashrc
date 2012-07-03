@@ -29,14 +29,16 @@ NORMAL="\[\033[00m\]"
 GREEN="\[\033[01;32m\]"
 BLUE="\[\033[01;34m\]"
 WHITE="\[\033[01;37m\]"
+# always set the prompt_command
+PROMPT_COMMAND='echo -n "($?) "'
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    PS1="\[\e]0;\u@\h: \w\a\]${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} "'$(__git_ps1 "(%s)")$(__svn_prompt)'"${NORMAL}\$ "
+    TITLE_BAR="\[\033]0;\u@\h: \w\007\]"
+    PS1="${TITLE_BAR}${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} \$(__git_ps1 \"(%s)\")\$(__svn_prompt)${NORMAL}\$ "
     ;;
 *)
-    PS1="${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} "'$(__git_ps1 "(%s)")$(__svn_prompt)'"${NORMAL}\$ "
+    PS1="${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} \$(__git_ps1 \"(%s)\")\$(__svn_prompt)${NORMAL}\$ "
     ;;
 esac
 
@@ -133,7 +135,7 @@ shopt -s checkwinsize
 
 # append history instead of overwrite
 shopt -s histappend
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND="$PROMPT_COMMAND ; history -a" 
 # give us lots of history
 export HISTSIZE=10000
 export HISTFILESIZE=1000000
