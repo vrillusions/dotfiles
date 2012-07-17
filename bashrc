@@ -26,11 +26,13 @@ source ~/.bash/git-completion.bash
 # some variables to make this stuff readable
 RESET="\[\017\]"
 NORMAL="\[\033[00m\]"
+# don't enclose brackets because it's used for PROMPT_COMMAND
+RED="\033[01;31m"
 GREEN="\[\033[01;32m\]"
 BLUE="\[\033[01;34m\]"
 WHITE="\[\033[01;37m\]"
 # always set the prompt_command
-PROMPT_COMMAND='echo -n "($?) "'
+PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${RED}rc: $RET"; fi'
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
