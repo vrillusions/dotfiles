@@ -21,7 +21,9 @@ source ~/.bash/svn.bash
 # git prompt
 export GIT_PS1_SHOWDIRTYSTATE=true      # adds a * if there are unstaged changes, + if staged changes
 export GIT_PS1_SHOWUNTRACKEDFILES=true  # adds a % if there are untracked files
-source ~/.bash/git-completion.bash
+#source ~/.bash/git-completion.bash
+# this only loads the git prompt stuff which is all I really need for here
+source ~/.bash/git-prompt.sh
 
 # some variables to make this stuff readable
 RESET="\[\017\]"
