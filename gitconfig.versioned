@@ -14,22 +14,22 @@
 	# Disables the rename limit
 	renamelimit = 0
 [alias]
-	st = status
-	ci = commit
 	br = branch
+	ci = commit
 	co = checkout
+	cpx = cherry-pick -x
+	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	df = diff
 	dfs = diff --name-status
 	lg = log -p
 	lgs = log --oneline --decorate
-	si = submodule init
-	su = submodule update
-	cpx = cherry-pick -x
-	ps = push --recurse-submodules=check
-	pr = pull --rebase
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
-	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
+	pr = pull --rebase
+	ps = push --recurse-submodules=check
+	si = submodule init
 	sst = submodule status
+	st = status
+	su = submodule update
 [advice]
 	statusHints = false
 [gc]
