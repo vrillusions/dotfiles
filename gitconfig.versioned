@@ -19,6 +19,7 @@
 	co = checkout
 	cpx = cherry-pick -x
 	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
+	datetags = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -s -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	df = diff
 	dfs = diff --name-status
 	lg = log -p
@@ -26,7 +27,10 @@
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	pr = pull --rebase
 	ps = push --recurse-submodules=check
+	sd = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git stash save \"$date $@\"; }; f"
 	si = submodule init
+	sl = stash list
+	sp = stash pop
 	sst = submodule status
 	st = status
 	su = submodule update
