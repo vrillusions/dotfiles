@@ -27,7 +27,7 @@
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	pr = pull --rebase
 	ps = push --recurse-submodules=check
-	sd = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git stash save \"$date $@\"; }; f"
+	sd = "!f(){ date=$(date \"+%Y-%m-%dT%H:%M:%S%z\") && git stash save \"$date $@\"; }; f"
 	si = submodule init
 	sl = stash list
 	sp = stash pop
