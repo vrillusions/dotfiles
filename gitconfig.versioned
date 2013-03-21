@@ -1,6 +1,6 @@
 [user]
 	name = Todd Eddy
-	email = vr@vrillusions.com
+	email = user@example.com
 [core]
 	# Set autocrlf to true if on windows
 	autocrlf = input
