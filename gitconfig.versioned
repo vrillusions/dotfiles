@@ -5,11 +5,11 @@
 	# Set autocrlf to true if on windows
 	autocrlf = input
 [color]
-	diff = auto
-	status = auto
 	branch = auto
-	ui = auto
+	diff = auto
 	grep = auto
+	status = auto
+	ui = auto
 [diff]
 	# Disables the rename limit
 	renamelimit = 0
