@@ -37,6 +37,8 @@
 [advice]
 	statusHints = false
 [gc]
+	# Default is 6700 which can be a while
 	auto = 1024
 [push]
+	# Only push the current branch to it's matching upstream branch
 	default = upstream
