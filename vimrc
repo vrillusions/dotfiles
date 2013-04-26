@@ -8,6 +8,9 @@ endif
 
 set nocompatible                " Use Vim settings, rather than Vi settings
 
+" Load pathogen
+execute pathogen#infect()
+
 set enc=utf-8                   " Always use UTF-8 encoding (needed for listchars)
 set backspace=indent,eol,start  " backspace over everything in insert mode
 set backup                      " keep a backup file
@@ -71,6 +74,9 @@ map <Leader>mp :set paste<CR>:set nolist<CR>
 " If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
 " password
 cmap w!! %!sudo tee > /dev/null %
+
+" Toggle NERDTree
+map <Leader>n :NERDTreeToggle<CR>
 
 " Vim v7.3 settings 
 if v:version >= 703
