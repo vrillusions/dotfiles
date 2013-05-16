@@ -28,6 +28,7 @@ echo "Other:"
 # In alphabetical order
 check_installed "7zip     " $(which 7za >/dev/null      && 7za --help | sed -n 3p | awk '{print $3}')
 check_installed "bash     " $(which bash >/dev/null     && bash --version | sed -n 1p | awk '{print $4}')
+check_installed "curl     " $(which curl >/dev/null     && curl --version | sed -n 1p | awk '{print $2}')
 check_installed "git      " $(which git >/dev/null      && git --version | awk '{print $3}')
 check_installed "ipcalc   " $(which ipcalc >/dev/null   && ipcalc --version)
 check_installed "lftp     " $(which lftp >/dev/null     && lftp --version | sed -n 1p | awk '{print $4}')
