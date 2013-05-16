@@ -6,3 +6,8 @@ setlocal smarttab
 setlocal expandtab
 setlocal smartindent
 setlocal fileencoding=utf-8
+" since we don't set textwidth this has to be an exact number to the position
+" that will be colored. Also this is a v7.3+ option so need to check if exists
+if exists('+colorcolumn')
+    setlocal colorcolumn=81
+endif

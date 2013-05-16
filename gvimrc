@@ -2,6 +2,9 @@
 " not command line, so it's only mentioned here.
 set autoread
 
+" show line numbers in gui (another thing used to gui editors)
+set number
+
 " use light solarized color scheme
 set background=light
 colorscheme solarized
