@@ -35,5 +35,6 @@ relink .gitconfig              $DOTFILES/gitconfig
 
 echo
 echo "Note: you need to manually link procmail and spamassassin files on mail server."
+echo "Also gvimrc if you need that."
 
 exit 0

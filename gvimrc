@@ -2,8 +2,14 @@
 " not command line, so it's only mentioned here.
 set autoread
 
+" gvim supports 256 colors
+set t_Co=256
+
 " show line numbers in gui (another thing used to gui editors)
 set number
+
+" stop cursor blinking
+set guicursor+=n-v-c:blinkon0
 
 " use light solarized color scheme
 set background=light

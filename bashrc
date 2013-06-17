@@ -101,6 +101,7 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 alias irssi='TERM=screen screen -S irssi irssi'
 alias screen='TERM=screen screen'
+alias gvim='gvim --remote-tab-silent'
 
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 alias ..="cd .."
