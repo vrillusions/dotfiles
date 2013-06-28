@@ -36,6 +36,7 @@ check_installed "minicom  " $(which minicom >/dev/null  && minicom --version | s
 check_installed "nmap     " $(which nmap >/dev/null     && nmap --version | sed -n 2p | awk '{print $3}')
 check_installed "php      " $(which php >/dev/null      && php --version | awk '{print $2}')
 check_installed "python   " $(which python >/dev/null   && python --version 2>&1 | awk '{print $2}')
+check_installed "└─ fabric " $(which fab >/dev/null      && fab --version | sed -n 1p | awk '{print $2}')
 check_installed "ruby     " $(which ruby >/dev/null     && ruby --version | awk '{print $2}')
 check_installed "rvm      " $(which rvm >/dev/null      && rvm --version | grep . | awk '{print $2}')
 check_installed "screen   " $(which screen >/dev/null   && screen --version | awk '{print $3}')
