@@ -75,8 +75,13 @@ map <Leader>mp :set paste<CR>:set nolist<CR>
 " password
 cmap w!! %!sudo tee > /dev/null %
 
-" Toggle NERDTree
+" NERDTree
 map <Leader>n :NERDTreeToggle<CR>
+
+" MiniBufExpl
+map     <Leader>t   :MBEToggle<CR>
+noremap <C-TAB>     :MBEbn<CR>
+noremap <C-S-TAB>   :MBEbp<CR>
 
 " Vim v7.3 settings 
 if v:version >= 703
