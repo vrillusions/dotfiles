@@ -15,14 +15,16 @@ set guicursor+=n-v-c:blinkon0
 set background=light
 colorscheme solarized
 
-" begin macvim specifics
+" begin OS specifics options
 if has("gui_macvim")
-    " disable toolbar
-    set guioptions-=T
-
-    " macvim parses guifont differently
-    set guifont=Inconsolata:h12
+    " MacVIM
+    set guioptions-=T           " disable toolbar
+    set guifont=Inconsolata:h12 " MacVIM parses guifont differently
 elseif has("win32") || has("win64")
+    " Windows
+    set lines=50 columns=106    " width is 106 to allow 100 + line numbers
+    set guioptions-=T           " disable toolbar
+    set background=dark         " dark theme in windows
     set guifont=Consolas:h12
 else
     " use standard syntax to set font
