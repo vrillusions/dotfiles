@@ -89,6 +89,9 @@ let NERDTreeQuitOnOpen = 1  " Quit on opening files from the tree
 map     <Leader>t   :MBEToggle<CR>
 noremap <C-TAB>     :MBEbn<CR>
 noremap <C-S-TAB>   :MBEbp<CR>
+let g:miniBufExplCycleArround = 1       " cycle around when reach either end
+let g:miniBufExplUseSingleClick = 1     " single click a buffer to open
+let g:miniBufExplForceSyntaxEnable = 1  " fix syntax highlight bugs
 
 " ctrlP
 let g:ctrlp_show_hidden = 1     " show hidden files
