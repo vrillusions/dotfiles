@@ -34,6 +34,9 @@ set vb                          " I really mean it
 set t_vb=                       " not a sound
 set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
+set wildmenu                    " make tab completion for files and buffers act like bash
+set wildmode=list:full          " show a list when pressing tab complete and first full match
+set wildignore=*.swp,*.bak,*.pyc,*.class " various files to ignore (also used by ctrlP)
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
@@ -75,13 +78,24 @@ map <Leader>mp :set paste<CR>:set nolist<CR>
 " password
 cmap w!! %!sudo tee > /dev/null %
 
+
+" --- PLUGIN SETTINGS ---
+
 " NERDTree
 map <Leader>n :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen = 1  " Quit on opening files from the tree
 
 " MiniBufExpl
 map     <Leader>t   :MBEToggle<CR>
 noremap <C-TAB>     :MBEbn<CR>
 noremap <C-S-TAB>   :MBEbp<CR>
+
+" ctrlP
+let g:ctrlp_show_hidden = 1     " show hidden files
+let g:ctrlp_open_new_file = 'r' " open new file in current window
+
+" --- END PLUGIN SETTINGS ---
+
 
 " Vim v7.3 settings 
 if v:version >= 703
