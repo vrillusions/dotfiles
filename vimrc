@@ -36,7 +36,7 @@ set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
 set wildmenu                    " make tab completion for files and buffers act like bash
 set wildmode=list:full          " show a list when pressing tab complete and first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class " various files to ignore (also used by ctrlP)
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.DS_Store " various files to ignore (also used by ctrlP)
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
@@ -83,7 +83,14 @@ cmap w!! %!sudo tee > /dev/null %
 
 " NERDTree
 map <Leader>n :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen = 1  " Quit on opening files from the tree
+let NERDTreeQuitOnOpen = 1          " Quit on opening files from the tree
+let NERDTreeBookmarksFile = expand("$HOME/.vim/NERDTreeBookmarks")
+let NERDTreeShowBookmarks = 1       " Show bookmarks table on startup
+let NERDTreeHighlightCursorline = 1 " Highlight cursor line
+let NERDTreeShowFiles = 1           " Show files
+let NERDTreeShowHidden = 1          " Including hidden
+" Ignored files for NERDTree
+let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
 " MiniBufExpl
 map     <Leader>t   :MBEToggle<CR>
