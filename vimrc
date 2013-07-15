@@ -79,6 +79,12 @@ map <Leader>mp :set paste<CR>:set nolist<CR>
 " password
 cmap w!! %!sudo tee > /dev/null %
 
+" Delete empty buffers when hiding them
+" this is a side effect from having 'set hidden' and using --remote option
+" ref: http://stackoverflow.com/questions/12328277/vim-remote-silent-always-opens-no-name-buffer-for-first-file
+if bufname('%') == ''
+    set bufhidden=wipe
+endif
 
 " --- PLUGIN SETTINGS ---
 
