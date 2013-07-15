@@ -14,6 +14,12 @@ cmap wq w
 " stop cursor blinking
 set guicursor+=n-v-c:blinkon0
 
+" disable toolbar and scroll bars (need to do -= options one at a time)
+" there are more scroll bar options but these are the ones added by default
+set guioptions-=T   " remove toolbar
+set guioptions-=r   " right scroll bar
+set guioptions-=L   " left scroll bar
+
 " use dark solarized color scheme
 set background=dark
 colorscheme solarized
@@ -22,12 +28,10 @@ colorscheme solarized
 if has("gui_macvim")
     " MacVIM
     set lines=45 columns=126    " width is to allow nerdTree
-    set guioptions-=T           " disable toolbar
     set guifont=Inconsolata:h14 " MacVIM parses guifont differently
 elseif has("win32") || has("win64")
     " Windows
     set lines=50 columns=106    " width is 106 to allow 100 + line numbers
-    set guioptions-=T           " disable toolbar
     set guifont=Consolas:h12
 else
     " use standard syntax to set font
