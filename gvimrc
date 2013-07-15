@@ -8,6 +8,9 @@ set t_Co=256
 " show line numbers in gui (another thing used to gui editors)
 set number
 
+" in gvim I do :wq when I really just want to :w, so force that
+cmap wq w
+
 " stop cursor blinking
 set guicursor+=n-v-c:blinkon0
 

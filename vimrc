@@ -37,6 +37,7 @@ set sidescrolloff=3             " same, but for columns
 set wildmenu                    " make tab completion for files and buffers act like bash
 set wildmode=list:full          " show a list when pressing tab complete and first full match
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.DS_Store " various files to ignore (also used by ctrlP)
+set hidden                      " hide buffers when I switch
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
