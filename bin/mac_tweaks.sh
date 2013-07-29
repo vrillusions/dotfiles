@@ -23,6 +23,10 @@ chflags nohidden ~/Library/
 echo "FINDER: restarting finder"
 killall Finder
 
+# --- GPGMail 2 ---
+echo "GPGMail: disable auto-sign"
+defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool NO
+
 echo
 echo "Done"
 echo "Some settings will only take effect on reboot of the system."
