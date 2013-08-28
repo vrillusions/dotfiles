@@ -9,7 +9,6 @@ setlocal formatoptions-=t   " don't autowrap code at textwidth
 setlocal formatoptions+=c   " but I want comments to autowrap
 setlocal smarttab
 setlocal expandtab
-setlocal smartindent
 setlocal autoindent
 setlocal fileencoding=utf-8 
 
