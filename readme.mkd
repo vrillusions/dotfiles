@@ -1,4 +1,4 @@
-# Overview
+# Overview [![Project Status](http://stillmaintained.com/vrillusions/dotfiles.png)](http://stillmaintained.com/vrillusions/dotfiles)
 
 Have kept this in subversion for a while but finally cleaned up all the sensitive information (`git rebase --interactive` ftw) and making it public.  Not as robust as others I've seen but it works for me.
 
