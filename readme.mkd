@@ -21,8 +21,10 @@ I'd rather manually push as I'm used to git now but someone coming along may fin
 
 # Patching gitconfig file with updates
 
-Should still keep backups but for reference here's how to patch my local gitconfig with the versioned one.
+Should still keep backups but for reference here's how to patch my local gitconfig with the versioned one. Indeed it's rather complicated because the `-I` option doesn't actually work right.
 
-    diff -u -I .*signingkey.* gitconfig gitconfig.versioned | patch -P0 gitconfig
+    diff -u -B <(grep -vE '^\s*(signingkey|email)' gitconfig) \
+        <(grep -vE '^\s*(signingkey|email)' gitconfig.versioned) \
+        | patch -p2 gitconfig
 
 Leave out the patch part to see what changes would be applied.
