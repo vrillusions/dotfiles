@@ -1,12 +1,13 @@
 " Tried to make this as backwards compatible as possible. Even in vi only
 " environments this shouldn't give errors, but haven't tested a lot.
 
+set nocompatible                " Use Vim settings, rather than Vi settings
+
 if has("win32") || has("win64")
   " I use ~/.vim on windows too
   set runtimepath=~/.vim,~/vimfiles,$VIMRUNTIME
+  set fileformat=unix           " Make new files with unix line endings
 endif
-
-set nocompatible                " Use Vim settings, rather than Vi settings
 
 " Load pathogen
 execute pathogen#infect()
