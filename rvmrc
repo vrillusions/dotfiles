@@ -1,0 +1,2 @@
+# if a folder doesn't have an rvmrc file (or equivalent) then use default
+rvm_project_rvmrc_default=1
