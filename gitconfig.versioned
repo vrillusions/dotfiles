@@ -15,26 +15,36 @@
 	renamelimit = 0
 [alias]
 	br = branch
+	changelog = shortlog --no-merges --format=\"[%h] %s\"
 	ci = commit
+	cia = commit --amend
 	co = checkout
 	cpx = cherry-pick -x
 	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	datetags = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -s -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	df = diff
+	dfc = diff --cached
 	dfs = diff --name-status
+	dfw = diff --color-words
+	graph = log --graph --oneline
 	lg = log -p
 	lgs = log --oneline --decorate
 	pa = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
 	permission-reset = "!git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply"
 	pr = pull --rebase
 	ps = push --recurse-submodules=check
+	restore = checkout --
 	sd = "!f(){ date=$(date \"+%Y-%m-%dT%H:%M:%S%z\") && git stash save \"$date $@\"; }; f"
 	si = submodule init
 	sl = stash list
 	sp = stash pop
 	sst = submodule status
 	st = status
+	sts = status --short --branch
 	su = submodule update
+	ta = tag -a
+	ts = tag -s
+	unstage = reset HEAD --
 [advice]
 	statusHints = false
 [gc]
