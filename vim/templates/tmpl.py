@@ -9,6 +9,7 @@ Thus this template will only work in python v2.6 or higher.
 """
 
 from __future__ import absolute_import, print_function, unicode_literals
+import os
 import sys
 import traceback
 import logging
@@ -25,8 +26,12 @@ def main():
 
 
 if __name__ == "__main__":
-    # DEBUG, WARNING, ERROR, or CRITICAL
-    logging.basicConfig(level=logging.ERROR)
+    # DEBUG, INFO, WARNING, ERROR, or CRITICAL
+    # This will set log level from the environment variable LOGLEVEL or default
+    # to warning. You can also just hardcode the error if this is simple.
+    loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
+    logformat = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+    logging.basicConfig(level=loglevel, format=logformat)
     log = logging.getLogger('ifmain')
     try:
         main()
