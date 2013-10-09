@@ -10,7 +10,7 @@ For some info on documenting modules see:
 http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
 Requirements
-    Python v2.6 or higher: This is due to the importsi from future and to make
+    Python v2.6 or higher: This is due to the imports from future and to make
         this more compatible with version 3.x.
 
 Environment Variables
@@ -20,7 +20,7 @@ Environment Variables
 """
 
 # Standard library imports
-from __future__ import absolute_import, print_function, unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals, division
 import os
 import sys
 import logging
