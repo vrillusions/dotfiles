@@ -3,8 +3,8 @@
 au BufNewFile,BufRead /etc/apache2/sites-* setf apache
 
 " Markdown
-" src: http://github.com/hallison/vim-markdown
-au BufNewFile,BufRead *.{md,mkd,mkdn,mark*} setfiletype markdown
+" src: https://github.com/jtratner/vim-flavored-markdown
+au BufNewFile,BufRead *.{md,mkd,mkdn,mark*} setfiletype ghmarkdown
 
 " reStructuredText Documentation Format
 " default only grabs *.rst this gets *.rst.txt which is more compatible with
