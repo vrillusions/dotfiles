@@ -20,7 +20,8 @@ Environment Variables
 """
 
 # Standard library imports
-from __future__ import absolute_import, print_function, unicode_literals, division
+from __future__ import division, absolute_import
+from __future__ import print_function, unicode_literals
 import os
 import sys
 import logging
@@ -39,21 +40,40 @@ __version__ = '0.1.0-dev'
 # DEBUG, INFO, WARNING, ERROR, or CRITICAL
 # This will set log level from the environment variable LOGLEVEL or default
 # to warning. You can also just hardcode the error if this is simple.
-_loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
-_logformat = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-logging.basicConfig(level=_loglevel, format=_logformat)
+_LOGLEVEL = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
+_LOGFORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+logging.basicConfig(level=_LOGLEVEL, format=_LOGFORMAT)
 
 
-def main(options=None, argv=None):
+def _parse_opts(argv=None):
+    """Parse the command line options.
+
+    Args:
+        argv: List of arguments to process. If not provided then will use
+            optparse default
+
+    Returns:
+        options,args where options is the list of specified options that were
+            parsed and args is whatever arguments are left after parsing all
+            options.
+
+    """
+    parser = OptionParser(version='%prog {}'.format(__version__))
+    parser.set_defaults(verbose=False)
+    parser.add_option('-c', '--config', dest='config', metavar='FILE',
+        help='Use config FILE (default: %default)', default='config.ini')
+    parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
+        help='Be more verbose (default is no)')
+    (options, args) = parser.parse_args(argv)
+    return options, args
+
+
+def main(argv=None):
     """The main function.
 
     Args:
-        options: Options as parsed from optparse in the conditional that calls
-            main. Default is None.
         argv: List of arguments passed to command line. Default is None, which
-            then will translate to having it set to sys.argv. Typically is used
-            in conjuction with option and contains the information added to the
-            end after all the options.
+            then will translate to having it set to sys.argv.
 
     Returns:
         Optionally returns a numeric exit code. If not 0 then assume an error
@@ -63,6 +83,9 @@ def main(options=None, argv=None):
     log = logging.getLogger()
     if argv is None:
         argv = sys.argv
+    #(options, args) = _parse_opts(argv[1:])
+    # If not using args then don't bother storing it
+    options = _parse_opts(argv)[0]
     if options.verbose:
         log.setLevel(logging.DEBUG)
     log.debug('Printing hello world to screen')
@@ -70,24 +93,15 @@ def main(options=None, argv=None):
 
 
 if __name__ == "__main__":
-    # Called from command line so lets parse options that were sent
-    parser = OptionParser(version='%prog {:1}'.format(__version__))
-    parser.set_defaults(verbose=False)
-    parser.add_option('-c', '--config', dest='config', metavar='FILE',
-        help='Use config FILE (default: %default)', default='config.ini')
-    parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
-        help='Be more verbose (default is no)')
-    (options, args) = parser.parse_args()
     try:
-        # main should only return a value instead of calling sys.exit itself
-        sys.exit(main(options, args))
+        sys.exit(main())
     # Uncomment if you need to do something if the user cancels.
-    #except KeyboardInterrupt as e:
+    #except KeyboardInterrupt as exc:
     #    # Ctrl-c
     #    log.error('Received keyboard interupt')
-    #    raise e
+    #    raise exc
     # This catches all "non system exiting" exceptions
-    except Exception as e:
-        _log.critical("ERROR, UNEXPECTED EXCEPTION")
-        _log.critical(str(e), exc_info=True)
+    except Exception as exc:
+        logging.critical("ERROR, UNEXPECTED EXCEPTION")
+        logging.critical(str(exc), exc_info=True)
         sys.exit(1)
