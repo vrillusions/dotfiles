@@ -53,6 +53,7 @@ log "Additional arguments after options: $*"
 ## Actual script begins here
 log "Sleeping for 2 seconds, use the -v option to see it"
 sleep 2
+%START%
 
 
 # SECONDS is a bash builtin

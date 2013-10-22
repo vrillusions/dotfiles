@@ -1,5 +1,4 @@
-" Tried to make this as backwards compatible as possible. Even in vi only
-" environments this shouldn't give errors, but haven't tested a lot.
+" Minimum recommended version of vim is 7.0
 
 set nocompatible                " Use Vim settings, rather than Vi settings
 
@@ -23,8 +22,6 @@ set incsearch                   " do incremental searching
 set ignorecase                  " ignore case when searching
 set smartcase                   " except when the search string has capitalization
 set showmatch                   " show matching brackets
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]     " a ton of info
-" just useful info (don't need ASCII and HEX values often)
 set statusline=%<%F%h%m%r%h%w%y\ fmt:%{&ff}\ %=\ %l\,%c%V\ %P
 set laststatus=2                " always show status line
 set background=dark             " we are using a dark background
@@ -42,6 +39,14 @@ set hidden                      " hide buffers when I switch
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
+endif
+
+" Use mustang color scheme if terminal supports 256 color
+" While I like solarized it seems to require changing the colors in terminal
+" emulator where mustang works just fine with defaults
+" Note if your terminal can do 256 color set it's TERM to xterm-256color
+if &t_Co >= 256 || has("gui_running")
+  colorscheme mustang
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
@@ -62,9 +67,6 @@ set autoindent                      " Turn autoindent on globally
 set nosmartindent                   " smartindent never seemed to work right for me
 set textwidth=0                     " 0 disables automatic line wrapping
 
-" Source some additional files
-source $HOME/.vim/abbreviations.vim " custom abbreviations
-
 " when holding the alt key want to go up and down a line as I visual see it
 " instead of going up and down actual lines (such as if a line wraps)
 map <A-DOWN> gj
@@ -75,6 +77,9 @@ imap <A-DOWN> <ESC>gji
 " More mappings
 " go into "paste" mode and disable list chars (can be used for copy as well)
 map <Leader>mp :set paste<CR>:set nolist<CR>
+
+" Use (with default leader) \q to clear highlighting
+nmap <Leader>q :nohlsearch<CR>
 
 " If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
 " password
@@ -125,16 +130,20 @@ if v:version >= 703
   set colorcolumn=+1
 endif
 
-if has('autocmd')
-  " turn on filetype and filetype plugins, not indent (I just put those in ftplugin)
-  " this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
-  " filetype from $VIMRUNTIME/ftplugin/ directory
-  filetype plugin on
-  "filetype indent on    " I just use ftplugin for everything including indents
+" --- The following (and a lot of stuff nowadays) uses autocmds ---
+" turn on filetype and filetype plugins, not indent (I just put those in ftplugin)
+" this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
+" filetype from $VIMRUNTIME/ftplugin/ directory
+filetype plugin on
+"filetype indent on    " if I want to use it for indents as well
 
-  "jump to last cursor position when opening a file
-  "dont do it when writing a commit log entry
-  autocmd BufReadPost * call SetCursorPosition()
+"spell check when writing commit logs
+autocmd filetype svn,*commit* set spell
+
+"jump to last cursor position when opening a file
+"dont do it when writing a commit log entry
+augroup set_cursor_position
+  au!
   function! SetCursorPosition()
     if &filetype !~ 'svn\|commit\c'
       if line("'\"") > 0 && line("'\"") <= line("$")
@@ -143,13 +152,24 @@ if has('autocmd')
       endif
     end
   endfunction
+  autocmd BufReadPost * call SetCursorPosition()
+augroup END
 
-  "spell check when writing commit logs
-  autocmd filetype svn,*commit* set spell
-  
-  " Load a template when creating a new file
-  autocmd! BufNewFile * silent! 0r ~/.vim/templates/tmpl.%:e
-endif
+" Load a template when creating a new file
+" Idea on templating from:
+"   http://dtfm.tumblr.com/post/4947427090/python-templates-in-vim
+augroup load_template
+  au!
+  function! LoadTemplate()
+    silent! 0r ~/.vim/templates/tmpl.%:e
+    " Put something in these placeholders if they exist
+    %s/%FILENAME%/\=expand("%:t")/ge
+    %s/%DATE%/\=strftime("%b %d, %Y")/ge
+    " Remove %START% and leave cursor there (should be last replacement)
+    %s/%START%//ge
+  endfunction
+  autocmd! BufNewFile * call LoadTemplate()
+augroup END
 
 " Load local settings if exists
 if filereadable(expand("~/.vimrc.local"))
