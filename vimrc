@@ -14,7 +14,7 @@ execute pathogen#infect()
 set enc=utf-8                   " Always use UTF-8 encoding (needed for listchars)
 set backspace=indent,eol,start  " backspace over everything in insert mode
 set backup                      " keep a backup file
-set history=100                 " how many lines of command line history to keep
+set history=1000                " how many lines of command line history to keep
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
 set hlsearch                    " highlight searched for phrases
@@ -36,6 +36,7 @@ set wildmenu                    " make tab completion for files and buffers act 
 set wildmode=list:full          " show a list when pressing tab complete and first full match
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.DS_Store " various files to ignore (also used by ctrlP)
 set hidden                      " hide buffers when I switch
+set shortmess+=I                " don't show intro message when starting vim
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
