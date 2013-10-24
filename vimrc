@@ -26,7 +26,7 @@ set statusline=%<%F%h%m%r%h%w%y\ fmt:%{&ff}\ %=\ %l\,%c%V\ %P
 set laststatus=2                " always show status line
 set background=dark             " we are using a dark background
 set backupdir=~/.vim/backup     " where to save backups
-set directory=~/.vim/backup     " where to save .swp files
+set directory=~/.vim/backup//   " where to save .swp files ('//' is intentional, see help)
 set noerrorbells                " be quiet
 set vb                          " I really mean it
 set t_vb=                       " not a sound
