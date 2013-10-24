@@ -1,23 +1,43 @@
-#!/bin/bash -e
+#!/bin/bash
+#
 
+
+### Bash options
+# exit upon receiving a non-zero exit code
+set -e
+# enable debuging
+#set -x
+# upon attempt to use an unset variable, print error and exit
+set -u
+# fail on first command in pipeline that fails, not last
+#set -o pipefail
+
+
+### Logging functions
 # Usage: log "What to log"
 log () {
     printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
 }
-
-# Usage: debug "What to log if verbose is true"
-debug () {
+# Usage: verbose "What to log if VERBOSE is true"
+verbose () {
     if [[ "$VERBOSE" == "true" ]]; then
         log "$*"
     fi
 }
 
+
 # set script_dir to location this script is running in
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# set this here or can't use after getopts
+SCRIPT_NAME="$(basename $0)"
+# full command which can be printed out if needed
+SCRIPT_CMD="$*"
 
-## Option Handling
+
+### Option Handling
 # Defaults
 RUNAS="$USER"
+VERBOSE=${VERBOSE:-"false"}
 
 while getopts ":hvr:" opt; do
     case $opt in
@@ -48,15 +68,15 @@ while getopts ":hvr:" opt; do
     esac
 done
 shift `expr $OPTIND - 1`
-log "Additional arguments after options: $*"
+verbose "Additional arguments after options: $*"
 
-## Actual script begins here
-log "Sleeping for 2 seconds, use the -v option to see it"
-sleep 2
+
+### Actual script begins here
+log "Starting ${SCRIPT_NAME}"
 %START%
 
 
 # SECONDS is a bash builtin
-debug "Script ran for ${SECONDS} seconds"
+verbose "Script ran for ${SECONDS} seconds"
 
 exit 0
