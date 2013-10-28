@@ -1,0 +1,25 @@
+General
+ :set nolist  remove list chars to copy text
+ rX           replace character cursor is under with X
+
+NERDTree
+ :Boormark <name>   bookmark selected folder
+ go                 open file but leave NERDTree open
+ C                  set root to selected folder
+ r                  refresh current folder
+ R                  refresh from root folder
+
+Ctrl-P
+ <ctrl>-d    toggle full-path or file search
+ <ctrl>-r    toggle string or regexp
+ <ctrl>-f    next search mode
+ <ctrl>-b    previous search mode
+
+Spelling
+ ]s   Next misspelled word
+ [s   Previous misspelled word
+ zg   Remember word in `spellfile` file
+ zG   Add word to internal-wordlist (lost when closing vim)
+ z=   Show suggestions
+Spelling (insert mode)
+ <ctrl>-x,s  Show suggestions for current word, use ^p and ^n to navigate
