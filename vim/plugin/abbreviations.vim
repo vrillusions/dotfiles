@@ -13,6 +13,8 @@ cabbrev sp set spell
 " print the current datestamp in ISO8601 format
 "idt = IsoDateTime
 iab idt <c-r>=strftime("%FT%T%z")<cr>
+
+" These are now handled by todo_comment.vim
 " When entering a todo or note, add current date and my login name
-iab TODO: TODO:<c-r>=strftime("%F")<CR>:teddy:
-iab NOTE: NOTE:<c-r>=strftime("%F")<CR>:teddy:
+"iab TODO: TODO:<c-r>=strftime("%F")<CR>:teddy:
+"iab NOTE: NOTE:<c-r>=strftime("%F")<CR>:teddy:

@@ -118,6 +118,10 @@ let g:miniBufExplForceSyntaxEnable = 1  " fix syntax highlight bugs
 let g:ctrlp_show_hidden = 1     " show hidden files
 let g:ctrlp_open_new_file = 'r' " open new file in current window
 
+" todo_comment
+let g:todo_comment_owner = 'teddy'  " Just always go by teddy since it's
+                                    " shorter than 'vrillusions'
+
 " --- END PLUGIN SETTINGS ---
 
 
