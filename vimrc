@@ -64,7 +64,7 @@ set shiftround                      " always indent by multiple of shiftwidth
 set expandtab                       " use spaces instead of tabs
 set list                            " display tabs and trailing spaces
 set listchars=tab:»·,trail:·,nbsp:· " what characters to use
-set autoindent                      " Turn autoindent on globally
+set autoindent                      " Turn autoindent on globally, safe to use with filetype indent
 set nosmartindent                   " smartindent never seemed to work right for me
 set textwidth=0                     " 0 disables automatic line wrapping
 
@@ -140,7 +140,8 @@ endif
 " this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
 " filetype from $VIMRUNTIME/ftplugin/ directory
 filetype plugin on
-"filetype indent on    " if I want to use it for indents as well
+" Trying out ftindent again
+filetype indent on
 
 "spell check when writing commit logs
 autocmd filetype svn,*commit* set spell
