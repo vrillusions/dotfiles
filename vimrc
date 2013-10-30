@@ -4,7 +4,7 @@ set nocompatible                " Use Vim settings, rather than Vi settings
 
 if has("win32") || has("win64")
   " I use ~/.vim on windows too
-  set runtimepath=~/.vim,~/vimfiles,$VIMRUNTIME
+  set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
   set fileformat=unix           " Make new files with unix line endings
 endif
 
