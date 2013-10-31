@@ -7,3 +7,6 @@
 [submodule "vim/bundle/securemodelines"]
 	path = vim/bundle/securemodelines
 	url = https://github.com/vrillusions/vim-securemodelines.git
+[submodule "vim/bundle/todotag"]
+	path = vim/bundle/todotag
+	url = https://github.com/vrillusions/vim-todotag.git
