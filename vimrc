@@ -124,6 +124,11 @@ let g:todo_comment_owner = 'teddy'  " Just always go by teddy since it's
 
 " --- END PLUGIN SETTINGS ---
 
+" --- SYNTAX FILE TWEAKS ---
+"
+" changelog
+let g:changelog_spacing_errors = 0
+
 
 " Vim v7.3 settings 
 if v:version >= 703

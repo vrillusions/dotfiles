@@ -23,4 +23,7 @@ augroup filetypedetect
   " Git config
   " set it for gitconfig and gitconfig.versioned in dotfiles
   au! BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
+
+  " Changelog (default doesn't check for all caps)
+  au! BufRead,BufNewFile CHANGELOG\c setfiletype changelog
 augroup END
