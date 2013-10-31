@@ -24,6 +24,7 @@ augroup filetypedetect
   " set it for gitconfig and gitconfig.versioned in dotfiles
   au! BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
 
-  " Changelog (default doesn't check for all caps)
-  au! BufRead,BufNewFile CHANGELOG\c setfiletype changelog
+  " Don't consider CHANGELOG as a gnu changelog
+  " Windows will detect this file type although linux doesn't
+  au! BufRead,BufNewFile CHANGELOG\c setfiletype ignored
 augroup END
