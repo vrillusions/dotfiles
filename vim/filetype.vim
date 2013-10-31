@@ -19,12 +19,10 @@ augroup filetypedetect
   " text filetype
   au! BufRead,BufNewFile *.{txt,TXT} setfiletype text
   au! BufRead,BufNewFile README setfiletype text
+  " treat CHANGELOG (the \C enforces case) files as text
+  au! BufRead,BufNewFile CHANGELOG\C setfiletype text
 
   " Git config
   " set it for gitconfig and gitconfig.versioned in dotfiles
   au! BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
-
-  " Don't consider CHANGELOG as a gnu changelog
-  " Windows will detect this file type although linux doesn't
-  au! BufRead,BufNewFile CHANGELOG\c setfiletype ignored
 augroup END
