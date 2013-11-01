@@ -9,7 +9,8 @@ if has("win32") || has("win64")
 endif
 
 " Load pathogen
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 
 set enc=utf-8                   " Always use UTF-8 encoding (needed for listchars)
 set backspace=indent,eol,start  " backspace over everything in insert mode
@@ -32,11 +33,31 @@ set vb                          " I really mean it
 set t_vb=                       " not a sound
 set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
-set wildmenu                    " make tab completion for files and buffers act like bash
-set wildmode=list:full          " show a list when pressing tab complete and first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class,*.DS_Store " various files to ignore (also used by ctrlP)
 set hidden                      " hide buffers when I switch
 set shortmess+=I                " don't show intro message when starting vim
+set wildmenu                    " make tab completion for files and buffers act like bash
+set wildmode=list:full          " show a list when pressing tab complete and first full match
+
+" Files to ignore (this is also the list used by ctrlP)
+set wildignore+=~/.vim/undofiles/*,~/.vim/backup/*,*.swp  " vim working files
+set wildignore+=*.bak               " miscellaneous
+set wildignore+=*.DS_Store          " macs
+set wildignore+=*.py?               " python
+set wildignore+=*.class             " java
+set wildignore+=*.jpg,*.bmp,*.gif   " images
+
+" default editor settings
+" per language settings are in $VIMRUNTIME/after/ftplugin/
+set tabstop=4                       " spaces per tab
+set softtabstop=4                   " spaces per tab (when editing)
+set shiftwidth=4                    " spaces per tab (when shifting)
+set shiftround                      " always indent by multiple of shiftwidth
+set expandtab                       " use spaces instead of tabs
+set list                            " display tabs and trailing spaces
+set listchars=tab:»·,trail:·,nbsp:· " what characters to use
+set autoindent                      " Turn autoindent on globally, safe to use with filetype indent
+set nosmartindent                   " smartindent never seemed to work right for me
+set textwidth=0                     " 0 disables automatic line wrapping
 
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
@@ -54,37 +75,6 @@ endif
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
-
-" default editor settings
-" per language settings are in $VIMRUNTIME/after/ftplugin/
-set tabstop=4                       " spaces per tab
-set softtabstop=4                   " spaces per tab (when editing)
-set shiftwidth=4                    " spaces per tab (when shifting)
-set shiftround                      " always indent by multiple of shiftwidth
-set expandtab                       " use spaces instead of tabs
-set list                            " display tabs and trailing spaces
-set listchars=tab:»·,trail:·,nbsp:· " what characters to use
-set autoindent                      " Turn autoindent on globally, safe to use with filetype indent
-set nosmartindent                   " smartindent never seemed to work right for me
-set textwidth=0                     " 0 disables automatic line wrapping
-
-" when holding the alt key want to go up and down a line as I visual see it
-" instead of going up and down actual lines (such as if a line wraps)
-map <A-DOWN> gj
-map <A-UP> gk
-imap <A-UP> <ESC>gki
-imap <A-DOWN> <ESC>gji
-
-" More mappings
-" go into "paste" mode and disable list chars (can be used for copy as well)
-map <Leader>mp :set paste<CR>:set nolist<CR>
-
-" Use (with default leader) \q to clear highlighting
-nmap <Leader>q :nohlsearch<CR>
-
-" If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
-" password
-cmap w!! %!sudo tee > /dev/null %
 
 " Delete empty buffers when hiding them
 " this is a side effect from having 'set hidden' and using --remote option
@@ -125,11 +115,13 @@ let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than
 
 " --- SYNTAX FILE SETTINGS ---
 "
-" changelog
-let g:changelog_spacing_errors = 0
+" Specified here to make sure they're set before syntax files are loaded
+"
+let g:changelog_spacing_errors = 0  " see ft-changelog-syntax
+let g:python_highlight_all = 1      " see ft-python-syntax
 
 
-" Vim v7.3 settings 
+" Vim v7.3+ settings
 if v:version >= 703
   " Enable persistant undu
   set undodir=~/.vim/undofiles
@@ -185,3 +177,5 @@ augroup END
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+" vim: set et ts=2 sw=2 sts=2:
