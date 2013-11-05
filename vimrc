@@ -34,6 +34,7 @@ set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
 set hidden                      " hide buffers when I switch
 set shortmess+=I                " don't show intro message when starting vim
+set cursorline                  " highlight row cursor is on
 set wildmenu                    " make tab completion for files and buffers act like bash
 set wildmode=list:full          " show a list when pressing tab complete and first full match
 
