@@ -23,3 +23,16 @@ Spelling
  z=   Show suggestions
 Spelling (insert mode)
  <ctrl>-x,s  Show suggestions for current word, use ^p and ^n to navigate
+
+Custom Mappings
+ Insert Mode
+  idt               InsertDateTime (note this doesn't work in windows)
+ Command Mode
+  <leader>p         Toggle paste mode
+  <leader>l         Toggle list characters
+  <leader><Space>   clear highlighting
+  :w!!              Use sudo to write file
+  <leader>u=        Underline current line with '='
+  <leader>u-        Underline current line with '-'
+  <leader>u~        Underline current line with '\~'
+

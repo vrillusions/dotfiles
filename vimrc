@@ -23,7 +23,6 @@ set incsearch                   " do incremental searching
 set ignorecase                  " ignore case when searching
 set smartcase                   " except when the search string has capitalization
 set showmatch                   " show matching brackets
-set statusline=%<%F%h%m%r%h%w%y\ fmt:%{&ff}\ %=\ %l\,%c%V\ %P
 set laststatus=2                " always show status line
 set background=dark             " we are using a dark background
 set backupdir=~/.vim/backup     " where to save backups
@@ -45,6 +44,14 @@ set wildignore+=*.DS_Store          " macs
 set wildignore+=*.py?               " python
 set wildignore+=*.class             " java
 set wildignore+=*.jpg,*.bmp,*.gif   " images
+
+" Statusline Setup
+" NOTE: removed spaces between separator in case that gives problems
+set statusline=%<%F%h%m%r%h%w%y " all the standard flags
+set statusline+=\ fmt:%{&ff}    " file format
+set statusline+=%=              " separate left and right side
+set statusline+=%l\,%c%V        " Line,Column of cursor
+set statusline+=\ %P            " Percentage of file
 
 " default editor settings
 " per language settings are in $VIMRUNTIME/after/ftplugin/

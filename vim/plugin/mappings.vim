@@ -7,12 +7,13 @@ map <A-UP> gk
 imap <A-UP> <ESC>gki
 imap <A-DOWN> <ESC>gji
 
-" More mappings
-" go into "paste" mode and disable list chars (can be used for copy as well)
-nmap <Leader>p :set paste<CR>:set nolist<CR>
+" toggle paste mode
+nmap <Leader>p :set invpaste paste?<CR>
+" toggle list characters (TODO: roll this into a TogglePaste function)
+nmap <Leader>l :set list! list?<CR>
 
-" Use (with default leader) \q to clear highlighting
-nmap <Leader>q :nohlsearch<CR>
+" Use <Leader><Space> to clear highlighting
+nmap <Leader><Space> :nohlsearch<CR>
 
 " If I forgot to sudo vi a file, use :w!! and it will run sudo, prompting for
 " password
