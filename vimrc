@@ -71,17 +71,26 @@ if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
 endif
 
+" Switch syntax highlighting on, when the terminal has colors
+if &t_Co > 2 || has("gui_running")
+  syntax on
+endif
+
 " Use mustang color scheme if terminal supports 256 color
 " While I like solarized it seems to require changing the colors in terminal
 " emulator where mustang works just fine with defaults
 " Note if your terminal can do 256 color set it's TERM to xterm-256color
 if &t_Co >= 256 || has("gui_running")
   colorscheme mustang
-endif
+  "colorscheme molokai
+  "colorscheme candycode
 
-" Switch syntax highlighting on, when the terminal has colors
-if &t_Co > 2 || has("gui_running")
-  syntax on
+  " NOTE: when loading a color scheme (specifically setting the ctermbg value
+  " for 'Normal' highlight) the value for background gets reloaded. This
+  " clears the background color and should reset the value for background in
+  " case plugins rely on it. See :help hi-normal-cterm
+  hi Normal ctermbg=NONE
+  "hi NonText ctermbg=NONE
 endif
 
 " Cursor line.
