@@ -1,3 +1,4 @@
 gitconfig
 vim/.netrwhist
 vim/NERDTreeBookmarks
+/vim/bundle/*/doc/tags
