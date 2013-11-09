@@ -70,17 +70,32 @@ shift `expr $OPTIND - 1`
 verbose "Additional arguments after options: $*"
 
 
-# Usage: import_repo "repo url" "name for directory"
+# Usage:
+#   import_repo <URL> <NAME> <COMMIT>
+#   Where:
+#     - URL is the full address to the repo
+#     - NAME is the name that the project will be cloned to
+#     - COMMIT is the specific commit id. This accepts any value that git
+#       checkout would allow (tags, branches, specific commits)
+#
+# Examples:
+#
+#     import_repo https://github.com/user/proj.git project 1.0.0
+#     import_repo https://github.com/user/proj.git project master
+#     import_repo https://github.com/user/proj.git project 34de2983
+#
 import_repo () {
-    if [[ $# -ne 2 ]]; then
-        log "Usage: export_repo url name"
+    if [[ $# -ne 3 ]]; then
+        log "Usage: export_repo <URL> <NAME> <COMMIT>"
         return
     fi
     local repo_url
     local repo_name
+    local repo_commit
 
     repo_url="$1"
     repo_name="$2"
+    repo_commit="$3"
 
     log "Importing ${repo_name}"
     cd ${SCRIPT_DIR}
@@ -89,6 +104,8 @@ import_repo () {
     # to a depth that contains a tag.
     git clone -q ${repo_url} ${repo_name}
     cd ${repo_name}
+    git checkout -q ${repo_commit}
+    git submodule -q update --init --recursive
     git describe --always --long --tags >GIT_VERSION.txt
     find . -name ".git*" -print0 | xargs -r -0 -n 200 rm -rf
 }
@@ -98,16 +115,20 @@ import_repo () {
 # TODO:2013-11-03:teddy: need a way to send a list of repos to this
 # TODO:2013-11-03:teddy: also this will always wipe the destination dir
 
-echo "WARNING: This will erase all the listed projects, including local changes."
+echo "WARNING: This will erase the destination folder for each project and will"
+echo "reset any local changes made. This shouldn't be an issue as the plugins"
+echo "should be configurable from the vimrc file."
 read -p "Continue with reload [y/N]? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    import_repo "https://github.com/kien/ctrlp.vim.git" tst-ctrlp
-    import_repo "https://github.com/ngn/vim-buffing-wheel.git" tst-vim-buffing-wheel
-    import_repo "https://github.com/scrooloose/nerdtree.git" tst-nerdtree
-    import_repo "https://github.com/ciaranm/securemodelines.git" tst-securemodelines
-    import_repo "https://github.com/altercation/vim-colors-solarized.git" tst-vim-colors-solarized
-    import_repo "https://github.com/vrillusions/vim-todotag.git" tst-todotag
+    # These are listed in alphabetical order of the destination folder
+    import_repo "https://github.com/ngn/vim-buffing-wheel.git" tst-buffing-wheel master
+    import_repo "https://github.com/kien/ctrlp.vim.git" tst-ctrlp 1.79
+    import_repo "https://github.com/scrooloose/nerdtree.git" tst-nerdtree 4.2.0
+    import_repo "https://github.com/ciaranm/securemodelines.git" tst-securemodelines master
+    import_repo "https://github.com/altercation/vim-colors-solarized.git" tst-solarized master
+    import_repo "https://github.com/vrillusions/vim-todotag.git" tst-todotag 0.2.0
+    import_repo "https://github.com/vimoutliner/vimoutliner.git" tst-vimoutliner v0.3.6
     log "Finished"
 fi
 
