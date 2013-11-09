@@ -140,7 +140,7 @@
 "The first draft of the work done in subtree.
 "
 "Revision 1.2  2003/07/08 17:58:56  matej
-"PÃ¸idÃ¡no ,cx a ,ci zmÃ¬nÃ¬n na ,cb.
+"Pøidáno ,cx a ,ci zmìnìn na ,cb.
 "
 "Revision 1.1  2003/07/08 17:39:12  matej
 "Initial revision

@@ -122,13 +122,13 @@ read -p "Continue with reload [y/N]? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # These are listed in alphabetical order of the destination folder
-    import_repo "https://github.com/ngn/vim-buffing-wheel.git" tst-buffing-wheel master
-    import_repo "https://github.com/kien/ctrlp.vim.git" tst-ctrlp 1.79
-    import_repo "https://github.com/scrooloose/nerdtree.git" tst-nerdtree 4.2.0
-    import_repo "https://github.com/ciaranm/securemodelines.git" tst-securemodelines master
-    import_repo "https://github.com/altercation/vim-colors-solarized.git" tst-solarized master
-    import_repo "https://github.com/vrillusions/vim-todotag.git" tst-todotag 0.2.0
-    import_repo "https://github.com/vimoutliner/vimoutliner.git" tst-vimoutliner v0.3.6
+    import_repo "https://github.com/ngn/vim-buffing-wheel.git" buffing-wheel master
+    import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
+    import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 4.2.0
+    import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines master
+    import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized master
+    import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.2.0
+    import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner v0.3.6
     log "Finished"
 fi
 

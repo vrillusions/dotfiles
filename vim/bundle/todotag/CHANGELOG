@@ -1,0 +1,17 @@
+0.2.0 - 2013-11-04
+==================
+
+- Renamed to "todotag" and moved to it's own project. (Was previously called
+  "todo_comment" and was located directly in my ~/.vim/plugin folder
+- Because of name change you will need to rename `g:todo_comment_owner` to
+  `g:todotag_owner`.
+- `strftime("%F")` didn't work in windows.
+- Known Issue (gh-1): On occasion the buffer-scope variable doesn't get set.
+  It's been difficult to reproduce though. Fix is in place while I figure it
+  out.
+
+0.1.0 - 2013-10-28
+==================
+
+- Initial release
+

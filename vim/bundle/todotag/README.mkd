@@ -1,0 +1,55 @@
+# todotag.vim
+
+Expands `TODO:` lines to add current date and owner. Inspiration for this came from <http://www.approxion.com/?p=39> and follows that format pretty much exactly.
+
+## Installation
+
+- Pathogen
+    - Pathogen is the recommended way. Clone this project to your `~/.vim/bundle` folder
+- Manual
+    - Copy `todotag.vim` to your `~/.vim/plugin` folder
+
+## Setup
+
+This takes the following variables.
+
+- `g:todotag_owner` - Set to the value for owner part of string. If this is an empty string then the owner part will be omitted. If not specified this will try $USER, $USERNAME, or 'ChangeMe'. It's highly recommended you set this as you may be logged in as different users in each system.
+
+## Usage
+
+One abbreviation is set, `TODO: `. With defaults this will expand to `TODO:2013-10-30:jdoe: ` where `jdoe` is your logged in username.
+
+Version 0.1.0 also had `NOTE: ` but I've found note tags are more informational don't necessitate a date and owner as much as a todo. You can add one by placing the following in your `.vimrc`:
+
+```viml
+iab NOTE: NOTE:<c-r>=GetTodoComment()<CR>
+```
+
+## License
+
+This project is [Unlicensed](http://unlicense.org/)
+
+    This is free and unencumbered software released into the public domain.
+
+    Anyone is free to copy, modify, publish, use, compile, sell, or
+    distribute this software, either in source code form or as a compiled
+    binary, for any purpose, commercial or non-commercial, and by any
+    means.
+
+    In jurisdictions that recognize copyright laws, the author or authors
+    of this software dedicate any and all copyright interest in the
+    software to the public domain. We make this dedication for the benefit
+    of the public at large and to the detriment of our heirs and
+    successors. We intend this dedication to be an overt act of
+    relinquishment in perpetuity of all present and future rights to this
+    software under copyright law.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+    OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+    OTHER DEALINGS IN THE SOFTWARE.
+
+    For more information, please refer to <http://unlicense.org/>

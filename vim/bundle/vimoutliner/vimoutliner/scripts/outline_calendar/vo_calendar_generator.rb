@@ -21,7 +21,7 @@ DAYNAMES = %w(Sun Mon Tue Wed Thu Fri Sat)
 
 
 # January should be first, December last entry
-# MONTHNAMES = %w(Januar Februar MÃ¤rz April Mai Juni Juli August September Oktober November Dezember)
+# MONTHNAMES = %w(Januar Februar März April Mai Juni Juli August September Oktober November Dezember)
 MONTHNAMES = %w(January February March April May June July August September October November December)
 
 # you should not need to change anything below here
