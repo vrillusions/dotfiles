@@ -81,22 +81,25 @@ endif
 " emulator where mustang works just fine with defaults
 " Note if your terminal can do 256 color set it's TERM to xterm-256color
 if &t_Co >= 256 || has("gui_running")
-  colorscheme mustang
-  "colorscheme molokai
-  "colorscheme candycode
+  colorscheme desert256
 
   " NOTE: when loading a color scheme (specifically setting the ctermbg value
   " for 'Normal' highlight) the value for background gets reloaded. This
   " clears the background color and should reset the value for background in
   " case plugins rely on it. See :help hi-normal-cterm
-  hi Normal ctermbg=NONE
+  "
+  " desert256 doesn't change the background color so these aren't needed. Kept
+  " them around in case I change my mind again.
+  "hi Normal ctermbg=NONE
   "hi NonText ctermbg=NONE
 endif
 
 " Cursor line.
 " Important: the highlight command must come after setting color scheme
 set cursorline            " highlight row cursor is on
-hi CursorLine cterm=NONE  " Don't underline it. Assumes colorscheme sets color
+" For desert256 need to add a background color too
+"hi CursorLine cterm=NONE  " Don't underline it. Assumes colorscheme sets color
+hi CursorLine cterm=NONE ctermbg=235
 
 " Delete empty buffers when hiding them
 " this is a side effect from having 'set hidden' and using --remote option
