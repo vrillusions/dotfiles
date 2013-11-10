@@ -16,6 +16,10 @@ augroup filetypedetect
   " windows
   au! BufNewFile,BufRead *.rst.txt setfiletype rst
 
+  " vimoutliner
+  " default just does *.otl, this adds *.otl.txt
+  au! BufNewFile,BufRead *.otl.txt setfiletype vo_base
+
   " text filetype
   au! BufRead,BufNewFile *.{txt,TXT} setfiletype text
   au! BufRead,BufNewFile README setfiletype text
