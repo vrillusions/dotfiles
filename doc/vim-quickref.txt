@@ -1,9 +1,10 @@
 General
  :set nolist  remove list chars to copy text
  rX           replace character cursor is under with X
+ gq           select block of text and gq rewraps
 
 NERDTree
- :Boormark <name>   bookmark selected folder
+ :Bookmark <name>   bookmark selected folder
  go                 open file but leave NERDTree open
  C                  set root to selected folder
  r                  refresh current folder
