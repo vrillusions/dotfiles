@@ -39,6 +39,7 @@ set shortmess+=I                " don't show intro message when starting vim
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
 endif
+set viminfo+=n~/.vim/.viminfo   " user directory in windows is ~/.vim as well for this reason
 
 " Improved tab completion {{{1
 set wildmenu                    " make tab completion for files and buffers act like bash
