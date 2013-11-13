@@ -102,6 +102,8 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 alias irssi='TERM=screen screen -S irssi irssi'
 alias screen='TERM=screen screen'
 alias gvim='gvim --remote-tab-silent'
+# opens last vim file
+alias lvim='vim -c "normal '\''0"'
 
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 alias ..="cd .."
