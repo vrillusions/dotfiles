@@ -45,7 +45,7 @@ xterm*|rxvt*)
 #    ;;
 esac
 
-PS1="\[${TITLE_BAR:-}\]"
+PS1="\[${TITLE_BAR:+$TITLE_BAR}\]"
 PS1+="\[${BR_GREEN}\]\u@\h\[${RESET}\]:\[${BR_BLUE}\]\w\[${BR_GREEN}\] "
 PS1+="\$(__git_ps1 \"(%s)\")\$(__svn_prompt)\[${RESET}\]\$ "
 
