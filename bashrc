@@ -6,47 +6,50 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-
-# use vim for editor
+# Use vim for editor {{{1
 # ubuntu creates a fake vim bin as a hint to use apt-get, so can't fall back
 # to vi automatically. need to override in ~/.bashrc_local if it applies to you.
 export EDITOR=vim
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files, see lesspipe(1) {{{1
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# svn prompt
+# svn prompt {{{1
 source ~/.bash/svn.bash
 
-# git prompt
+# git prompt {{{1
 export GIT_PS1_SHOWDIRTYSTATE=true      # adds a * if there are unstaged changes, + if staged changes
 export GIT_PS1_SHOWUNTRACKEDFILES=true  # adds a % if there are untracked files
 #source ~/.bash/git-completion.bash
 # this only loads the git prompt stuff which is all I really need for here
 source ~/.bash/git-prompt.sh
 
+# Prompt colorization {{{1
 # some variables to make this stuff readable
-RESET="\[\017\]"
-NORMAL="\[\033[00m\]"
-# don't enclose brackets because it's used for PROMPT_COMMAND
-RED="\033[01;31m"
-GREEN="\[\033[01;32m\]"
-BLUE="\[\033[01;34m\]"
-WHITE="\[\033[01;37m\]"
+RESET=$(tput sgr0)
+BR_RED=$(tput setaf 9)
+GREEN=$(tput setaf 2)
+BR_GREEN=$(tput setaf 10)
+BR_BLUE=$(tput setaf 12)
+WHITE=$(tput setaf 15)
 # always set the prompt_command
-PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${RED}rc: $RET"; fi'
+PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${BR_RED}rc: ${RET}${RESET}"; fi'
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    TITLE_BAR="\[\033]0;\u@\h: \w\007\]"
-    PS1="${TITLE_BAR}${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} \$(__git_ps1 \"(%s)\")\$(__svn_prompt)${NORMAL}\$ "
+    TITLE_BAR="\e]0;\u@\h: \w\007"
     ;;
-*)
-    PS1="${GREEN}\u@\h${NORMAL}:${BLUE}\w${GREEN} \$(__git_ps1 \"(%s)\")\$(__svn_prompt)${NORMAL}\$ "
-    ;;
+# TODO:2013-11-13:teddy: leaving as a case statement for now
+#*)
+#    PS1="\[${GREEN}\]\u@\h\[${NORMAL}:${BLUE}\w${GREEN} \$(__git_ps1 \"(%s)\")\$(__svn_prompt)${NORMAL}\$ "
+#    ;;
 esac
 
-# enable color support of ls and also add handy aliases
+PS1="\[${TITLE_BAR:-}\]"
+PS1+="\[${BR_GREEN}\]\u@\h\[${RESET}\]:\[${BR_BLUE}\]\w\[${BR_GREEN}\] "
+PS1+="\$(__git_ps1 \"(%s)\")\$(__svn_prompt)\[${RESET}\]\$ "
+
+# Enable color support of ls and also add handy aliases {{{1
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
@@ -54,7 +57,7 @@ if [ -x /usr/bin/dircolors ]; then
     #alias vdir='ls --color=auto --format=long'
 fi
 
-# LSCOLORS variable
+# LSCOLORS variable {{{1
 # default string: exfxcxdxbxegedabagacad
 # Color designations:
 #  a black
@@ -95,7 +98,7 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 #export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
 
-# Alias definitions.
+# Alias definitions {{{1
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
@@ -111,7 +114,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Spellcheck Function
+# Spellcheck function {{{1
 # Type `sp someword` to spellcheck it
 sp () {
     if [ "$(which ispell)" != "" ]; then
@@ -123,6 +126,7 @@ sp () {
     fi
 }
 
+# Load bash_completion (commented out) {{{1
 # MOST COMPUTERS PULL THIS AUTOMATICALLY, ADD TO ~/.bashrc_local IF
 # IT'S NOT DONE ON THIS SYSTEM
 # enable programmable completion features (you don't need to enable
@@ -132,7 +136,7 @@ sp () {
 #    . /etc/bash_completion
 #fi
 
-# --- BEGIN SOME BASH SPECIFIC OPTIONS --- 
+# Bash specific options {{{1
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 
@@ -157,7 +161,9 @@ CDPATH='.:..:../..:~'
 export CLICOLOR=true
 # --- END BASH SPECIFIC OPTIONS ---
 
-# include .bashrc_local if it exists
+# include .bashrc_local if it exists {{{1
 if [ -f ~/.bashrc_local ]; then
     . ~/.bashrc_local
 fi
+
+# vim: fdm=marker:
