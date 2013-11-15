@@ -14,8 +14,10 @@ export EDITOR=vim
 # Make less more friendly for non-text input files, see lesspipe(1) {{{1
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# svn prompt {{{1
-source ~/.bash/svn.bash
+#
+# svn prompt (commented out) {{{1
+# Don't use svn any more so don't bother decorating prompt
+#source ~/.bash/svn.bash
 
 # git prompt {{{1
 export GIT_PS1_SHOWDIRTYSTATE=true      # adds a * if there are unstaged changes, + if staged changes
@@ -37,7 +39,7 @@ PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${BR_RED}rc: ${RET}${RES
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    TITLE_BAR="\e]0;\u@\h: \w\007"
+    TITLE_BAR="\e]0;\u@\h: \w\a"
     ;;
 # TODO:2013-11-13:teddy: leaving as a case statement for now
 #*)
@@ -47,7 +49,7 @@ esac
 
 PS1="\[${TITLE_BAR:+$TITLE_BAR}\]"
 PS1+="\[${BR_GREEN}\]\u@\h\[${RESET}\]:\[${BR_BLUE}\]\w\[${BR_GREEN}\] "
-PS1+="\$(__git_ps1 \"(%s)\")\$(__svn_prompt)\[${RESET}\]\$ "
+PS1+="\$(__git_ps1 \"(%s)\")\[${RESET}\]\$ "
 
 # Enable color support of ls and also add handy aliases {{{1
 if [ -x /usr/bin/dircolors ]; then
