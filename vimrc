@@ -131,6 +131,9 @@ let g:ctrlp_open_new_file = 'r' " open new file in current window
 " todotag
 let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than 'vrillusions'
 
+" SimpylFold
+let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
+
 " Syntax file settings {{{1
 " Specified here to make sure they're set before syntax files are loaded
 "
