@@ -116,15 +116,8 @@ let NERDTreeShowHidden = 1          " Including hidden
 " Ignored files for NERDTree
 let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
-" MiniBufExpl
-map     <Leader>t   :MBEToggle<CR>
-noremap <C-TAB>     :MBEbn<CR>
-noremap <C-S-TAB>   :MBEbp<CR>
-let g:miniBufExplCycleArround = 1       " cycle around when reach either end
-let g:miniBufExplUseSingleClick = 1     " single click a buffer to open
-let g:miniBufExplForceSyntaxEnable = 1  " fix syntax highlight bugs
-
 " ctrlP
+nmap <Leader>m      :CtrlPMRU<CR>
 let g:ctrlp_show_hidden = 1     " show hidden files
 let g:ctrlp_open_new_file = 'r' " open new file in current window
 
