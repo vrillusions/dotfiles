@@ -13,6 +13,9 @@ defscrollback 5000
 vbell on
 #shelltitle "$ |terminal"
 
+# (failed) attempt to get 256 colors going
+term screen-256color
+
 #my custom one
 #hardstatus alwayslastline "%-Lw%{= BW}[%C %H] %-Lw%{= BW}%50>%n%f* %+%{-}%+Lw%<"
 
