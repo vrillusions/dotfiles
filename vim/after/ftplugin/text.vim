@@ -2,6 +2,11 @@ setlocal textwidth=78
 setlocal spell
 " Lists typically start with - or *
 setlocal comments=b:#,fb:-,fb:*,fb:+
+" Auto add comment marker when hitting enter or starting new line
+" TODO:2013-11-20:teddy: requires the comment tag to not have 'f' option
+"setlocal formatoptions+=ro
+" TODO:2013-11-20:teddy: until fixed it's better to ensure these are not set
+setlocal formatoptions-=ro
 
 " Folding {{{1
 " Part of this from https://gist.github.com/sjl/1038710
@@ -32,6 +37,11 @@ endfunction
 setlocal foldexpr=TextFoldexpr(v:lnum)
 setlocal foldmethod=expr
 " Default to only one level deep (which in most cases will be no folding)
-setlocal foldlevelstart=1
+setlocal foldlevel=1
+
+" But have securemodelines permit foldlevel overrides
+if exists("g:secure_modelines_allowed_items")
+    let g:secure_modelines_allowed_items += ["foldlevel", "fdl"]
+endif
 
 " vim: set fdm=marker:

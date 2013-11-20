@@ -1,4 +1,7 @@
 setlocal spell
+setlocal formatoptions+=ro
+" The three valid unordered list characters are -, *, and +
+setlocal comments=b:-,b:*,b:+
 
 
 " Folding {{{1

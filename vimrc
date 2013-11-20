@@ -41,6 +41,10 @@ if has('mouse')
 endif
 set viminfo+=n~/.vim/.viminfo   " user directory in windows is ~/.vim as well for this reason
 
+" Format options {{{1
+set formatoptions+=1            " don't wrap on a single letter
+set formatoptions+=l            " don't autowrap if line is already longer than textwidth
+
 " Improved tab completion {{{1
 set wildmenu                    " make tab completion for files and buffers act like bash
 set wildmode=list:full          " show a list when pressing tab complete and first full match
