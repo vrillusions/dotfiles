@@ -72,7 +72,7 @@ set shiftwidth=4                    " spaces per tab (when shifting)
 set shiftround                      " always indent by multiple of shiftwidth
 set expandtab                       " use spaces instead of tabs
 set list                            " display tabs and trailing spaces
-set listchars=tab:»·,trail:·,nbsp:· " what characters to use
+set listchars=tab:»·,trail:·,nbsp:·,extends:»,precedes:« " what characters to use
 set autoindent                      " Turn autoindent on globally, safe to use with filetype indent
 set nosmartindent                   " smartindent never seemed to work right for me
 set textwidth=0                     " 0 disables automatic line wrapping
