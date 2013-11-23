@@ -5,8 +5,8 @@ setlocal shiftwidth=2
 setlocal smarttab
 setlocal expandtab
 setlocal fileencoding=utf-8
-" since we don't set textwidth this has to be an exact number to the position
-" that will be colored. Also this is a v7.3+ option so need to check if exists
-if exists('+colorcolumn')
-    setlocal colorcolumn=81
-endif
+setlocal textwidth=80
+" Don't auto-wrap text
+setlocal formatoptions-=t
+" But do for comments, as well as auto-add comment leader
+setlocal formatoptions+=cro
