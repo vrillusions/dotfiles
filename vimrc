@@ -136,6 +136,8 @@ let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 "
 let g:changelog_spacing_errors = 0  " see ft-changelog-syntax
 let g:python_highlight_all = 1      " see ft-python-syntax
+let g:ruby_fold = 1                 " see ft-ruby-syntax
+"let g:ruby_no_comment_fold = 1      " see ft-ruby-syntax
 
 " Vim v7.3+ settings {{{1
 if v:version >= 703
