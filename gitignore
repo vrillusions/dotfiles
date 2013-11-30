@@ -1,0 +1,9 @@
+# System level files that should be ignored. Language specific would be better
+# suited to be ignored in the project's gitignore file
+
+# Mac
+.DS_Store
+._*
+
+# Backup files
+*~
