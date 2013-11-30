@@ -11,6 +11,7 @@ While I don't expect anyone to use this on their system but pick and choose what
     - creates symlinks for the specified files.
 - edit `gitconfig` and enter your email address. I kept this out of git so bots don't pick up the email address.
 - if you want, add the `bin` folder to your path. See [Directories](#directories) for details.
+- on linux or mac run `bin/vim_maintenance.sh install` to setup a cron entry for that command
 
 ## Directories
 
@@ -27,7 +28,7 @@ A non-exhaustive list of files. Most files should have a `-h` or `--help` option
 
 - **`bin/mac_defaults.sh`** - (Mac only) contains all the various `defaults write` changes I use. This may need to be run occasionally since the `chflags nohidden` on the library folder seems to reset occasionally.
 - **`bin/show_app_versions`** - Checks if a program exists and prints out the version. Can be used beyond initial setup to verify the current version of a program.
-- **`bin/vim_maintenance.sh`** - Cleans up the backup directories used by vim. This should be run from cron at regular intervals. This is specific to linux and mac so windows machines will need to handle this some other way at least until I can create a script for windows.
+- **`bin/vim_maintenance.sh`** - Cleans up the backup directories used by vim. This should be run from cron at regular intervals. Call it like `./vim_maintenance.sh install` and it will attempt to install into cron automatically. This is specific to linux and mac so windows machines will need to handle this some other way at least until I can create a script for windows.
 - **`createlinks.sh`** - Run this to create symlinks to various common files. Currently this is only the common ones. Files that are more specific to a single machine aren't included here. Works on both linux and mac.
 - **`createlinks.bat`** - A simplified batch file of above to use on windows. All it does is setup symlinks for vim.
 

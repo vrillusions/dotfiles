@@ -62,8 +62,11 @@ VERBOSE=${VERBOSE:-"false"}
 while getopts ":hb:d:u:v" opt; do
     case $opt in
     h)
-        echo "Usage: $(basename $0) [OPTION]"
-        echo 'Removes old backup, swap, and undo files created by vim.'
+        echo "Usage: ${SCRIPT_NAME} [OPTION]"
+        echo "       ${SCRIPT_NAME} install"
+        echo 'Removes old backup, swap, and undo files created by vim. If'
+        echo 'called with ``install`` then will add an entry the crontab for'
+        echo 'the current user to run this daily.'
         echo
         echo 'Options:'
         echo '  -h  This help message'
@@ -100,17 +103,27 @@ verbose "Additional arguments after options: $*"
 
 
 ### Actual script begins here
-# We use xargs here in case there's a lot of files to delete and rm can't
-# handle a lot of files at once.
-log "Cleaning ${BACKUP_DIR}"
-cd "${BACKUP_DIR}"
-find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-    | xargs -n 200 -r -0 rm -f
+# check if `install` was specified and update crontab
+if [[ "$*" == "install" ]]; then
+    log "Installing script to user crontab"
+    croncmd="${SCRIPT_DIR}/${SCRIPT_NAME} >/dev/null"
+    cronjob="@daily $croncmd"
+    # Need the `|| true` part or else it fails if a blank cron file
+    ( crontab -l | grep -v "${croncmd}" || true ; echo "${cronjob}" ) | crontab -
+    log "Added '${cronjob}' successfully"
+else
+    # We use xargs here in case there's a lot of files to delete and rm can't
+    # handle a lot of files at once.
+    log "Cleaning ${BACKUP_DIR}"
+    cd "${BACKUP_DIR}"
+    find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
+        | xargs -n 200 -r -0 rm -f
 
-log "Cleaning ${UNDO_DIR}"
-cd "${UNDO_DIR}"
-find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-    | xargs -n 200 -r -0 rm -f
+    log "Cleaning ${UNDO_DIR}"
+    cd "${UNDO_DIR}"
+    find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
+        | xargs -n 200 -r -0 rm -f
+fi
 
 log "Finished"
 
