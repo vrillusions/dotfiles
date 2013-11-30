@@ -1,25 +1,37 @@
-# Overview [![Project Status](http://stillmaintained.com/vrillusions/dotfiles.png)](http://stillmaintained.com/vrillusions/dotfiles)
+# Dotfiles
 
 Have kept this in subversion for a while but finally cleaned up all the sensitive information (`git rebase --interactive` ftw) and making it public.  Not as robust as others I've seen but it works for me.
 
-# Setup
+## Setup
 
 While I don't expect anyone to use this on their system but pick and choose what they want, here's how I set it up on a new computer.
 
 - after clone, run `./createlinks.sh`
-  - for some files I maintain a separate versioned file like my gitconfig since my actual one has a signing key and author fields could change if I'm at work.  This will notice I don't have a gitconfig and copy from gitconfig.versioned.  This will be done to other files as well
-  - creates symlinks for the specified files.
+    - for some files I maintain a separate versioned file like my `gitconfig` since my actual one has a signing key and author fields could change if I'm at work.  This will notice I don't have a `gitconfig` and copy from `gitconfig.versioned`.  This will be done to other files as well
+    - creates symlinks for the specified files.
+- edit `gitconfig` and enter your email address. I kept this out of git so bots don't pick up the email address.
+- if you want, add the `bin` folder to your path. See [Directories](#directories) for details.
 
-# Post-install options
+## Directories
 
-One thing I miss with git is new commits aren't always pushed to central server.  I'm used to this in git and tend to push rather frequently because of it.  But for my own reference I can emulate the auto push functionality in a post-commit hook:
+These directories don't relate to a program and are not symlinked by default. If it's not specified here then assume it's for a specific program.
 
-    echo 'git push' > .git/hooks/post-commit
-    chmod 755 .git/hooks/post-commit
+- **`_archive/`** - If I no longer have a use for something but I still want to keep it around in case I do in the future, it goes here. This could include one time scripts that I'll never run again but can be good reference for future tasks.
+- **`bin/`** - Contains commonly used files. You can get this in your path via two ways. First is to symlink it to `~/bin` assuming you don't have already. The other way is to create `~/.bashrc_local` with the content `export PATH="~/dotfiles/bin:$PATH"`. This isn't done automatically so you know which option to choose or if to even bother with it. Also don't assume if the file doesn't end in an extension that it's a binary. More than likely it isn't.
+- **`doc/`** - For the most part these are just quick reference documents. Anything more detailed than that I'll use simplenote or similar
+- **`script/`** - Less commonly used scripts.
 
-I'd rather manually push as I'm used to git now but someone coming along may find that information useful.
+## Files
 
-# Patching gitconfig file with updates
+A non-exhaustive list of files. Most files should have a `-h` or `--help` option. Also just look at the comments at the top of the file.
+
+- **`bin/mac_defaults.sh`** - (Mac only) contains all the various `defaults write` changes I use. This may need to be run occasionally since the `chflags nohidden` on the library folder seems to reset occasionally.
+- **`bin/show_app_versions`** - Checks if a program exists and prints out the version. Can be used beyond initial setup to verify the current version of a program.
+- **`bin/vim_maintenance.sh`** - Cleans up the backup directories used by vim. This should be run from cron at regular intervals. This is specific to linux and mac so windows machines will need to handle this some other way at least until I can create a script for windows.
+- **`createlinks.sh`** - Run this to create symlinks to various common files. Currently this is only the common ones. Files that are more specific to a single machine aren't included here. Works on both linux and mac.
+- **`createlinks.bat`** - A simplified batch file of above to use on windows. All it does is setup symlinks for vim.
+
+## Patching gitconfig file with updates
 
 Should still keep backups but for reference here's how to patch my local gitconfig with the versioned one. Indeed it's rather complicated because the `-I` option doesn't actually work right.
 
