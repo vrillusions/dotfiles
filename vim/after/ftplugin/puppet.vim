@@ -10,3 +10,4 @@ setlocal textwidth=80
 setlocal formatoptions-=t
 " But do for comments, as well as auto-add comment leader
 setlocal formatoptions+=cro
+setlocal foldmethod=indent
