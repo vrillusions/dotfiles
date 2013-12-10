@@ -12,5 +12,8 @@ setlocal expandtab
 setlocal autoindent
 setlocal fileencoding=utf-8 
 
+" This seems to get set automatically but setting it here just in case
+setlocal omnifunc=pythoncomplete#Complete
+
 " python specific abbreviations
 iab <buffer> ifmain if __name__ == "__main__":
