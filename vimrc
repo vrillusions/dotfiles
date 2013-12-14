@@ -35,6 +35,8 @@ set t_vb=                       " not a sound
 set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
 set hidden                      " hide buffers when I switch
+set splitbelow                  " make new split behavior more 'natural'
+set splitright
 set shortmess+=I                " don't show intro message when starting vim
 if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
