@@ -16,6 +16,8 @@
 # - Check for swap files older than a day and print an error since those
 #   should clean up after themselves.
 #
+# Only works on Mac and Linux currently
+#
 # This file is "Unlicensed." See <http://unlicense.org/> for terms.
 #
 
@@ -114,15 +116,20 @@ if [[ "$*" == "install" ]]; then
 else
     # We use xargs here in case there's a lot of files to delete and rm can't
     # handle a lot of files at once.
+    XARGS_OPTS='-n 200 -0'
+    if [[ $(uname -s) != 'Darwin' ]]; then
+        # Not on mac so should have the "-r" option available
+        XARGS_OPTS="${XARGS_OPTS} -r"
+    fi
     log "Cleaning ${BACKUP_DIR}"
     cd "${BACKUP_DIR}"
     find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-        | xargs -n 200 -r -0 rm -f
+        | xargs ${XARGS_OPTS} rm -f
 
     log "Cleaning ${UNDO_DIR}"
     cd "${UNDO_DIR}"
     find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-        | xargs -n 200 -r -0 rm -f
+        | xargs ${XARGS_OPTS} rm -f
 fi
 
 log "Finished"
