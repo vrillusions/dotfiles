@@ -37,6 +37,9 @@ defaults write NSGlobalDomain com.apple.springing.enabled -bool false
 # Display time as "Jan 10 4:18 PM"
 defaults write com.apple.menuextra.clock DateFormat -string "MMM d  h:mm a"
 
+# Expand save dialog by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
 
 # Finder {{{1
 #####
