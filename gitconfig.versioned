@@ -40,6 +40,7 @@
 	sp = stash pop
 	sst = submodule status
 	st = status
+	sti = status --ignored
 	sts = status --short --branch
 	su = submodule update
 	ta = tag -a
