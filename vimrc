@@ -133,6 +133,9 @@ let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than
 " SimpylFold
 let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 
+" XMLEdit
+let g:xmledit_enable_html = 1   " Enable for html files
+
 " Syntax file settings {{{1
 " Specified here to make sure they're set before syntax files are loaded
 "
@@ -140,6 +143,7 @@ let g:changelog_spacing_errors = 0  " see ft-changelog-syntax
 let g:python_highlight_all = 1      " see ft-python-syntax
 let g:ruby_fold = 1                 " see ft-ruby-syntax
 "let g:ruby_no_comment_fold = 1      " see ft-ruby-syntax
+let g:xml_syntax_folding = 1        " see ft-xml-syntax
 
 " Vim v7.3+ settings {{{1
 if v:version >= 703

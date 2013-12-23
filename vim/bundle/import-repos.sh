@@ -130,6 +130,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized master
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.2.0
     import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner v0.3.6
+    import_repo "https://github.com/sukima/xmledit.git" xmledit 1.10.4
     log "Finished"
 fi
 
