@@ -40,6 +40,9 @@ defaults write com.apple.menuextra.clock DateFormat -string "MMM d  h:mm a"
 # Expand save dialog by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
+# Turn off shadow when doing screen captures
+defaults write com.apple.screencapture disable-shadow -bool true
+
 
 # Finder {{{1
 #####
@@ -82,9 +85,9 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:gridSpacing 45" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:iconSize 48" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:labelOnBottom true" ${USRPREFS}/com.apple.finder.plist
+$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:gridSpacing 85" ${USRPREFS}/com.apple.finder.plist
+$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:iconSize 32" ${USRPREFS}/com.apple.finder.plist
+$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" ${USRPREFS}/com.apple.finder.plist
 $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" ${USRPREFS}/com.apple.finder.plist
 $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${USRPREFS}/com.apple.finder.plist
 
@@ -96,6 +99,13 @@ $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${USRP
 #defaults write com.apple.dock no-glass -bool true
 # Since that's not available going to try positioning it on the left
 defaults write com.apple.dock orientation -string left
+
+# So far only mavericks option I've found. This removes the blur effect. Unsure
+# how much better that is though
+defaults write com.apple.dock hide-mirror -bool true
+
+# Dim apps that are hidden
+defaults write com.apple.dock showhidden -bool true
 
 # Set icon size
 defaults write com.apple.dock tilesize -int 25
