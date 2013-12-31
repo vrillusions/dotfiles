@@ -1,4 +1,4 @@
-" todotag.vim - format TODO tags with date and owner
+" todotag.vim - format TODO tags with date and owner {{{1
 "
 " This formats a todo line in comments so they have a standard format.
 " Inspiration for this came from http://www.approxion.com/?p=39 and pretty
@@ -30,18 +30,20 @@
 "
 " Author: Todd Eddy <http://toddeddy.com>
 " License: The Unlicense <http://unlicense.org/>
-" Version: 0.2.0
-"
+" Version: 0.3.0
 
+
+" Initial setup {{{1
 if exists('g:loaded_todotag') || &cp || v:version < 700
-    finish
+  finish
 endif
 let g:loaded_todotag = 1
 
 " Uncomment this to echo debug lines. Used by s:Debug()
 "let s:do_debug = 'true'
 
-" Will echo the given message if s:do_debug exists
+
+" s:Debug(msg): Will echo the given message if s:do_debug exists {{{1
 "
 " Variables:
 "   s:do_debug - Checks if this variable is set. If it doesn't exist nothing
@@ -52,13 +54,48 @@ let g:loaded_todotag = 1
 "   >> filename.vim: test
 "
 function! s:Debug (msg)
-    if exists("s:do_debug")
-        echom @% . ': ' . a:msg
-    endif
+  if exists("s:do_debug")
+    echom @% . ': ' . a:msg
+  endif
 endfunction
 
 
-" Returns a concatenation of timestamp and owner.
+" s:SetOwnerTag(): Determine what the owner portion of tag should be {{{1
+"
+" Variables:
+"   g:todotag_owner - The owner set by the user in their vimrc. If this
+"   doesn't exist it tries to be smart about discovering a good value.
+"
+" Returns:
+"   It sets b:todotag_owner_tag and does the implied return of 1
+"
+function s:SetOwnerTag ()
+  if !exists("g:todotag_owner")
+    call s:Debug('g:todotag_owner not set')
+    if exists("$USER")
+      call s:Debug('$USER exists')
+      let b:todotag_owner_tag = $USER . ':'
+    elseif exists("$USERNAME")
+      call s:Debug('$USERNAME exists')
+      let b:todotag_owner_tag = $USERNAME . ':'
+    else
+      call s:Debug('Cant find anything')
+      let b:todotag_owner_tag = 'ChangeMe:'
+    endif
+  elseif g:todotag_owner == ''
+    call s:Debug('g:todotag_owner set to empty string')
+    let b:todotag_owner_tag = ''
+  else
+    call s:Debug('g:todotag_owner is ' . g:todotag_owner)
+    let b:todotag_owner_tag = g:todotag_owner . ':'
+  endif
+
+  call s:Debug('b:todotag_owner_tag is "' . b:todotag_owner_tag . '"')
+endfunction
+call s:SetOwnerTag()
+
+
+" GetTodoComment(): Returns a concatenation of timestamp and owner. {{{1
 "
 " Variables:
 "   b:todotag_owner_tag - Will be appended to date. Should either end
@@ -74,54 +111,18 @@ endfunction
 "   >> 2013-08-09:
 "
 function GetTodoComment ()
-    " TODO:2013-10-31:teddy: figure out why sometimes this isn't being set
-    " properly. In the meantime this will make sure it is
-    if !exists("b:todotag_owner_tag")
-        call s:Debug('b:todotag_owner_tag not set')
-        call s:SetOwnerTag()
-    endif
-    return strftime("%Y-%m-%d") . ':' . b:todotag_owner_tag
+  " TODO:2013-10-31:teddy: figure out why sometimes this isn't being set
+  " properly. In the meantime this will make sure it is
+  if !exists("b:todotag_owner_tag")
+    call s:Debug('b:todotag_owner_tag not set')
+    call s:SetOwnerTag()
+  endif
+  return strftime("%Y-%m-%d") . ':' . b:todotag_owner_tag
 endfunction
 
 
-" Sets the owner tag based on global variable and saves to buffer-scope
-" variable.
-"
-" Variables:
-"   g:todotag_owner - The owner set by the user in their vimrc. If this
-"   doesn't exist it tries to be smart about discovering a good value.
-"
-" Returns:
-"   It sets b:todotag_owner_tag and does the implied return of 1
-"
-function s:SetOwnerTag ()
-    if !exists("g:todotag_owner")
-        call s:Debug('g:todotag_owner not set')
-        if exists("$USER")
-            call s:Debug('$USER exists')
-            let b:todotag_owner_tag = $USER . ':'
-        elseif exists("$USERNAME")
-            call s:Debug('$USERNAME exists')
-            let b:todotag_owner_tag = $USERNAME . ':'
-        else
-            call s:Debug('Cant find anything')
-            let b:todotag_owner_tag = 'ChangeMe:'
-        endif
-    elseif g:todotag_owner == ''
-        call s:Debug('g:todotag_owner set to empty string')
-        let b:todotag_owner_tag = ''
-    else
-        call s:Debug('g:todotag_owner is ' . g:todotag_owner)
-        let b:todotag_owner_tag = g:todotag_owner . ':'
-    endif
-
-    call s:Debug('b:todotag_owner_tag is "' . b:todotag_owner_tag . '"')
-endfunction
-call s:SetOwnerTag()
+" Set the abbreviations {{{1
+iab TODO: TODO:<C-R>=GetTodoComment()<CR>
 
 
-" Set the abbreviations
-iab TODO: TODO:<c-r>=GetTodoComment()<CR>
-
-
-" vim: set et ts=4 sw=4 sts=4:
+" vim: set et ts=2 sw=2 sts=2 fdm=marker:

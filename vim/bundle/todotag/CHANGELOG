@@ -1,3 +1,10 @@
+0.3.0 - 2013-12-31
+ =================
+
+- Two space indents are the norm for vim so modified that
+- Add folding markers for each of the functions
+- Be consistent with mapping capitalization
+
 0.2.0 - 2013-11-04
 ==================
 

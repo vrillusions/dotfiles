@@ -22,7 +22,7 @@ One abbreviation is set, `TODO: `. With defaults this will expand to `TODO:2013-
 Version 0.1.0 also had `NOTE: ` but I've found note tags are more informational don't necessitate a date and owner as much as a todo. You can add one by placing the following in your `.vimrc`:
 
 ```viml
-iab NOTE: NOTE:<c-r>=GetTodoComment()<CR>
+iab NOTE: NOTE:<C-R>=GetTodoComment()<CR>
 ```
 
 ## License
