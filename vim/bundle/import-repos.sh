@@ -107,7 +107,12 @@ import_repo () {
     git checkout -q ${repo_commit}
     git submodule -q update --init --recursive
     git describe --always --long --tags >GIT_VERSION.txt
-    find . -name ".git*" -print0 | xargs -r -0 -n 200 rm -rf
+    if [[ "$(uname -s)" == 'Darwin' ]]; then
+        XARGS_OPTS=''
+    else
+        XARGS_OPTS="-r"
+    fi
+    find . -name ".git*" -print0 | xargs ${XARGS_OPTS} -0 -n 200 rm -rf
 }
 
 
@@ -128,6 +133,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines master
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold master
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized master
+    import_repo "https://github.com/ervandew/supertab.git" supertab 7a32e0866b
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.2.0
     import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner v0.3.6
     import_repo "https://github.com/sukima/xmledit.git" xmledit 1.10.4
