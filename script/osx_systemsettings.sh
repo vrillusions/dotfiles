@@ -16,8 +16,10 @@ set -x
 #####
 # Turn off hibernate mode (saves a bunch of space so long as mac doesn't
 # sleep for a week and the battery comepletely dies)
-sudo pmset -a hibernatemode 0
-sudo rm -f /var/vm/sleepimage
+# Commenting this out since battery barely makes it through weekend with it
+# disabled
+#sudo pmset -a hibernatemode 0
+#sudo rm -f /var/vm/sleepimage
 
 # Disable local time machine snapshots
 sudo tmutil disablelocal
