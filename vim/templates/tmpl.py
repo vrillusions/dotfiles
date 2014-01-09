@@ -3,8 +3,7 @@
 """Python Template.
 
 Environment Variables
-    LOGLEVEL: overrides the level specified here. Choices are debug, info,
-        warning, error, and critical. Default is warning.
+    LOGLEVEL: overrides the level specified here. Default is warning
 
 """
 
@@ -41,9 +40,9 @@ def _parse_opts(argv=None):
     parser = OptionParser(version='%prog {}'.format(__version__))
     parser.set_defaults(verbose=False)
     parser.add_option('-c', '--config', dest='config', metavar='FILE',
-        help='Use config FILE (default: %default)', default='config.ini')
+        help='use config FILE (default: %default)', default='config.ini')
     parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
-        help='Be more verbose (default is no)')
+        help='be more verbose (default is no)')
     (options, args) = parser.parse_args(argv)
     return options, args
 
