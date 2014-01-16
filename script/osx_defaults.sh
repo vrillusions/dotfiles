@@ -117,4 +117,15 @@ defaults write com.apple.dock wvous-bl-corner -int 6
 defaults write com.apple.dock wvous-br-corner -int 5
 
 
+# Messages {{{1
+#####
+# Disable a bunch of things that apparently don't honor the global ignores
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
+    -dict-add "automaticDashSubstitutionEnabled" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
+    -dict-add "automaticSpellingCorrectionEnabled" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
+    -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+
+
 # vim: set fdm=marker:
