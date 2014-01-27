@@ -101,6 +101,7 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 
 
 # Alias definitions {{{1
+# TODO:2014-01-27:teddy: move to separate file, like ~/.bash/aliases
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
@@ -109,6 +110,9 @@ alias screen='TERM=screen screen'
 alias gvim='gvim --remote-tab-silent'
 # opens last vim file
 alias lvim='vim -c "normal '\''0"'
+# note: on osx this won't work (there is no --forest option)
+# TODO:2014-01-27:teddy: make an osx equivalent that just calls pstree (homebrew package)
+alias psf='ps aux --forest'
 
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 alias ..="cd .."
