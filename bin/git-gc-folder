@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# Given a directory with git repos, it will check each subfolder if it's a git
+# repo and will then run `git gc`.  Typically not needed but can be useful to
+# run before backing up because it will pack all the objects into a single pack
+# which is more efficient.
+#
+# If you did want to automate this I wouldn't bother running it any more than
+# once a month.
+#
+# You also may be tempted to add --aggressive option to this but don't. Per
+# Linus[1]:
+#
+#   So the equivalent of "git gc --aggressive" - but done *properly* - is to
+#   do (overnight) something like
+#
+#           git repack -a -d --depth=250 --window=250
+#
+# [1]: http://gcc.gnu.org/ml/gcc/2007-12/msg00165.html
+#
+# Due to submodules this only scans one level deep for git repositories. There
+# may be a way now to determine if we're in a submodule or not. Although I
+# guess it doesn't really hurt to gc the submodules as well.
+#
+
+set -e
+
+## Option Handling
+# Defaults
+VERBOSE=false
+while getopts ":hv" opt; do
+    case $opt in
+    h)
+        echo "Usage: $0 [OPTION] [directory]"
+        echo 'Runs `git gc` on all repos in [directory].'
+        echo
+        echo '  -h  This help message'
+        echo '  -v  Be verbose'
+
+        exit 0
+        ;;
+    v)
+        VERBOSE=true
+        ;;
+    \?)
+        echo "Invalid option: -$OPTARG" >&2
+        exit 1
+        ;;
+    esac
+done
+shift `expr $OPTIND - 1`
+
+if [ $# -ne 1 ]; then
+    echo "No directory specified. See -h for help." >&2
+    exit 1
+fi
+if [ ! -d "$1" ]; then
+    echo "$1 is not a directory" >&2
+    exit 1
+fi
+DIRECTORY="$1"
+
+cd $DIRECTORY
+
+for NAME in *; do
+    if [ -d "$NAME" ] && [ -d "$NAME/.git" ]; then
+        echo "Running garbage collection on $NAME"
+        cd "$NAME"
+        if [ "$VERBOSE" == "true" ]; then
+            git gc
+            # Put an extra line break when verbose
+            echo
+        else
+            git gc -q
+        fi
+        cd "$DIRECTORY"
+    fi
+done
+
+exit 0
