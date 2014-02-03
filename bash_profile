@@ -17,7 +17,11 @@ fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
+    export PATH=~/bin:"${PATH}"
+fi
+# same for dotfiles/bin
+if [ -d ~/dotfiles/bin ] ; then
+    export PATH=~/dotfiles/bin:"${PATH}"
 fi
 
 # load ~/.bash_profile_local if it exists
