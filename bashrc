@@ -127,9 +127,9 @@ test $(which gpg2) && alias gpg=gpg2 || true
 # Type `sp someword` to spellcheck it
 sp () {
     if [ "$(which ispell)" != "" ]; then
-        echo "$1" | ispell -a
+        echo "$*" | ispell -a
     elif [ "$(which aspell)" != "" ]; then
-        echo "$1" | aspell -a
+        echo "$*" | aspell -a
     else
         echo "Could not find ispell or aspell"
     fi
