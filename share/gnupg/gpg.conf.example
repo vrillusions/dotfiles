@@ -1,0 +1,79 @@
+# Default key to use
+default-key 0xAABBCCDDEEFF9900
+
+# Always encrypt to your key
+#encrypt-to some-key-id
+# Even better, hide the encrytion to yourself. Using just encrypt-to it's
+# possible to guess that one of those keys is the sender of the message. With
+# hidden-encrypt-to all that will be known is the recipients key and yours will
+# just show up as all zeros
+hidden-encrypt-to 0xAABBCCDDEEFF9900
+
+# In a future version this will be the default
+charset utf-8
+
+# This uses a pool of servers and is generally always responsive
+keyserver hkp://pool.sks-keyservers.net
+
+# Unless you don't want to use a keyserver at all, this is a good option to
+# have on. Commenting out can speed up certain operations though
+#keyserver-options auto-key-retrieve
+
+# Another usability option. If you encrypt for an email address not in your
+# local keyring it will search in this order:
+#   - DNS CERT, per http://www.josefsson.org/rfc2538bis (published as RFC4398)
+#   - DNS PKA, not in RFC but referred to a lot on gpg sites
+#   - what we have defined in "keyservers" option(s)
+# Leaving disabled because this could slow things down a lot (DNS CERT stores
+# the entire public key in dns record and DNS PKA gives a url to fetch the
+# public key from)
+#auto-key-locate cert pka keyserver
+
+# Additional PKA options (again leaving disabled but again useful options that
+# can reduce the amount of "unknown user" messages you'll see.
+#   - pka-lookups - This will do a DNS PKA lookup to verify the sender. Since
+#     this isn't popular it could needless slow things down.
+#   - pka-trust-increase - If pka lookup succeeds (this option requires pka-
+#     lookups) then raise the trust of the signature to full.
+# Again left commented out since for most people this wastes time
+#verify-options pka-lookups pka-trust-increase
+
+# These next three settings are important and should be setup before creating
+# your key
+# Prefer SHA256 when creating signatures. SHA256 is enough and also the most
+# widely supported of the sha2 digests
+personal-digest-preferences SHA256
+
+# Use SHA256 to sign keys
+cert-digest-algo SHA256
+
+# Orders the list of preferred hashes and ciphers more appropriately. Usually
+# when you see this line in other blogs they leave out blowfish. It's quite a
+# capable cipher and see no reason why it shouldn't be included. Still placed
+# after AES as BLOWFISH only has the option for 128 bit keys. Also reordered
+# this to match how the docs describe ordering this (cipher, hash, then
+# compression).
+# This sets the preferences on all new keys. You can modify preferences on
+# existing keys. Search around for instructions on that
+default-preference-list AES256 AES192 AES BLOWFISH CAST5 SHA512 SHA384 SHA256 SHA224 ZLIB BZIP2 ZIP Uncompressed
+
+# Display keys in long format (less likely for collisions)
+keyid-format 0xlong
+
+# It's very rare that I don't want ascii armor so just make it default.
+# Note that some programs may not like this option so if you run into problems
+# try commenting this out
+armor
+
+# When signing keys, ask for trust level. Some people discourage the use of
+# this as the different levels can be interpreted differently for each person.
+# Even though I usually leave it at default 0 it is useful to have the option
+# presented.
+ask-cert-level
+
+# Turn off copyright notice each time it's run
+no-greeting
+# Don't show version in ascii armor
+no-emit-version
+# Don't show comments either (this is the default)
+#no-comments
