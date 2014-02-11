@@ -2,6 +2,7 @@ General
  :set nolist  remove list chars to copy text
  rX           replace character cursor is under with X
  gq           select block of text and gq rewraps
+ gqq          rewrap current line without having to select
  :on[ly]      close all windows but current one
  ~            toggle case (ex 3~ changes next 3 characters)
  g~, gU, gu   toggle, upper, or lower the next movement (ex gU$ would
