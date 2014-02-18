@@ -27,16 +27,16 @@ verbose () {
 
 
 # set script_dir to location this script is running in
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # set this here or can't use after getopts
-SCRIPT_NAME="$(basename $0)"
+script_name="$(basename $0)"
 # full command which can be printed out if needed
-SCRIPT_CMD="$*"
+script_cmd="$*"
 
 
 ### Option Handling
 # Defaults
-RUNAS="$USER"
+runas="$USER"
 VERBOSE=${VERBOSE:-"false"}
 
 while getopts ":hvr:" opt; do
@@ -46,13 +46,13 @@ while getopts ":hvr:" opt; do
         echo 'Description of command'
         echo
         echo 'Options:'
-        echo '  -h  This help message'
-        echo "  -r  Run as specified user (default: $RUNAS)"
-        echo '  -v  Be verbose'
+        echo '  -h  this help message'
+        echo "  -r  run as specified user (default: ${runas})"
+        echo '  -v  be verbose'
         exit 0
         ;;
     r)
-        RUNAS=$OPTARG
+        runas=$OPTARG
         ;;
     v)
         VERBOSE=true
@@ -72,7 +72,7 @@ verbose "Additional arguments after options: $*"
 
 
 ### Actual script begins here
-log "Starting ${SCRIPT_NAME}"
+log "Starting ${script_name}"
 %START%
 
 
