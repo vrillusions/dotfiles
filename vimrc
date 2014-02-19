@@ -42,6 +42,7 @@ if has('mouse')
   set mouse=a                   " use mouse everywhere (when terminal supports it)
 endif
 set viminfo+=n~/.vim/.viminfo   " user directory in windows is ~/.vim as well for this reason
+set lazyredraw                  " don't redraw screen so often
 
 " Format options {{{1
 set formatoptions+=1            " don't wrap on a single letter
