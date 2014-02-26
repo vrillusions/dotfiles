@@ -7,6 +7,7 @@ General
  ~            toggle case (ex 3~ changes next 3 characters)
  g~, gU, gu   toggle, upper, or lower the next movement (ex gU$ would
               uppercase from cursor to end of line)
+ :g/SEARCH/d  delete all lines that SEARCH exists on.
 
 NERDTree
  :Bookmark <name>   bookmark selected folder
