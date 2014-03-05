@@ -131,6 +131,26 @@ let g:ctrlp_open_new_file = 'r' " open new file in current window
 " todotag
 let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than 'vrillusions'
 
+" securemodelines
+" have to specify full list
+let g:secure_modelines_allowed_items = [
+            \ "textwidth",   "tw",
+            \ "softtabstop", "sts",
+            \ "tabstop",     "ts",
+            \ "shiftwidth",  "sw",
+            \ "expandtab",   "et",   "noexpandtab", "noet",
+            \ "filetype",    "ft",
+            \ "foldmethod",  "fdm",
+            \ "readonly",    "ro",   "noreadonly", "noro",
+            \ "rightleft",   "rl",   "norightleft", "norl",
+            \ "cindent",     "cin",  "nocindent", "nocin",
+            \ "smartindent", "si",   "nosmartindent", "nosi",
+            \ "autoindent",  "ai",   "noautoindent", "noai",
+            \ "spell",  "nospell",
+            \ "spelllang",
+            \ "list", "nolist"
+            \ ]
+
 " SimpylFold
 let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 

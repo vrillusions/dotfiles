@@ -14,6 +14,9 @@ cabbrev sp set spell
 "idt = IsoDateTime
 iab idt <c-r>=strftime("%FT%T%z")<cr>
 
+" Create a simple modeline string
+iab vimml vim: set ft=text nolist :
+
 " These are now handled by todo_comment.vim
 " When entering a todo or note, add current date and my login name
 "iab TODO: TODO:<c-r>=strftime("%F")<CR>:teddy:
