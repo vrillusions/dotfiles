@@ -1,0 +1,26 @@
+# This section should be at the bottom of the file
+Host *
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  GSSAPIAuthentication no
+  GSSAPIKeyExchange no
+#   ForwardAgent no
+#   ForwardX11 no
+#   RhostsAuthentication no
+#   RhostsRSAAuthentication no
+#   RSAAuthentication yes
+#   PasswordAuthentication yes
+#   HostbasedAuthentication no
+#   BatchMode no
+#   CheckHostIP yes 
+#   Compression no
+#   StrictHostKeyChecking ask
+#   User loginname
+#   IdentityFile ~/.ssh/identity
+#   IdentityFile ~/.ssh/id_rsa
+#   IdentityFile ~/.ssh/id_dsa
+#   Port 22
+#   Protocol 2,1
+#   Cipher 3des
+#   Ciphers aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour,aes192-cbc,aes256-cbc
+#   EscapeChar ~
