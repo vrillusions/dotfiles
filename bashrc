@@ -150,16 +150,21 @@ sp () {
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
 # append history instead of overwrite
 shopt -s histappend
 PROMPT_COMMAND="$PROMPT_COMMAND ; history -a" 
+
 # give us lots of history
 export HISTSIZE=10000
 export HISTFILESIZE=1000000
+
+# set the timeformat when printing history. also tells bash to keep track of
+# timestamps when it's writing to history
+export HISTTIMEFORMAT="%Y:%m:%d %H:%M:%S  "
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
 # fix typos when changing directories
 shopt -s cdspell
