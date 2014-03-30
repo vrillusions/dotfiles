@@ -150,6 +150,9 @@ sp () {
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
 
+# Ignore `ls`.
+export HISTIGNORE="ls"
+
 # append history instead of overwrite
 shopt -s histappend
 PROMPT_COMMAND="$PROMPT_COMMAND ; history -a" 
