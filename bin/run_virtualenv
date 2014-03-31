@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# Runs the command in specified virtualenv environment
+
+set -e
+set -u
+#set -x
+
+### Logging functions
+# Usage: log "What to log"
+log () {
+    printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
+}
+# Usage: log_abort "Log this and then exit"
+log_abort () {
+    log "ERROR: $*" >&2
+    exit 1
+}
+
+# set script_dir to location this script is running in
+readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+### Option Handling
+# Defaults
+working_dir="${HOME}"
+virtualenvs="${HOME}/.virtualenvs"
+
+while getopts ":hd:v:" opt; do
+    case $opt in
+    h)
+        echo "Usage: $(basename $0) [OPTION] <virtualenv> <command>"
+        echo 'Runs a python script in a virtualenv'
+        echo
+        echo 'Options:'
+        echo '  -h  this help message'
+        echo "  -d  start in this directory (default: ${working_dir})"
+        echo "  -p  virtualenvs path (default: ${virtualenvs})"
+        exit 0
+        ;;
+    d)
+        working_dir=$OPTARG
+        ;;
+    v)
+        virtualenvs=$OPTARG
+        ;;
+    \?)
+        echo "Invalid option: -$OPTARG" >&2
+        exit 1
+        ;;
+    :)
+        echo "Option -$OPTARG requires an argument" >&2
+        exit 1
+        ;;
+    esac
+done
+shift $(expr ${OPTIND} - 1)
+if [[ $# -ne 2 ]]; then
+    log_abort "See -h for usage"
+fi
+virtenv="$1"
+cmd="$2"
+python_cmd="${virtualenvs}/${virtenv}/bin/python"
+activate_script="${virtualenvs}/${virtenv}/bin/activate"
+
+cd "${working_dir}"
+log "Running '${cmd}' in virtualenv '${virtenv}'"
+
+test -f "${activate_script}" || log_abort "couldn't find activate script"
+test -x "${python_cmd}"      || log_abort "couldn't run virtualenv's python"
+
+eval "${python_cmd}" "${cmd}"
+
+exit 0
+
