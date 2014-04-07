@@ -4,6 +4,7 @@
 
 Environment Variables
     LOGLEVEL: overrides the level specified here. Default is warning
+        option: DEBUG, INFO, WARNING, ERROR, or CRITICAL
 
 """
 
@@ -16,13 +17,6 @@ from optparse import OptionParser
 
 
 __version__ = '0.1.0-dev'
-
-
-# Logger config
-# DEBUG, INFO, WARNING, ERROR, or CRITICAL
-_loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
-_logformat = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-logging.basicConfig(level=_loglevel, format=_logformat)
 
 
 def _parse_opts(argv=None):
@@ -56,6 +50,9 @@ def main(argv=None):
     :rtype: int
 
     """
+    loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
+    logformat = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    logging.basicConfig(level=loglevel, format=logformat)
     log = logging.getLogger()
     if argv is None:
         argv = sys.argv

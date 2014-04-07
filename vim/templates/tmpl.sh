@@ -1,16 +1,15 @@
 #!/bin/bash
 #
+# Enter description here
+#
+# Environment Variables:
+#     VERBOSE: Set to 'true' to output more information. Default is 'false'
+#
 
 
 ### Bash options
-# exit upon receiving a non-zero exit code
 set -e
-# enable debuging
-#set -x
-# upon attempt to use an unset variable, print error and exit
 set -u
-# fail on first command in pipeline that fails, not last
-#set -o pipefail
 
 
 ### Logging functions
@@ -20,27 +19,27 @@ log () {
 }
 # Usage: verbose "What to log if VERBOSE is true"
 verbose () {
-    if [[ "$VERBOSE" == "true" ]]; then
+    if [[ "${VERBOSE}" == "true" ]]; then
         log "$*"
     fi
 }
 
 
 # set script_dir to location this script is running in
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # set this here or can't use after getopts
-script_name="$(basename $0)"
+#script_name="$(basename $0)"
 # full command which can be printed out if needed
-script_cmd="$*"
+#script_cmd="$*"
 
 
 ### Option Handling
 # Defaults
-runas="$USER"
+runas="${USER}"
 VERBOSE=${VERBOSE:-"false"}
 
 while getopts ":hvr:" opt; do
-    case $opt in
+    case ${opt} in
     h)
         echo "Usage: $(basename $0) [OPTION] [filename]"
         echo 'Description of command'
@@ -52,22 +51,22 @@ while getopts ":hvr:" opt; do
         exit 0
         ;;
     r)
-        runas=$OPTARG
+        runas=${OPTARG}
         ;;
     v)
         VERBOSE=true
         ;;
     \?)
-        echo "Invalid option: -$OPTARG" >&2
+        echo "Invalid option: -${OPTARG}" >&2
         exit 1
         ;;
     :)
-        echo "Option -$OPTARG requires an argument" >&2
+        echo "Option -${OPTARG} requires an argument" >&2
         exit 1
         ;;
     esac
 done
-shift `expr $OPTIND - 1`
+shift $(expr ${OPTIND} - 1)
 verbose "Additional arguments after options: $*"
 
 
