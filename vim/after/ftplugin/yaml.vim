@@ -5,3 +5,4 @@ setlocal shiftwidth=2
 setlocal smarttab
 setlocal expandtab
 setlocal fileencoding=utf-8
+setlocal foldmethod=indent
