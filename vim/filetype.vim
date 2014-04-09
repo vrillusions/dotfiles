@@ -29,4 +29,7 @@ augroup filetypedetect
   " Git config
   " set it for gitconfig and gitconfig.versioned in dotfiles
   au! BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
+
+  " Generic config files
+  au! BufRead,BufNewFile *.conf setfiletype conf
 augroup END
