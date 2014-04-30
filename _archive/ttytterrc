@@ -1,0 +1,6 @@
+ssl=1
+ansi=1
+vcheck=1
+dostream=1
+hold=1
+readline=1

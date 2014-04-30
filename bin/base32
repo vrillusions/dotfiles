@@ -1,0 +1,177 @@
+#!/usr/bin/env python
+# vim:ts=4:sw=4:ft=python:fileencoding=utf-8
+"""Base32 Encoder/Decoder Utility.
+
+This is a simple wrapper around python utilities to do base32 encoding. It
+should be feature compatible with the `base64` utility.
+
+Requirements
+    Python v2.6 or higher: This is due to the imports from future and to make
+        this more compatible with version 3.x.
+
+Environment Variables
+    LOGLEVEL: overrides the level specified here. Choices are debug, info,
+        warning, error, and critical. Default is warning.
+
+"""
+
+# Standard library imports
+from __future__ import (division, absolute_import, print_function,
+                        unicode_literals)
+#from __future__ import division, absolute_import, print_function
+import os
+import sys
+import logging
+import base64
+import textwrap
+from optparse import OptionParser
+
+
+__version__ = '0.1.0-dev'
+
+
+# Logger config
+# DEBUG, INFO, WARNING, ERROR, or CRITICAL
+# This will set log level from the environment variable LOGLEVEL or default
+# to warning. You can also just hardcode the error if this is simple.
+_LOGLEVEL = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
+_LOGFORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+logging.basicConfig(level=_LOGLEVEL, format=_LOGFORMAT)
+
+
+def _parse_opts(argv=None):
+    """Parse the command line options.
+
+    :param argv: List of arguments to process.
+
+    :return: (options,args) where options is the list of specified options that
+            were parsed and args is whatever arguments are left after parsing
+            all options.
+
+    """
+    version = '%prog {}'.format(__version__)
+    usage = '%prog [options] [FILE]'
+    epilog = 'With no FILE, or when FILE is -, read standard input'
+    parser = OptionParser(version=version, usage=usage, epilog=epilog)
+    parser.set_defaults(verbose=False, decode=False, ignore_garbage=False)
+    parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
+        help='be more verbose')
+    parser.add_option('-d', '--decode', action='store_true',
+        help='decode data')
+    parser.add_option('-i', '--ignore-garbage', action='store_true',
+        help='when decoding, ignore non-alphabet characters')
+    parser.add_option('-w', '--wrap', metavar='COLS',
+        help=('wrap encoded lines after COLS character (default: %default). '
+              'Use 0 to disable line wrapping'), default=72)
+    (options, args) = parser.parse_args(argv)
+    return options, args
+
+
+def _do_base32decode(args, ignore_garbage):
+    """Process options for base32decode."""
+    log = logging.getLogger()
+    argnum = len(args)
+    if argnum > 1:
+        print('Only specify one file at a time, see --help')
+        return False
+    if argnum == 1 and args[0] != '-':
+        # given a file
+        log.debug('Processing {} as file'.format(args[0]))
+        with open(args[0], 'r') as fh:
+            content = fh.read()
+    else:
+        # read stdin
+        log.debug('Reading stdin')
+        content = sys.stdin.read()
+    if ignore_garbage:
+        # Need to ignore characters like spaces
+        # should this just be done here and removed from base32decode()?
+        pass
+    print(base32decode(content, ignore_garbage))
+    return True
+
+
+def base32decode(string, ignore_garbage=False):
+    """Decode the given string.
+
+    :param string: The string to decode
+    :param ignore_garbage: Ignore non-alphabet characters (like spaces).
+            Default: False
+    :return: The decoded representation of string
+
+    """
+    # TODO:2013-12-08:teddy: process ignore_garbage
+    # I'm interpretting garbage as not in the list of valid base32 characters
+    string = string.replace("\n", '')
+    # src: http://stackoverflow.com/a/2942039 (one of the comments)
+    string = string + '='*(-len(string) % 8)
+    # always accept lowercase characters
+    response = base64.b32decode(string, casefold=True)
+    return response
+
+
+def _do_base32encode(args, wrap):
+    """Process options for base32encode."""
+    log = logging.getLogger()
+    argnum = len(args)
+    if argnum > 1:
+        print('Only specify one file at a time, see --help')
+        return False
+    if argnum == 1 and args[0] != '-':
+        # given a file
+        log.debug('Processing {} as file'.format(args[0]))
+        with open(args[0], 'r') as fh:
+            content = fh.read()
+    else:
+        # read stdin
+        log.debug('Reading stdin')
+        content = sys.stdin.read()
+    print(base32encode(content, wrap))
+    return True
+
+
+def base32encode(string, wrap=76):
+    """Encode the given string.
+
+    :param string: The string to encode
+    :param wrap: String will wrap after this many characters. Default is 76.
+    :return: The base32 representation of string
+
+    """
+    # TODO a bunch of stuff here
+    response = base64.b32encode(string)
+    if wrap > 0:
+        response = textwrap.fill(response, wrap)
+    return response
+
+
+def main(argv=None):
+    """The main function.
+
+    :param argv: List of arguments passed to command line. Default is None,
+            which then will translate to having it set to sys.argv.
+
+    :return: Optionally returns a numeric exit code. If not 0 then assume an
+            error has happened.
+
+    """
+    log = logging.getLogger()
+    if argv is None:
+        argv = sys.argv
+    (options, args) = _parse_opts(argv[1:])
+    if options.verbose:
+        log.setLevel(logging.DEBUG)
+    log.debug('Options: {}'.format(options))
+    log.debug('Arguments after options: {}'.format(args))
+    if options.decode:
+        result = _do_base32decode(args, options.ignore_garbage)
+    else:
+        result = _do_base32encode(args, int(options.wrap))
+    if not result:
+        # an error happened, return a non-zero exit code
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+
