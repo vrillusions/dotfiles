@@ -128,4 +128,11 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
     -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
 
+# Mail {{{1
+#####
+# Don't show attachments inline
+# In mavericks mail still seems to show attachments inline occasionally, so
+# just leave this at default (which is false)
+#defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+
 # vim: set fdm=marker:
