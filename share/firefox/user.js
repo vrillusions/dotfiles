@@ -34,7 +34,8 @@ user_pref("browser.enable_automatic_image_resizing", false);
 user_pref("browser.tabs.closeWindowWithLastTab", false);
 
 // Put tabs underneath the url bar, where they belong
-user_pref("browser.tabs.onTop", false);
+// No longer works in FF29+
+//user_pref("browser.tabs.onTop", false);
 
 // Don't warn when going to about:config
 user_pref("general.warnOnAboutConfig", false);

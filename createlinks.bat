@@ -1,4 +1,5 @@
 @ECHO OFF
+setlocal
 REM This needs to run as administrator
 REM make a couple symlinks to dotfiles, mainly just vim configs.
 cd %HOMEPATH%
@@ -9,4 +10,10 @@ mklink _vimrc "dotfiles\vimrc"
 mklink _gvimrc "dotfiles\gvimrc"
 REM directory doesn't need a hard link
 mklink /D .vim "dotfiles\vim"
+echo Additionally you can add firefox's user.js (currently not handled by
+echo script as the profile folder is unique)
+echo.
+echo Example:
+echo   cd %APPDATA%\Mozilla\Firefox\Profiles\ohrei0i4.default
+echo   mklink user.js %USERPROFILE%\dotfiles\share\firefox\user.js
 pause
