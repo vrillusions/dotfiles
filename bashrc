@@ -6,6 +6,12 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# include .bashrc_local_pre at top of file if it exists {{{1
+# This is for setting environment variables and such that need to be set early
+if [ -f ~/.bashrc_local_pre ]; then
+    . ~/.bashrc_local_pre
+fi
+
 # Use vim for editor {{{1
 # ubuntu creates a fake vim bin as a hint to use apt-get, so can't fall back
 # to vi automatically. need to override in ~/.bashrc_local if it applies to you.
