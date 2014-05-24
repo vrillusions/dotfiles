@@ -154,6 +154,18 @@ let g:secure_modelines_allowed_items = [
 " SimpylFold
 let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 
+" buffing wheel and bbye
+" This depends on bbye plugin <https://github.com/moll/vim-bbye>
+" Use the Bdelete command from bbye instead of default bdelete so vim doesn't
+" close windows when I close the buffer.
+" BUG: because .vimrc is loaded before the pathogen plugins there's no way to
+" verify Bdelete.
+let g:BuffingWheelSkipMappings = 1
+command BuffingWheelClose call buffingwheel#cmd('Bdelete')
+noremap <silent> L :<C-u>BuffingWheelNext<CR>
+noremap <silent> H :<C-u>BuffingWheelPrevious<CR>
+noremap <silent> X :<C-u>BuffingWheelClose<CR>
+
 " XMLEdit
 let g:xmledit_enable_html = 1   " Enable for html files
 

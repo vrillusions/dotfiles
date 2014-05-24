@@ -37,6 +37,13 @@ function buffingwheel#cmd(c)
     let i += 1
   endwhile
 
+  if curIndex == -1
+    " zero buffers listed, create a blank one
+    exe "enew"
+    call add(names, '*')
+    let curIndex = len(names) - 1
+  endif
+
   let sLabel = 'Buffers: '
   let sLeft = (curIndex == 0) ? '' : (join(names[:(curIndex - 1)], ' ') . ' ')
   let sMid = '[' . names[curIndex] . ']'

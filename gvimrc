@@ -24,6 +24,10 @@ set guioptions-=L   " left scroll bar
 set background=dark
 colorscheme solarized
 
+" For NERDTree if gui leave window open and allow single click on anything
+let NERDTreeQuitOnOpen = 0 " Quit on opening files from the tree
+let NERDTreeMouseMode = 3  " default is 1 (double click everything)
+
 " begin OS specifics options
 if has("gui_macvim")
     " MacVIM
