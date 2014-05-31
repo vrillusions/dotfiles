@@ -161,7 +161,7 @@ export HISTIGNORE="ls"
 
 # append history instead of overwrite
 shopt -s histappend
-PROMPT_COMMAND="$PROMPT_COMMAND ; history -a" 
+PROMPT_COMMAND="$PROMPT_COMMAND ; history -a"
 
 # give us lots of history
 export HISTSIZE=10000

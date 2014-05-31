@@ -23,7 +23,7 @@ term screen-256color
 #hardstatus alwayslastline "[%C %H] %-Lw%{ WB}%50>%n%f* %+%{-}%+Lw%<"
 
 # add a bunch of information to the bottom of the screen
-# taken from http://shurl.net/1Is 
+# taken from http://shurl.net/1Is
 hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[%m/%d %c]%{W}'
 
 # Keybindings

@@ -35,8 +35,8 @@ cp -f ~/.ssh/config ~/.ssh/config.bak
 
 # Havent' checked this one yet
 # src: http://stackoverflow.com/a/2700594
-#The ba branches to label "a" within the braces associated with 
-#the test for "BEGIN" and the b branches to the end when "END" 
+#The ba branches to label "a" within the braces associated with
+#the test for "BEGIN" and the b branches to the end when "END"
 #is found since it's in a set of braces associated with that test.
 #It's kind of like if /BEGIN/ then read file; while not /END/ do skip line
 #

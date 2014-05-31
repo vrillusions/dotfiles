@@ -6,7 +6,7 @@
  * Any important changes you make in about:config should be transfered here in
  * case the generated file gets overwritten or reset
  */
- 
+
 // Security Options
 // These are the warnings you get on new installs, personally don't need to see them
 //don't need to see these everytime I install a new version
@@ -15,7 +15,7 @@ user_pref("security.warn_leaving_secure", false);
 user_pref("security.warn_submit_insecure", false);
 user_pref("security.warn_viewing_mixed", false);
 
-// Disable 3rd party cookies (0 - allows all, 1 - Only originating server (recommended), 
+// Disable 3rd party cookies (0 - allows all, 1 - Only originating server (recommended),
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
 user_pref('network.cookie.cookieBehavior', 1);
 
@@ -88,10 +88,10 @@ user_pref("plugin.expose_full_path", true);
 //user_pref("network.http.pipelining.maxrequests", 8);
 user_pref("nglayout.initialpaint.delay", 0);
 user_pref("content.notify.interval", 750000);
-user_pref("content.max.tokenizing.time", 2250000); 
+user_pref("content.max.tokenizing.time", 2250000);
 user_pref("content.interrupt.parsing", true);
-user_pref("content.notify.ontimer", true); 
+user_pref("content.notify.ontimer", true);
 user_pref("network.http.max-connections", 48);
 user_pref("network.http.max-connections-per-server", 16);
 user_pref("network.http.max-persistent-connections-per-proxy", 16);
-user_pref("network.http.max-persistent-connections-per-server", 8); 
+user_pref("network.http.max-persistent-connections-per-server", 8);

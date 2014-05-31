@@ -12,7 +12,7 @@ Host *
 #   PasswordAuthentication yes
 #   HostbasedAuthentication no
 #   BatchMode no
-#   CheckHostIP yes 
+#   CheckHostIP yes
 #   Compression no
 #   StrictHostKeyChecking ask
 #   User loginname

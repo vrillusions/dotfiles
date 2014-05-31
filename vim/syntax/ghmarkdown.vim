@@ -4,7 +4,7 @@
 " GFM Maintainer: Jeff Tratner <github.com/jtratner>
 " Filenames:    *.ghmarkdown
 " Last Change:	2013 June 8
-" (nearly the same as tpope's markdown.vim, with a few 
+" (nearly the same as tpope's markdown.vim, with a few
 " add-ons for Github Flavored Markdown)
 
 if exists("b:current_syntax")
