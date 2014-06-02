@@ -112,7 +112,7 @@ set cursorline            " highlight row cursor is on
 hi CursorLine cterm=NONE ctermbg=235
 
 " Plugin settings {{{1
-" NERDTree
+" NERDTree {{{2
 map <Leader>n :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1          " Quit on opening files from the tree
 let NERDTreeBookmarksFile = expand("$HOME/.vim/NERDTreeBookmarks")
@@ -123,15 +123,15 @@ let NERDTreeShowHidden = 1          " Including hidden
 " Ignored files for NERDTree
 let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
-" ctrlP
+" ctrlP {{{2
 nmap <Leader>m      :CtrlPMRU<CR>
 let g:ctrlp_show_hidden = 1     " show hidden files
 let g:ctrlp_open_new_file = 'r' " open new file in current window
 
-" todotag
+" todotag {{{2
 let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than 'vrillusions'
 
-" securemodelines
+" securemodelines {{{2
 " have to specify full list
 let g:secure_modelines_allowed_items = [
             \ "textwidth",   "tw",
@@ -151,10 +151,10 @@ let g:secure_modelines_allowed_items = [
             \ "list", "nolist"
             \ ]
 
-" SimpylFold
+" SimpylFold {{{2
 let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 
-" buffing wheel and bbye
+" buffing wheel and bbye {{{2
 " This depends on bbye plugin <https://github.com/moll/vim-bbye>
 " Use the Bdelete command from bbye instead of default bdelete so vim doesn't
 " close windows when I close the buffer.
@@ -166,7 +166,7 @@ noremap <silent> L :<C-u>BuffingWheelNext<CR>
 noremap <silent> H :<C-u>BuffingWheelPrevious<CR>
 noremap <silent> X :<C-u>BuffingWheelClose<CR>
 
-" XMLEdit
+" XMLEdit {{{2
 let g:xmledit_enable_html = 1   " Enable for html files
 
 " Syntax file settings {{{1
