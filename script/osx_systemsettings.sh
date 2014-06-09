@@ -19,6 +19,10 @@ set -x
 # Value before (and the default it seems) is autopoweroff 1
 sudo pmset -a autopoweroff 0
 
+# I also ran this line at some point, which I don't know if it fixed it
+# see SSD tweak below
+sudo pmset hibernatemode 3
+
 
 # SSD Tweaks {{{1
 #####
