@@ -22,29 +22,24 @@ if [ ! -f "$HOME/.ssh/config" ]; then
     echo "# configuration file, and defaults at the end." >>~/.ssh/config
     echo >>~/.ssh/config
     echo "###BEGIN GENERATED CONTENT" >>~/.ssh/config
+    echo >>~/.ssh/config
     echo "###END GENERATED CONTENT" >>~/.ssh/config
 fi
 
 # backup existing file, overwriting any existing one
 cp -f ~/.ssh/config ~/.ssh/config.bak
 
+
 # do replacement
-# TODO: this doesn't work
-#newContent=$(cat ssh_config_template)
-#perl -0777 -pe "s/(### BEGIN GENERATED CONTENT\\n).*(\\n### END GENERATED CONTENT)/\$1$newContent\$2/s" ~/.ssh/config
+# src: http://superuser.com/a/440057
+begin_tag='^### BEGIN GENERATED CONTENT$'
+end_tag='^### END GENERATED CONTENT$'
+insert_file="./ssh_config_template"
+destination="${HOME}/.ssh/config"
+# The line break here is significant. White space is not
+sed -i -e "/${begin_tag}/,/${end_tag}/{ /${begin_tag}/{p; r ${insert_file}
+    }; /${end_tag}/p; d }" ${destination}
 
-# Havent' checked this one yet
-# src: http://stackoverflow.com/a/2700594
-#The ba branches to label "a" within the braces associated with
-#the test for "BEGIN" and the b branches to the end when "END"
-#is found since it's in a set of braces associated with that test.
-#It's kind of like if /BEGIN/ then read file; while not /END/ do skip line
-#
-#sed -ine '/<!-- BEGIN realm -->/ {p; r realm.xml' \
-#    -e ':a; n; /<!-- END realm -->/ {p; b}; ba}; p' server.xml
-
-# This may be of help, forget where I got it from
-#sed -ne '/^# BEGIN SECTION/,/^# END SECTION/p' filename.xml
 
 # fix permissions
 chmod 700 ~/.ssh
