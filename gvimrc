@@ -27,6 +27,7 @@ colorscheme solarized
 " For NERDTree if gui leave window open and allow single click on anything
 let NERDTreeQuitOnOpen = 0 " Quit on opening files from the tree
 let NERDTreeMouseMode = 3  " default is 1 (double click everything)
+let NERDTreeDirArrows = 1  " fancy arrows
 
 " begin OS specifics options
 if has("gui_macvim")
@@ -35,7 +36,7 @@ if has("gui_macvim")
     set guifont=Inconsolata:h16 " MacVIM parses guifont differently
 elseif has("win32") || has("win64")
     " Windows
-    set lines=50 columns=106    " width is 106 to allow 100 + line numbers
+    set lines=50 columns=126    " width is 106 to allow 100 + line numbers
     set guifont=Consolas:h12
 else
     " use standard syntax to set font
