@@ -3,9 +3,10 @@
 # Contains the options that needs to be reset often. Namely not hiding Library
 
 set -e
+set -u
 
-PLISTBUDDY="/usr/libexec/PlistBuddy -c"
-USRPREFS="${HOME}/Library/Preferences"
+plistbuddy="/usr/libexec/PlistBuddy -c"
+usrprefs="${HOME}/Library/Preferences"
 
 # From here down print the command as it's being run
 set -x
