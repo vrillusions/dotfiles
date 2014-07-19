@@ -44,7 +44,7 @@ WHITE=$(tput setaf 15)
 PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${BR_RED}rc: ${RET}${RESET}"; fi'
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|cygwin*)
     TITLE_BAR="\e]0;\u@\h: \w\a"
     ;;
 # TODO:2013-11-13:teddy: leaving as a case statement for now
