@@ -8,7 +8,7 @@
 # ------------------ General -------------------------------------------
 
 # How many hits before a mail is considered spam.
-required_score 3.2
+required_score 3.1
 
 # How to report spam 0 just modifies headers, 1 does a report and attaches
 # original message, 2 does the report inline at the top of the message.  Default
