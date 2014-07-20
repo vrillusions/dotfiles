@@ -26,9 +26,9 @@ if [ ! -f "${HOME}/.ssh/config" ]; then
     echo "# Thus, host-specific definitions should be at the beginning of the" >>~/.ssh/config
     echo "# configuration file, and defaults at the end." >>~/.ssh/config
     echo >>~/.ssh/config
-    echo "###BEGIN GENERATED CONTENT" >>~/.ssh/config
+    echo "### BEGIN GENERATED CONTENT" >>~/.ssh/config
     echo >>~/.ssh/config
-    echo "###END GENERATED CONTENT" >>~/.ssh/config
+    echo "### END GENERATED CONTENT" >>~/.ssh/config
 fi
 
 # backup existing file, overwriting any existing one

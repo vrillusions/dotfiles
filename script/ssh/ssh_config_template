@@ -14,7 +14,8 @@ Host *
   # umac-64@openssh.com (or even umac-32@openssh.com) or hmac-md5 for mac
   #
   # MD5 is still 'good enough' when used for HMAC but still making it last
-  MACs hmac-sha1-etm@openssh.com,umac-128-etm@openssh.com,hmac-md5-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-ripemd160-etm@openssh.com,hmac-sha1,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-md5,hmac-ripemd160
+  # Commenting out since this list isn't valid in Ubuntu 12.04
+  #MACs hmac-sha1-etm@openssh.com,umac-128-etm@openssh.com,hmac-md5-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-ripemd160-etm@openssh.com,hmac-sha1,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-md5,hmac-ripemd160
 #   UserKnownHosts ~/.ssh/known_hosts ~/.ssh/known_hosts2
 #   ForwardAgent no
 #   ForwardX11 no
