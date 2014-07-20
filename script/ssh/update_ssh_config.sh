@@ -1,12 +1,17 @@
-#!/bin/bash -e
+#!/bin/bash
 # Replaces the bottom part of ~/.ssh/config with any updates
 # BUG: if existing config does not have a template section it doesn't complain and just does nothing
 
-if [ ! -d "$HOME/.ssh" ]; then
+set -e
+set -u
+
+readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ ! -d "${HOME}/.ssh" ]; then
     # create .ssh directory
     mkdir ~/.ssh
 fi
-if [ ! -f "$HOME/.ssh/config" ]; then
+if [ ! -f "${HOME}/.ssh/config" ]; then
     # create base ssh config
     # doing this as a bunch of echos instead of heredoc to maintain indentation
     echo "# This is the ssh client user configuration file.  See" >>~/.ssh/config
@@ -34,7 +39,7 @@ cp -f ~/.ssh/config ~/.ssh/config.bak
 # src: http://superuser.com/a/440057
 begin_tag='^### BEGIN GENERATED CONTENT$'
 end_tag='^### END GENERATED CONTENT$'
-insert_file="./ssh_config_template"
+insert_file="${script_dir}/ssh_config_template"
 destination="${HOME}/.ssh/config"
 # The line break here is significant. White space is not
 sed -i -e "/${begin_tag}/,/${end_tag}/{ /${begin_tag}/{p; r ${insert_file}
