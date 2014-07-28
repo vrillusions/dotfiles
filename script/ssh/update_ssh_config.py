@@ -12,6 +12,13 @@ Environment Variables
     LOGLEVEL: overrides the level specified here. Default is warning
         option: DEBUG, INFO, WARNING, ERROR, or CRITICAL
 
+TODO:2014-07-28:teddy: create a starter file if doesn't exist
+TODO:2014-07-28:teddy: fix permissions
+
+Changelog
+
+0.1.0 - 2014-07-28 - Initial release
+
 """
 
 from __future__ import (division, absolute_import, print_function,
@@ -23,7 +30,7 @@ import shutil
 from optparse import OptionParser
 
 
-__version__ = '0.1.0-dev'
+__version__ = '0.1.0'
 
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -83,7 +90,6 @@ def main(argv=None):
         log.setLevel(logging.DEBUG)
     with open(options.content, 'rb') as fh:
         template_content = fh.read().rstrip()
-    # TODO:2014-07-25:teddy: handle file not existing and create template
     with open(options.sshconfig, 'rb') as fh:
         sshconfig = fh.read().rstrip()
     startindex = sshconfig.find("\n### BEGIN GENERATED CONTENT")
@@ -91,14 +97,18 @@ def main(argv=None):
     if startindex == -1 or endindex == -1:
         log.error('Could not find where to add data')
         return 1
-    new_sshconfig = "{}\n### BEGIN GENERATED CONTENT\n{}{}".format(
+    new_sshconfig = "{}\n### BEGIN GENERATED CONTENT\n{}{}\n".format(
         sshconfig[:startindex], template_content, sshconfig[endindex:])
     shutil.copy(options.sshconfig, options.backup_file)
     log.info('Created backup %s', options.backup_file)
+    with open(options.sshconfig, 'wb') as fh:
+        fh.write(new_sshconfig)
+    log.info('Updated %s', options.sshconfig)
     log.debug('--- contents before search and replace ---')
     log.debug(sshconfig)
     log.debug('--- contents after search and replace  ---')
     log.debug(new_sshconfig)
+    print("Finished updating {}. Have a nice day!".format(options.sshconfig))
 
 
 if __name__ == "__main__":
