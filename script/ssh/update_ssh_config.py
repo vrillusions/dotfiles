@@ -37,6 +37,10 @@ __version__ = '0.2.0-dev'
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
+class SearchTermNotFoundError(Exception):
+    pass
+
+
 def _parse_opts(argv=None):
     """Parse the command line options.
 
@@ -132,8 +136,7 @@ def main(argv=None):
     startindex = sshconfig.find("\n### BEGIN GENERATED CONTENT")
     endindex = sshconfig.find("\n### END GENERATED CONTENT")
     if startindex == -1 or endindex == -1:
-        log.error('Could not find where to add data')
-        return 1
+        raise SearchTermNotFoundError('See config_default for values')
     new_sshconfig = "{}\n### BEGIN GENERATED CONTENT\n{}{}\n".format(
         sshconfig[:startindex], template_content, sshconfig[endindex:])
     shutil.copy(options.sshconfig, options.backup_file)
