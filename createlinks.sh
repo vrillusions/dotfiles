@@ -45,8 +45,6 @@ relink .inputrc      "${dotfiles}/inputrc"
 relink .vim          "${dotfiles}/vim"
 relink .vimrc        "${dotfiles}/vimrc"
 
-relink .screenrc     "${dotfiles}/screenrc"
-relink .lftprc       "${dotfiles}/lftprc"
 relink .gemrc        "${dotfiles}/gemrc"
 relink .rvmrc        "${dotfiles}/rvmrc"
 
@@ -67,6 +65,20 @@ else
     relink ignore "${dotfiles}/gitignore"
     cd "${HOME}"
 fi
+
+# put lftprc in XDG directory
+rm -f "${HOME}/.lftprc"
+create_dir "${HOME}/.config/lftp"
+cd "${HOME}/.config/lftp"
+relink rc "${dotfiles}/lftprc"
+cd "${HOME}"
+
+# put screenrc in XDG directory
+rm -f "${HOME}/.screenrc"
+create_dir "${HOME}/.config/screen"
+cd "${HOME}/.config/screen"
+relink screenrc "${dotfiles}/screenrc"
+cd "${HOME}"
 
 echo
 echo "This only sets up common files. Additional files to setup if you use them"
