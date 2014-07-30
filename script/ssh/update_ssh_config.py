@@ -14,10 +14,12 @@ Environment Variables
 
 Changelog
 
-0.2.0 - unreleased
+0.2.0 - 2014-07-29
     - create config file if doesn't exist (including parent directories)
     - sets permissions on all files it touches
-0.1.0 - 2014-07-28 - Initial release
+    - throws exception if can't find template tags
+0.1.0 - 2014-07-28
+    - Initial release
 
 """
 
@@ -31,7 +33,7 @@ import errno
 from optparse import OptionParser
 
 
-__version__ = '0.2.0-dev'
+__version__ = '0.2.0'
 
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -129,29 +131,31 @@ def main(argv=None):
     options = _parse_opts(argv)[0]
     if options.verbose:
         log.setLevel(logging.DEBUG)
+
     with open(options.content, 'rb') as fh:
         template_content = fh.read().rstrip()
     sshconfig = _read_or_create(options.sshconfig, options.default_config)
     sshconfig = sshconfig.rstrip()
+
     startindex = sshconfig.find("\n### BEGIN GENERATED CONTENT")
     endindex = sshconfig.find("\n### END GENERATED CONTENT")
     if startindex == -1 or endindex == -1:
         raise SearchTermNotFoundError('See config_default for values')
     new_sshconfig = "{}\n### BEGIN GENERATED CONTENT\n{}{}\n".format(
         sshconfig[:startindex], template_content, sshconfig[endindex:])
+
     shutil.copy(options.sshconfig, options.backup_file)
     log.info('Created backup %s', options.backup_file)
+
     with open(options.sshconfig, 'wb') as fh:
         fh.write(new_sshconfig)
     log.info('Updated %s', options.sshconfig)
+
     os.chmod(os.path.dirname(options.sshconfig), options.dir_mode)
     os.chmod(options.sshconfig, options.file_mode)
     os.chmod(options.backup_file, options.file_mode)
     log.info('Fixed permissions')
-    log.debug('--- contents before search and replace ---')
-    log.debug(sshconfig)
-    log.debug('--- contents after search and replace  ---')
-    log.debug(new_sshconfig)
+
     print("Finished updating {}. Have a nice day!".format(options.sshconfig))
 
 
