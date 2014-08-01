@@ -160,6 +160,7 @@ export XDG_CACHE_DIR="${HOME}/.cache"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_DIR}/httpie"
 export PYLINTHOME="${XDG_DATA_DIR}/pylint"
 export SCREENRC="${XDG_CONFIG_DIR}/screen/screenrc"
+export LESSHISTFILE="${XDG_CONFIG_DIR}/less/lesshst"
 
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
