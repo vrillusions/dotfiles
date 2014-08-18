@@ -8,6 +8,7 @@ General
  g~, gU, gu   toggle, upper, or lower the next movement (ex gU$ would
               uppercase from cursor to end of line)
  :g/SEARCH/d  delete all lines that SEARCH exists on.
+ K            will lookup man page for word cursor is under
 
 NERDTree
  :Bookmark <name>   bookmark selected folder
