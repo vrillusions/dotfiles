@@ -17,3 +17,5 @@ setlocal omnifunc=pythoncomplete#Complete
 
 " python specific abbreviations
 iab <buffer> ifmain if __name__ == "__main__":
+" start debugger environment here
+iab <buffer> pdbtrace import pdb; pdb.set_trace()
