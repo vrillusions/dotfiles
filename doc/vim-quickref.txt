@@ -29,6 +29,7 @@ Spelling
  zg   Remember word in `spellfile` file
  zG   Add word to internal-wordlist (lost when closing vim)
  z=   Show suggestions
+ \r   (custom) replace all
 Spelling (insert mode)
  <ctrl>-x,s  Show suggestions for current word, use ^p and ^n to navigate
 
