@@ -33,7 +33,7 @@ import errno
 from optparse import OptionParser
 
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -105,7 +105,9 @@ def _read_or_create(filename, file_template):
     except IOError as exc:
         if exc.errno == errno.ENOENT:
             log.info('No ssh config found, creating new one.')
-            os.makedirs(os.path.dirname(filename))
+            # TODO: Shouldn't ever have to create ~/.ssh/ but may want to
+            # consider adding the logic for it
+            #os.makedirs(os.path.dirname(filename))
             shutil.copy(file_template, filename)
             with open(filename, 'rb') as fh:
                 result = fh.read().rstrip()
