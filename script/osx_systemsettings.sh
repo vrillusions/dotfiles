@@ -38,3 +38,8 @@ sudo tmutil disablelocal
 
 # Disable motion sensor since there's no spinning disk to save
 sudo pmset -a sms 0
+
+
+# Enable apache to start on boot {{{1
+#####
+sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd.plist Disabled -bool false
