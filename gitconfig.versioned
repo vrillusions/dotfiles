@@ -6,10 +6,6 @@
 	# Set autocrlf to true if on windows
 	autocrlf = input
 [color]
-	branch = auto
-	diff = auto
-	grep = auto
-	status = auto
 	ui = auto
 [diff]
 	# Disables the rename limit
@@ -55,3 +51,5 @@
 [push]
 	# Only push the current branch to it's matching upstream branch
 	default = upstream
+[log]
+	decorate = auto
