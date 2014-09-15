@@ -127,7 +127,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Default to gpg v2 if it exists
-test $(which gpg2) && alias gpg=gpg2 || true
+test "$(which gpg2)" && alias gpg=gpg2 || true
 
 # Spellcheck function {{{1
 # Type `sp someword` to spellcheck it
