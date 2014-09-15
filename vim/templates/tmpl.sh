@@ -1,20 +1,30 @@
 #!/bin/bash
 #
-# Enter description here
+# Description NOT SET
 #
 # Environment Variables:
 #     VERBOSE: Set to 'true' to output more information. Default is 'false'
 #
 
 
-### Bash options
 set -e
 set -u
+
+
+### Script-wide variables
+# set script_dir to location this script is running in
+readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly script_name="$(basename $0)"
+# full command before getopts
+#readonly script_cmd="$*"
 
 
 ### Logging functions
 # Usage: log "What to log"
 log () {
+    # logger will output to syslog, useful for background tasks
+    #logger -s -t "${script_name}" -- "$*"
+    # printf is good for scripts run manually when needed
     printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
 }
 # Usage: verbose "What to log if VERBOSE is true"
@@ -23,14 +33,6 @@ verbose () {
         log "$*"
     fi
 }
-
-
-# set script_dir to location this script is running in
-readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# set this here or can't use after getopts
-#script_name="$(basename $0)"
-# full command which can be printed out if needed
-#script_cmd="$*"
 
 
 ### Option Handling
@@ -42,7 +44,7 @@ while getopts ":hvr:" opt; do
     case ${opt} in
     h)
         echo "Usage: $(basename $0) [OPTION] [filename]"
-        echo 'Description of command'
+        echo 'Description NOT SET'
         echo
         echo 'Options:'
         echo '  -h  this help message'
@@ -70,12 +72,9 @@ shift $(expr ${OPTIND} - 1)
 verbose "Additional arguments after options: $*"
 
 
-### Actual script begins here
-log "Starting ${script_name}"
 %START%
 
 
-# SECONDS is a bash builtin
 verbose "Script ran for ${SECONDS} seconds"
 
 exit 0
