@@ -1,0 +1,13 @@
+United States - modified
+========================
+
+This is pretty much the standard international keyboard. I modified it since I found the `AltGr` key combinations to be faster than using the numpad. Also on laptops that don't have a numpad. Big annoyance I had though was the dead keys since I never needed them. Current modifications are listed below.
+
+Note that it shows up in keyboard chooser as United States-International - Modified
+
+Changes to base layout
+----------------------
+
+* Base layout: United States-International
+* All dead keys (eg `'` and `~` and such) are removed
+* `AltGr + t` - Changed from U+00fe () to trademark symbol

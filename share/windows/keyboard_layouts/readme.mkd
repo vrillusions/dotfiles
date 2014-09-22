@@ -1,0 +1,12 @@
+Using keyboard layouts
+======================
+
+Only the source file is included. To actually install the profile you need to compile a dll and installer. Do the following.
+
+1. download and install [Microsoft Keyboard Layout Creator](http://www.microsoft.com/en-us/download/details.aspx?id=22339)
+2. double click on the `.klc` file should open it automatically. If not start the program and load it in
+3. once in the program go to project > Build DLL and Setup Package
+4. should complete without errors
+5. that build process shouldn't have any errors. By default the installer is placed in users Documents folder in a subfolder which it will ask if you want to open it.
+6. clicking on `setup.exe` will give you the proper installer and go ahead with installation.
+7. once that is done go to keyboard settings in control panel to choose the new keyboard layout

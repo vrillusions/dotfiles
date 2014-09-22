@@ -4,3 +4,4 @@ vim/.viminfo
 vim/NERDTreeBookmarks
 /vim/bundle/*/doc/tags
 *.py?
+share/windows/keyboard_layouts/us_modified/vr_kbd01/
