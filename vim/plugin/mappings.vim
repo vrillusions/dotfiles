@@ -41,4 +41,12 @@ nmap <C-L> <C-W><C-L>
 " <Leader>-r to repeate last replacement done {{{1
 nmap <Leader>r :spellrepall
 
+" Insert current date in a few ways {{{1
+" <Leader>dt - date and time
+" <Leader>da - date
+" <Leader>ti - time
+nmap <Leader>dt "=strftime("%FT%T%z")"<CR>P
+nmap <Leader>da "=strftime("%F")"<CR>P
+nmap <Leader>ti "=strftime("%T%z")"<CR>P
+
 " vim: set fdm=marker:
