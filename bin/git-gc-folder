@@ -24,10 +24,30 @@
 #
 
 set -e
+set -u
+
+
+### Logging functions
+# Usage: log "What to log"
+log () {
+    printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
+}
+# Usage: log_error "What to log to stderr"
+log_error () {
+    log "$*" >&2
+}
+# Usage: verbose "What to log if VERBOSE is true"
+verbose () {
+    if [[ "${VERBOSE}" == "true" ]]; then
+        log "$*"
+    fi
+}
+
 
 ## Option Handling
 # Defaults
-VERBOSE=false
+VERBOSE=${VERBOSE:-false}
+
 while getopts ":hv" opt; do
     case $opt in
     h)
@@ -51,29 +71,33 @@ done
 shift `expr $OPTIND - 1`
 
 if [ $# -ne 1 ]; then
-    echo "No directory specified. See -h for help." >&2
+    log_error "No directory specified. See -h for help."
     exit 1
 fi
 if [ ! -d "$1" ]; then
-    echo "$1 is not a directory" >&2
+    log_error "$1 is not a directory"
     exit 1
 fi
-DIRECTORY="$1"
+repo_dir="$1"
 
-cd $DIRECTORY
+cd "${repo_dir}"
 
-for NAME in *; do
-    if [ -d "$NAME" ] && [ -d "$NAME/.git" ]; then
-        echo "Running garbage collection on $NAME"
-        cd "$NAME"
-        if [ "$VERBOSE" == "true" ]; then
-            git gc
-            # Put an extra line break when verbose
-            echo
+for repo in *; do
+    if [ -d "${repo}" ]; then
+        cd "${repo}"
+        if [[ $(git rev-parse --git-dir &>/dev/null ; echo $?) -ne 0 ]]; then
+            verbose "${repo} doesn't appear to be a git directory, skipping"
         else
-            git gc -q
+            log "Running garbage collection on ${repo}"
+            if [ "$VERBOSE" == "true" ]; then
+                git gc
+                # Put an extra line break when verbose
+                echo
+            else
+                git gc -q
+            fi
         fi
-        cd "$DIRECTORY"
+        cd "${repo_dir}"
     fi
 done
 
