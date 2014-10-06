@@ -17,6 +17,7 @@ call pathogen#helptags()
 set enc=utf-8                   " Always use UTF-8 encoding (needed for listchars)
 set backspace=indent,eol,start  " backspace over everything in insert mode
 set backup                      " keep a backup file
+set backupskip=/tmp/*           " but not of files in /tmp
 set history=1000                " how many lines of command line history to keep
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
@@ -238,8 +239,8 @@ if bufname('%') == ''
 endif
 
 " Load local settings if exists {{{1
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+if filereadable(expand("~/.vimrc_local"))
+  source ~/.vimrc_local
 endif
 
 " vim: set et ts=2 sw=2 sts=2 fdm=marker:
