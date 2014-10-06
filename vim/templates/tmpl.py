@@ -50,9 +50,6 @@ def main(argv=None):
     :rtype: int
 
     """
-    loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
-    logformat = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    logging.basicConfig(level=loglevel, format=logformat)
     log = logging.getLogger()
     if argv is None:
         argv = sys.argv
@@ -67,4 +64,8 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    # Configure logging only if called directly
+    _loglevel = getattr(logging, os.getenv('LOGLEVEL', 'WARNING').upper())
+    _logformat = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    logging.basicConfig(level=_loglevel, format=_logformat)
     sys.exit(main())
