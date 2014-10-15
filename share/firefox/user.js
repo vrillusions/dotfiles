@@ -15,6 +15,10 @@ user_pref("security.warn_leaving_secure", false);
 user_pref("security.warn_submit_insecure", false);
 user_pref("security.warn_viewing_mixed", false);
 
+// Set minimum tls version: (0 - SSLv3 (default), 1 - TLSv1, 2 - TLSv1.1, 3 - TLSv1.2)
+// SSLv3 should be avoided due to POODLE attack
+user_pref("security.tls.version.min", 1);
+
 // Disable 3rd party cookies (0 - allows all, 1 - Only originating server (recommended),
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
 user_pref('network.cookie.cookieBehavior', 1);
