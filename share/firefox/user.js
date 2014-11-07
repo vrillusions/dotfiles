@@ -19,6 +19,9 @@ user_pref("security.warn_viewing_mixed", false);
 // SSLv3 should be avoided due to POODLE attack
 user_pref("security.tls.version.min", 1);
 
+// Require that we pass OCSP validation or don't continue
+user_pref("security.OCSP.require", true);
+
 // Disable 3rd party cookies (0 - allows all, 1 - Only originating server (recommended),
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
 user_pref('network.cookie.cookieBehavior', 1);
@@ -28,7 +31,24 @@ user_pref('network.cookie.cookieBehavior', 1);
 // Set this to 2 and use permit cookies to whitelist sites that can store cookies normally
 user_pref("network.cookie.lifetimePolicy", 2);
 
+
+// Set the default action for various plugins.
+// 0 - never activate
+// 1 - ask to activate
+// 2 - always activate
+user_pref("plugin.state.flash", 1);
+
+
 // Other UI tweaks not related to performance articles below
+// Don't use new tab page
+user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.newtabpage.enhanced", false);
+
+// Set default home page
+user_pref("browser.startup.homepage", "https://www.google.com");
+user_pref("browser.startup.page", 3);
+
+
 // backspace key action (0 - goes back a page, 1 - scrolls up a page, >1 - disables)
 user_pref("browser.backspace_action", 2);
 // disable image resizing
