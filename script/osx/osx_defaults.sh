@@ -11,6 +11,16 @@ USRPREFS="${HOME}/Library/Preferences"
 # From here down print the command as it's being run
 set -x
 
+# Stuff to figure out {{{1
+#####
+# Setting the script menu in menu bar.
+# In gui this is done by opening applescript editor and then preferences.  From
+# command line it touches com.apple.systemuiserver, adding a line to array.  The
+# suboptions that are set in preferences can be set in com.apple.scriptmenu.
+# Toggle them in gui to see the values change. Main challenge is going to be
+# appending the script menu to the list of menuextras only if it doesn't already
+# exist
+
 # General {{{1
 #####
 # Disable auto spell correction
