@@ -49,9 +49,21 @@ defaults write com.apple.menuextra.clock DateFormat -string "MMM d  h:mm a"
 
 # Expand save dialog by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print dialog by default
+defaults write NSGlobalDomain NSPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain NSPrintingExpandedStateForPrint2 -bool true
+
+# Don't save to icloud by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Turn off shadow when doing screen captures
 defaults write com.apple.screencapture disable-shadow -bool true
+
+# Disable “natural” scrolling although this is the first thing I change on new
+# system.
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 
 # Finder {{{1
@@ -70,12 +82,13 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 # Don't create .DS_Store files on network
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
 # Allow selecting text in quicklook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Show status and path bars
 defaults write com.apple.finder ShowStatusBar -bool true
-defaults write com.apple.finder ShowPathBar -bool true
+defaults write com.apple.finder ShowPathbar -bool true
 
 # Show full path in title bar
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -118,7 +131,7 @@ defaults write com.apple.dock hide-mirror -bool true
 defaults write com.apple.dock showhidden -bool true
 
 # Set icon size
-defaults write com.apple.dock tilesize -int 25
+defaults write com.apple.dock tilesize -int 48
 
 # Bottom left disables screen saver (6)
 defaults write com.apple.dock wvous-bl-corner -int 6
@@ -144,5 +157,25 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
 # In mavericks mail still seems to show attachments inline occasionally, so
 # just leave this at default (which is false)
 #defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+
+# Disable send and reply animations in Mail.app
+defaults write com.apple.mail DisableReplyAnimations -bool true
+defaults write com.apple.mail DisableSendAnimations -bool true
+
+
+# Address Book {{{1
+#####
+# Enable debug menu in address book
+defaults write com.apple.addressbook ABShowDebugMenu -bool true
+
+
+# TextEdit {{{1
+#####
+# Use plain text mode
+defaults write com.apple.TextEdit RichText -int 0
+
+# Use UTF-8 when opening and saving documents
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # vim: set fdm=marker:
