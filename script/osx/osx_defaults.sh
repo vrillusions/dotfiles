@@ -178,4 +178,22 @@ defaults write com.apple.TextEdit RichText -int 0
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
+
+# Activity Monitor {{{1
+#####
+# Show main window when launching activity monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Show CPU usage in dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Show all processes by default
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Default sort is on CPU
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+
+# vim settings {{{1
 # vim: set fdm=marker:

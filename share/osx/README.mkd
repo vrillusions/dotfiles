@@ -1,0 +1,8 @@
+## Script folders
+
+The two application folders should be symlinked to ~/Library/ like so (assuming the folders don't exist already)
+
+    ln -s ~/dotfiles/share/osx/Application\ Scripts ~/Library/
+    ln -s ~/dotfiles/share/osx/Scripts ~/Library/
+
+In general the application scripts tend to be specialized for a particular application.  When you use an application subfolder in scripts then your basically just saying you only ever use that script on a certain application.
