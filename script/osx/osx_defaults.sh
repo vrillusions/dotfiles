@@ -71,7 +71,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set short delay till repeat and then set repeat rate fast
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 2
+
 
 # Finder {{{1
 #####
