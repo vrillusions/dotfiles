@@ -63,8 +63,15 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # Disable “natural” scrolling although this is the first thing I change on new
 # system.
+# NOTE: If you have scroll reverser installed then leave this to true
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
+# Disable press and hold so key repeat is faster
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Set short delay till repeat and then set repeat rate fast
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Finder {{{1
 #####
@@ -114,6 +121,9 @@ $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" ${US
 $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" ${USRPREFS}/com.apple.finder.plist
 $PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${USRPREFS}/com.apple.finder.plist
 
+# Turn off confirmation when changing file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
 
 # Dock {{{1
 #####
@@ -125,19 +135,29 @@ defaults write com.apple.dock orientation -string left
 
 # So far only mavericks option I've found. This removes the blur effect. Unsure
 # how much better that is though
+# Don't think this has any effect in Yosemite
 defaults write com.apple.dock hide-mirror -bool true
 
 # Dim apps that are hidden
 defaults write com.apple.dock showhidden -bool true
 
 # Set icon size
-defaults write com.apple.dock tilesize -int 48
+defaults write com.apple.dock tilesize -int 32
 
 # Bottom left disables screen saver (6)
 defaults write com.apple.dock wvous-bl-corner -int 6
 
 # Bottom right starts screen saver (5)
 defaults write com.apple.dock wvous-br-corner -int 5
+
+# Don't show dashboard as a space
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# In fact, just disable dashboard completely
+#defaults write com.apple.dashboard mcx-disabled -bool true
+
+# Disable rearranging spaces based on use
+defaults write com.apple.dock mru-spaces -bool false
 
 
 # Messages {{{1
@@ -161,6 +181,11 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings \
 # Disable send and reply animations in Mail.app
 defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true
+
+# Enable spell checking
+defaults write com.apple.mail SpellCheckingBehavior -string "InlineSpellCheckingEnabled"
+# But don't correct it automatically
+defaults write com.apple.mail WebAutomaticSpellingCorrectionEnabled -bool false
 
 
 # Address Book {{{1
