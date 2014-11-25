@@ -155,7 +155,7 @@ defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
 # In fact, just disable dashboard completely
-#defaults write com.apple.dashboard mcx-disabled -bool true
+defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Disable rearranging spaces based on use
 defaults write com.apple.dock mru-spaces -bool false
