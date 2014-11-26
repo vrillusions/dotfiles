@@ -156,11 +156,13 @@ export XDG_CONFIG_DIR="${HOME}/.config"
 export XDG_DATA_DIR="${HOME}/.local/share"
 export XDG_CACHE_DIR="${HOME}/.cache"
 
-# applications that support an environment variable to specify config location
+# Set application configs (when supported) to XDG locations {{{1
+export CCACHE_DIR="${XDG_CACHE_DIR}/ccache"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_DIR}/httpie"
+export LESSHISTFILE="${XDG_CONFIG_DIR}/less/lesshst"
 export PYLINTHOME="${XDG_DATA_DIR}/pylint"
 export SCREENRC="${XDG_CONFIG_DIR}/screen/screenrc"
-export LESSHISTFILE="${XDG_CONFIG_DIR}/less/lesshst"
+export VAGRANT_HOME="${XDG_DATA_DIR}/vagrant"
 
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
