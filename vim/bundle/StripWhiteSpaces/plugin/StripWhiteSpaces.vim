@@ -10,9 +10,13 @@ function! s:StripWhiteSpaces()
     let save_cursor = getpos(".")
     let old_query = getreg('/')
     :%s/\s\+$//e
+
+    if exists('g:strip_trailing_lines') && g:strip_trailing_lines
+        :%s#\($\n\s*\)\+\%$##e
+    endif
+
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
-
 autocmd BufWritePre * StripWhiteSpace
 command! -range=% StripWhiteSpaces :silent call <SID>StripWhiteSpaces()

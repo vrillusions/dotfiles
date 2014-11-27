@@ -119,6 +119,7 @@ import_repo () {
 ### Actual script begins here
 # TODO:2013-11-03:teddy: need a way to send a list of repos to this
 # TODO:2013-11-03:teddy: also this will always wipe the destination dir
+# TODO:2014-11-27:teddy: automated way of checking latest commit
 
 echo "WARNING: This will erase the destination folder for each project and will"
 echo "reset any local changes made. This shouldn't be an issue as the plugins"
@@ -131,14 +132,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ngn/vim-buffing-wheel.git" buffing-wheel 130cf196
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 4.2.0
-    import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines febb02f
+    import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines bfbecf0
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold 08d94d4
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized 528a59f
-    import_repo "https://github.com/ervandew/supertab.git" supertab 24780b94644
-    import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces a700696
+    import_repo "https://github.com/ervandew/supertab.git" supertab b0ca47f
+    import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 98169e3
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.3.0
     #import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner v0.3.6
-    import_repo "https://github.com/sukima/xmledit.git" xmledit 1.10.4
+    import_repo "https://github.com/sukima/xmledit.git" xmledit v1.10.5
     log "Finished"
 fi
 
