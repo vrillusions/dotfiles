@@ -54,7 +54,6 @@ set wildmenu                    " make tab completion for files and buffers act 
 set wildmode=list:full          " show a list when pressing tab complete and first full match
 " Files to ignore (this is also the list used by ctrlP)
 set wildignore+=~/.vim/undofiles/*,~/.vim/backup/*,*.swp  " vim working files
-set wildignore+=*.bak               " miscellaneous
 set wildignore+=*.DS_Store          " macs
 set wildignore+=*.py?               " python
 set wildignore+=*.class             " java
