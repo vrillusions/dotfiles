@@ -152,17 +152,18 @@ sp () {
 #fi
 
 # XDG Basedir Setup {{{1
-export XDG_CONFIG_DIR="${HOME}/.config"
-export XDG_DATA_DIR="${HOME}/.local/share"
-export XDG_CACHE_DIR="${HOME}/.cache"
+# To override these add them to ~/.bashrc_local_pre
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
 # Set application configs (when supported) to XDG locations {{{1
-export CCACHE_DIR="${XDG_CACHE_DIR}/ccache"
-export HTTPIE_CONFIG_DIR="${XDG_CONFIG_DIR}/httpie"
-export LESSHISTFILE="${XDG_CONFIG_DIR}/less/lesshst"
-export PYLINTHOME="${XDG_DATA_DIR}/pylint"
-export SCREENRC="${XDG_CONFIG_DIR}/screen/screenrc"
-export VAGRANT_HOME="${XDG_DATA_DIR}/vagrant"
+export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
+export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
+export LESSHISTFILE="${XDG_CONFIG_HOME}/less/lesshst"
+export PYLINTHOME="${XDG_DATA_HOME}/pylint"
+export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
+export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
