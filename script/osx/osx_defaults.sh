@@ -5,21 +5,35 @@
 
 set -e
 
-PLISTBUDDY="/usr/libexec/PlistBuddy -c"
-USRPREFS="${HOME}/Library/Preferences"
+plistbuddy_cmd="/usr/libexec/PlistBuddy -c"
+prefs_home="${HOME}/Library/Preferences"
+
+
+# Usage: add_menu_item "Item to add to menu if not exist"
+add_menu_item () {
+    set +x
+    if [[ -z "$*" ]]; then
+        echo "No menu item specified" >&2
+        exit 2
+    fi
+    local menu_item
+    local menu_item_exists
+    menu_item="$*"
+    menu_item_exists=$($plistbuddy_cmd "Print :menuExtras:" \
+        ${prefs_home}/com.apple.systemuiserver.plist \
+        | grep "${menu_item}" &>/dev/null ; echo $?)
+    if [ $menu_item_exists -eq 1 ]; then
+        echo "Adding ${menu_item} to toolbar"
+        $plistbuddy_cmd "Add :menuExtras:0 string ${menu_item}" \
+            ${prefs_home}/com.apple.systemuiserver.plist
+    fi
+    set -x
+}
+
 
 # From here down print the command as it's being run
 set -x
 
-# Stuff to figure out {{{1
-#####
-# Setting the script menu in menu bar.
-# In gui this is done by opening applescript editor and then preferences.  From
-# command line it touches com.apple.systemuiserver, adding a line to array.  The
-# suboptions that are set in preferences can be set in com.apple.scriptmenu.
-# Toggle them in gui to see the values change. Main challenge is going to be
-# appending the script menu to the list of menuextras only if it doesn't already
-# exist
 
 # General {{{1
 #####
@@ -74,6 +88,17 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 
+# Script Editor {{{1
+# Add script menu to menu bar
+add_menu_item "/System/Library/CoreServices/Menu Extras/Script Menu.menu"
+
+# Show scripts in /Library/Scripts
+defaults write com.apple.scriptmenu ShowLibraryScripts -bool true
+
+# Put app scripts above the system ones
+defaults write com.apple.scriptmenu PutAppScriptsFirst -bool true
+
+
 # Finder {{{1
 #####
 # Show ~/Library in finder (this likes to get reset it seems)
@@ -115,12 +140,12 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:gridSpacing 85" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:iconSize 32" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" ${USRPREFS}/com.apple.finder.plist
-$PLISTBUDDY "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${USRPREFS}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:gridSpacing 85" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:iconSize 32" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${prefs_home}/com.apple.finder.plist
 
 # Turn off confirmation when changing file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -220,6 +245,13 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+
+# Print notice to restart {{{1
+# First turn of command printing now
+set +x
+echo
+echo "Finished. Save any work you have and restart the computer now"
+echo
 
 # vim settings {{{1
 # vim: set fdm=marker:
