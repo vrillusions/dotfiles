@@ -5,12 +5,9 @@
 Environment Variables
     LOGLEVEL: overrides the level specified here. Default is warning
         option: DEBUG, INFO, WARNING, ERROR, or CRITICAL
-
 """
-
 from __future__ import (division, absolute_import, print_function,
                         unicode_literals)
-import os
 import sys
 import logging
 from optparse import OptionParser
@@ -27,13 +24,14 @@ def _parse_opts(argv=None):
     :return: options,args where options is the list of specified options that
         were parsed and args is whatever arguments are left after parsing all
         options.
-
     """
     parser = OptionParser(version='%prog {}'.format(__version__))
     parser.set_defaults(verbose=False)
-    parser.add_option('-c', '--config', dest='config', metavar='FILE',
+    parser.add_option(
+        '-c', '--config', dest='config', metavar='FILE',
         help='use config FILE (default: %default)', default='config.ini')
-    parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
+    parser.add_option(
+        '-v', '--verbose', dest='verbose', action='store_true',
         help='be more verbose (default is no)')
     (options, args) = parser.parse_args(argv)
     return options, args
@@ -48,7 +46,6 @@ def main(argv=None):
     :return: Optionally returns a numeric exit code. If not given then will
         default to 0.
     :rtype: int
-
     """
     log = logging.getLogger()
     if argv is None:
