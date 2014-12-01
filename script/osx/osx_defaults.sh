@@ -150,6 +150,9 @@ $plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${
 # Turn off confirmation when changing file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
+# Don't open folders in new tabs
+defaults write com.apple.finder FinderSpawnTab -bool false
+
 
 # Dock {{{1
 #####
