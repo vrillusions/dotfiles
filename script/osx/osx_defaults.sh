@@ -249,6 +249,12 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 
+# Safari {{{1
+#####
+# First attempt to prevent 'try the new safari' popup (wtf apple?)
+defaults write com.apple.safari LastOSVersionSafariWasLaunchedOn -string "10.10.1"
+
+
 # Print notice to restart {{{1
 # First turn of command printing now
 set +x
