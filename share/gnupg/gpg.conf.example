@@ -15,9 +15,24 @@ charset utf-8
 # This uses a pool of servers and is generally always responsive
 keyserver hkp://pool.sks-keyservers.net
 
+# The import-clean in the next two options removes all signatures that are not
+# usable to you, this includes keys that are not in your keychain. This means
+# if a key has 100s of signatures they will be removed if they are unknown to
+# you.  This may raise alarms if you expect a key to have 100s of signatures
+# and see hardly any.
+#
 # Unless you don't want to use a keyserver at all, this is a good option to
 # have on. Commenting out can speed up certain operations though
 #keyserver-options auto-key-retrieve
+# This version turns on several other options. The two clean options helps keep
+# the keyring from getting filled up with expired signatures
+keyserver-options include-subkeys include-revoked import-clean export-clean
+# To add auto-key-retrieve add it to the end (only a single keyserver-options
+# line can exist)
+# keyserver-options include-subkeys include-revoked import-clean export-clean auto-key-retrieve
+
+# When importing a key manually, also clean up signatures
+import-options import-clean
 
 # Another usability option. If you encrypt for an email address not in your
 # local keyring it will search in this order:
