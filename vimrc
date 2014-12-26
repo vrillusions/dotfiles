@@ -64,7 +64,7 @@ set wildignore+=*.jpg,*.bmp,*.gif   " images
 set statusline=%<%F%h%m%r%h%w%y " all the standard flags
 set statusline+=\ fmt:%{&ff}    " file format
 set statusline+=%=              " separate left and right side
-set statusline+=%l\,%c%V        " Line,Column of cursor
+set statusline+=\ %l\,%c%V        " Line,Column of cursor
 set statusline+=\ %P            " Percentage of file
 
 " Default editor settings {{{1
