@@ -164,6 +164,7 @@ export LESSHISTFILE="${XDG_CONFIG_HOME}/less/lesshst"
 export PYLINTHOME="${XDG_DATA_HOME}/pylint"
 export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
+export PACKER_CACHE_DIR="${XDG_CACHE_HOME}/packer"
 
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
