@@ -160,11 +160,23 @@ let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 " close windows when I close the buffer.
 " BUG: because .vimrc is loaded before the pathogen plugins there's no way to
 " verify Bdelete.
-let g:BuffingWheelSkipMappings = 1
-command BuffingWheelClose call buffingwheel#cmd('Bdelete')
-noremap <silent> L :<C-u>BuffingWheelNext<CR>
-noremap <silent> H :<C-u>BuffingWheelPrevious<CR>
-noremap <silent> X :<C-u>BuffingWheelClose<CR>
+"let g:BuffingWheelSkipMappings = 1
+"command BuffingWheelClose call buffingwheel#cmd('Bdelete')
+"noremap <silent> L :<C-u>BuffingWheelNext<CR>
+"noremap <silent> H :<C-u>BuffingWheelPrevious<CR>
+"noremap <silent> X :<C-u>BuffingWheelClose<CR>
+
+" bbye {{{2
+"noremap <silent> X :Bdelete<CR>
+
+" minibufexpl {{{2
+let g:miniBufExplBRSplit = 0         " put new windown above current
+let g:miniBufExplUseSingleClick = 1  " single click to select buffer
+let g:miniBufExplCycleArround = 1    " wrap around when reach end
+let g:miniBufExplShowBufNumbers = 0  " hide buffer numbers
+noremap <silent> L :MBEbn<CR>
+noremap <silent> H :MBEbp<CR>
+noremap <silent> X :MBEbd<CR>
 
 " XMLEdit {{{2
 let g:xmledit_enable_html = 1   " Enable for html files
