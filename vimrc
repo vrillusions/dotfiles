@@ -127,6 +127,7 @@ let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 nmap <Leader>m      :CtrlPMRU<CR>
 let g:ctrlp_show_hidden = 1     " show hidden files
 let g:ctrlp_open_new_file = 'r' " open new file in current window
+let g:ctrlp_clear_cache_on_exit = 0  " persist cache files
 
 " todotag {{{2
 let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than 'vrillusions'
