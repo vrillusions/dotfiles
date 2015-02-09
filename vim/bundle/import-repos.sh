@@ -128,11 +128,10 @@ read -p "Continue with reload [y/N]? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # These are listed in alphabetical order of the destination folder
-    #import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
-    #import_repo "https://github.com/ngn/vim-buffing-wheel.git" buffing-wheel 130cf196
     import_repo "https://github.com/chase/vim-ansible-yaml.git" ansible-yaml v1.0
+    import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
+    import_repo "https://github.com/ngn/vim-buffing-wheel.git" buffing-wheel 130cf196
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
-    import_repo "https://github.com/fholgado/minibufexpl.vim.git" minibufexpl.vim v6.5.2
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 4.2.0
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines bfbecf0
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold 08d94d4
