@@ -72,6 +72,8 @@ user_pref("browser.search.openintab", true); //when searching
 user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (default)
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
 
+// Disable hello
+user_pref("loop.enabled", false);
 
 /**
  * default 1. 1 - show all images, 2 - block all images, 3 - prevent third party images
