@@ -83,11 +83,14 @@ user_pref("loop.enabled", false);
 // FF 4.0 settings
 // When saving state between browser restarts it has saved session cookies for a
 // while now.  In FF4.0 it now saves session data for HTTPS sites as well. This
-// reverts back to pre 4.0 behavior of only saving state for non-https sites
+// reverts back to pre 4.0 behavior of only saving state for non-https sites.
+// NOTE: If you have your browser.startup.page set to restore previous session it
+// will STILL save session cookies even if you set privacy_level_deferred to 2. It
+// does seem possible to set both settings to 2 to will work.
 // 0 - store for any site, 1 - only for non-https, 2 - never store
-user_pref("browser.sessionstore.privacy_level", 1);
+user_pref("browser.sessionstore.privacy_level", 2);
 // What to do when quiting normally, default is 1
-user_pref("browser.sessionstore.privacy_level_deferred", 1);
+user_pref("browser.sessionstore.privacy_level_deferred", 2);
 
 
 // see http://www.tweakfactor.com/articles/tweaks/firefoxtweak/4.html
