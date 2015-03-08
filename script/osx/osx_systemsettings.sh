@@ -13,15 +13,16 @@ sudo echo
 set -x
 
 # Power management {{{1
+# Disabling these after fresh install of Yosemite
 #####
 # Trying to fix the sleep wake error I keep getting on mid 2012 MBP.
 # src: http://apple.stackexchange.com/a/76485
 # Value before (and the default it seems) is autopoweroff 1
-sudo pmset -a autopoweroff 0
+#sudo pmset -a autopoweroff 0
 
 # I also ran this line at some point, which I don't know if it fixed it
 # see SSD tweak below
-sudo pmset hibernatemode 3
+#sudo pmset hibernatemode 3
 
 
 # SSD Tweaks {{{1
