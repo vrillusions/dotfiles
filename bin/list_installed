@@ -29,6 +29,7 @@ check_installed "aspell        " $(which aspell >/dev/null   && aspell --version
 
 printf "\n%b\n" "Other:"
 # In alphabetical order
+check_installed "apg           " $(which apg >/dev/null      && apg -v | sed -n 2p | awk '{print $2}')
 check_installed "7zip          " $(which 7za >/dev/null      && 7za --help | sed -n 3p | awk '{print $3}')
 check_installed "bash          " $(which bash >/dev/null     && bash --version | sed -n 1p | awk '{print $4}')
 check_installed "curl          " $(which curl >/dev/null     && curl --version | sed -n 1p | awk '{print $2}')
@@ -39,7 +40,8 @@ check_installed "minicom       " $(which minicom >/dev/null  && minicom --versio
 check_installed "nmap          " $(which nmap >/dev/null     && nmap --version | sed -n 2p | awk '{print $3}')
 check_installed "php           " $(which php >/dev/null      && php --version | awk '{print $2}')
 check_installed "python        " $(which python >/dev/null   && python --version 2>&1 | awk '{print $2}')
-check_installed "└─ fabric     " $(which fab >/dev/null      && fab --version | sed -n 1p | awk '{print $2}')
+check_installed "├─ fabric     " $(which fab >/dev/null      && fab --version | sed -n 1p | awk '{print $2}')
+check_installed "├─ pyenv      " $(which pyenv >/dev/null    && pyenv --version | awk '{print $2}')
 check_installed "└─ virtualenv " $(which virtualenv >/dev/null && virtualenv --version)
 check_installed "ruby          " $(which ruby >/dev/null     && ruby --version | awk '{print $2}')
 check_installed "rvm           " $(which rvm >/dev/null      && rvm --version | grep . | awk '{print $2}')
