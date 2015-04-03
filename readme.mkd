@@ -12,6 +12,10 @@ While I don't expect anyone to use this on their system but pick and choose what
 - edit `gitconfig` and enter your email address. I kept this out of git so bots don't pick up the email address.
 - if you want, add the `bin` folder to your path. See [Directories](#directories) for details.
 - on linux or mac run `bin/vim_maintenance.sh install` to setup a cron entry for that command
+- if this is running on a machine where your default git info doesn't match up with github (like at work) don't forget to set those here:
+
+        git config user.email 'vr@vrillusions.com'
+        git config user.name 'Todd Eddy'
 
 ## Directories
 
