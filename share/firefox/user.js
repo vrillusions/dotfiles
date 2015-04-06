@@ -32,6 +32,10 @@ user_pref('network.cookie.cookieBehavior', 1);
 user_pref("network.cookie.lifetimePolicy", 2);
 
 
+// Enable tracking protection (blocks sites that track visits across web)
+user_pref("privacy.trackingprotection.enabled", true);
+
+
 // Set the default action for various plugins.
 // 0 - never activate
 // 1 - ask to activate
