@@ -1,0 +1,5 @@
+# MultiMarkdown styling
+
+## Usage
+
+Place `style.css` in same folder your rendered html file is going to be (typically the same folder as the markdown file).  At the top of the markdown file add `CSS: style.css` followed by a blank line.  Then generate the html file like normal with `multimarkdown filename.mkd >filename.html`.  You can also host the css file somewhere and use that url in place of `style.css`.  I tried to do this by making a gist but the mime type returned is `text/plain` so browser won't treat it as a stylesheet.
