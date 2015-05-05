@@ -34,18 +34,20 @@ source ~/.bash/git-prompt.sh
 
 # Prompt colorization {{{1
 # some variables to make this stuff readable
-RESET=$(tput sgr0)
-BR_RED=$(tput setaf 9)
-GREEN=$(tput setaf 2)
-BR_GREEN=$(tput setaf 10)
-BR_BLUE=$(tput setaf 12)
-WHITE=$(tput setaf 15)
+_RESET=$(tput sgr0)
+_BR_RED=$(tput setaf 9)
+_GREEN=$(tput setaf 2)
+_BR_GREEN=$(tput setaf 10)
+_BR_BLUE=$(tput setaf 12)
+_WHITE=$(tput setaf 15)
+# Define this in ~/.bashrc_local_pre to change the color
+PROMPT_HOST_COLOR=${PROMPT_HOST_COLOR:-$_BR_GREEN}
 # always set the prompt_command
-PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${BR_RED}rc: ${RET}${RESET}"; fi'
+PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo -e "${_BR_RED}rc: ${RET}${_RESET}"; fi'
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*|cygwin*)
-    TITLE_BAR="\e]0;\u@\h: \w\a"
+    _TITLE_BAR="\e]0;\u@\h: \w\a"
     ;;
 # TODO:2013-11-13:teddy: leaving as a case statement for now
 #*)
@@ -53,9 +55,14 @@ xterm*|rxvt*|cygwin*)
 #    ;;
 esac
 
-PS1="\[${TITLE_BAR:+$TITLE_BAR}\]"
-PS1+="\[${BR_GREEN}\]\u@\h\[${RESET}\]:\[${BR_BLUE}\]\w\[${BR_GREEN}\] "
-PS1+="\$(__git_ps1 \"(%s)\")\[${RESET}\]\$ "
+PS1="\[${_TITLE_BAR:+$_TITLE_BAR}\]"
+PS1+="\[${PROMPT_HOST_COLOR}\]\u@\h\[${_RESET}\]:"
+PS1+="\[${_BR_BLUE}\]\w "
+PS1+="\[${_BR_GREEN}\]\$(__git_ps1 \"(%s)\")"
+PS1+="\[${_RESET}\]\$ "
+
+# PROMPT_HOST_COLOR is no longer needed and mess up the output of `env`
+unset PROMPT_HOST_COLOR
 
 # Enable color support of ls and also add handy aliases {{{1
 if [ -x /usr/bin/dircolors ]; then
