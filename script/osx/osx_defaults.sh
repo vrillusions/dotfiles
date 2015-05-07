@@ -37,8 +37,17 @@ set -x
 
 # General {{{1
 #####
+# Enable auto text substitution
+defaults write NSGlobalDomain WebAutomaticTextReplacementEnabled -bool true
+
 # Disable auto spell correction
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable auto quote substitution
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable auto dash substitution (leaving it around for now)
+#defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Disable resume
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
