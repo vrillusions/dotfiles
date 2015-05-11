@@ -112,6 +112,11 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 # commenting out since in ubuntu there are many more options I need to check
 #export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
+# XDG Basedir Setup {{{1
+# To override these add them to ~/.bashrc_local_pre
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
 # Alias definitions {{{1
 # TODO:2014-01-27:teddy: move to separate file, like ~/.bash/aliases
@@ -136,6 +141,17 @@ alias .....="cd ../../../.."
 # Default to gpg v2 if it exists
 test "$(which gpg2)" && alias gpg=gpg2 || true
 
+# Commenting this out as the bloomfilter stuff doesn't seem to work
+# Instead use the -r wordlist option which is slower but seems to work
+## Set some defaults for apg if bloomfilter is generated
+#if [[ -f ${XDG_DATA_HOME}/apg/bloomfilter ]] \
+#        && command -v apg >/dev/null 2>&1; then
+#    alias apg='apg -b "${XDG_DATA_HOME}/apg/bloomfilter" -E O1IB'
+#fi
+if command -v apg >/dev/null 2>&1; then
+    alias apg='apg -E O1IB'
+fi
+
 # Spellcheck function {{{1
 # Type `sp someword` to spellcheck it
 sp () {
@@ -157,12 +173,6 @@ sp () {
 #if [ -f /etc/bash_completion ]; then
 #    . /etc/bash_completion
 #fi
-
-# XDG Basedir Setup {{{1
-# To override these add them to ~/.bashrc_local_pre
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
 # Set application configs (when supported) to XDG locations {{{1
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
