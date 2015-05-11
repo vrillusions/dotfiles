@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Generate a prounouncable password for user
+#
+# Will check against wordlist if exists. This slows it down considerably but
+# not so much to be annoying.
+#
+
+# Minimum length of password
+minlength=20
+
+if [[ -f /usr/share/dict/words ]]; then
+    wordcheck="-r /usr/share/dict/words"
+fi
+
+# Need \ since it's likely aliased
+\apg -a0 -M SNCL -m ${minlength} -E O1IB ${wordcheck:-}
+
+exit $?
