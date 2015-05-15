@@ -49,6 +49,11 @@ set lazyredraw                  " don't redraw screen so often
 set formatoptions+=1            " don't wrap on a single letter
 set formatoptions+=l            " don't autowrap if line is already longer than textwidth
 
+" Delete comment character when using 'J' command to join lines
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
 " Improved tab completion {{{1
 set wildmenu                    " make tab completion for files and buffers act like bash
 set wildmode=list:full          " show a list when pressing tab complete and first full match
