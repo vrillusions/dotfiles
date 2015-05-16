@@ -9,13 +9,37 @@ While I don't expect anyone to use this on their system but pick and choose what
 - after clone, run `./createlinks.sh`
     - for some files I maintain a separate versioned file like my `gitconfig` since my actual one has a signing key and author fields could change if I'm at work.  This will notice I don't have a `gitconfig` and copy from `gitconfig.versioned`.  This will be done to other files as well
     - creates symlinks for the specified files.
-- edit `gitconfig` and enter your email address. I kept this out of git so bots don't pick up the email address.
+- run `git config --global user.email 'user@example.com'` to set your email as it's not in version control to try and keep spam bots at bay.
 - if you want, add the `bin` folder to your path. See [Directories](#directories) for details.
 - on linux or mac run `bin/vim_maintenance.sh install` to setup a cron entry for that command
 - if this is running on a machine where your default git info doesn't match up with github (like at work) don't forget to set those here:
 
-        git config user.email 'vr@vrillusions.com'
+        git config user.email 'user@example.com'
         git config user.name 'Todd Eddy'
+
+## Overrides
+
+Several local files can be set:
+
+- **`~/.bashrc_local_pre`** - This is sourced before running the main bashrc file.  It's described in more detail at [bash.rc options](#bashrc-options)
+- **`~/.bashrc_local`** - This is run after the bashrc file.  This is a good place to put config items needed for programs installed on that computer
+- **`~/.bash_profile_local`** - This is run after the main bash_profile file
+- **`~/.vimrc_local`** - Sourced after the main vimrc file
+
+## bash.rc options
+
+The `~/.bashrc` file can be controlled though some environment variables. These should be placed in `~/.bashrc_local_pre`.
+
+- `$XDG_DATA_HOME`, `$XDG_CACHE_HOME`, `$XDG_CONFIG_HOME` - These are taken from the [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).  They default to the values as specified on that page.  Commonly on mac you may want to set `$XDG_CACHE_DIR` to `$HOME/Library/Caches` which is the standard cache directory on OS X.
+- `$PROMPT_HOST_COLOR` - This sets the color in terminal for the `user@host` part. It defaults to bright green `tput setaf 10`.
+
+An example for this file on Mac:
+
+```shell
+export XDG_CACHE_HOME="${HOME}/Library/Caches"
+# setaf 11 = bright yellow
+export PROMPT_HOST_COLOR=$(tput setaf 11)
+```
 
 ## Directories
 
