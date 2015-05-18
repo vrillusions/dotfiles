@@ -64,8 +64,10 @@ A non-exhaustive list of files. Most files should have a `-h` or `--help` option
 
 Should still keep backups but for reference here's how to patch my local gitconfig with the versioned one. Indeed it's rather complicated because the `-I` option doesn't actually work right.
 
-    diff -u -B <(grep -vE '^\s*(signingkey|email)' gitconfig) \
-        <(grep -vE '^\s*(signingkey|email)' gitconfig.versioned) \
-        | patch -p2 gitconfig
+```shell
+diff -u -B <(grep -vE '^\s*(signingkey|email)' gitconfig) \
+    <(grep -vE '^\s*(signingkey|email)' gitconfig.versioned) \
+    | patch --no-backup-if-mismatch -p2 gitconfig
+```
 
 Leave out the patch part to see what changes would be applied.
