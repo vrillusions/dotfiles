@@ -56,7 +56,7 @@ endif
 
 " Improved tab completion {{{1
 set wildmenu                    " make tab completion for files and buffers act like bash
-set wildmode=list:full          " show a list when pressing tab complete and first full match
+set wildmode=list:longest,full  " tab completion list matches, then longest string, then all
 " Files to ignore (this is also the list used by ctrlP)
 set wildignore+=~/.vim/undofiles/*,~/.vim/backup/*,*.swp  " vim working files
 set wildignore+=*.DS_Store          " macs
@@ -69,7 +69,7 @@ set wildignore+=*.jpg,*.bmp,*.gif   " images
 set statusline=%<%F%h%m%r%h%w%y " all the standard flags
 set statusline+=\ fmt:%{&ff}    " file format
 set statusline+=%=              " separate left and right side
-set statusline+=\ %l\,%c%V        " Line,Column of cursor
+set statusline+=\ %l\,%c%V      " Line,Column of cursor
 set statusline+=\ %P            " Percentage of file
 
 " Default editor settings {{{1
@@ -195,14 +195,15 @@ if v:version >= 703
 endif
 
 " Autocommands and tweaks {{{1
-" turn on filetype and filetype plugins, not indent (I just put those in ftplugin)
-" this sources $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
-" filetype from $VIMRUNTIME/ftplugin/ directory
-filetype plugin on
-" Trying out ftindent again
-filetype indent on
+" turn on filetype plugins and filetype indent files. This sources
+" $VIMRUNTIME/filetype.vim for custom filetype mappings and also the specific
+" filetype from $VIMRUNTIME/after/plugin/ directory (use '/after/' directory
+" so you can override what the os vendor supplied one does). Indentation
+" rarely needs touched although some files provide options you can toggle. see
+" help topics 'filetype-plugin' and 'indent-expression'.
+filetype plugin indent on
 
-"spell check when writing commit logs
+"spell check when writing commit logs {{{2
 autocmd filetype svn,*commit* set spell
 
 "jump to last cursor position when opening a file {{{2
@@ -247,5 +248,14 @@ endif
 if filereadable(expand("~/.vimrc_local"))
   source ~/.vimrc_local
 endif
+
+" Enable secure mode {{{1
+" Prevents certain dangerous commands from running when loading a .vimrc or
+" .exrc file in the current directory (requires 'set exrc'). Placed this at
+" end of this file to highlight that it only affects vimrc configs at the
+" local directory level.  Even if this was at the top of ~/.vimrc it will run
+" any exec calls you specify (except in certain cases, see :help secure for
+" more info)
+set secure
 
 " vim: set et ts=2 sw=2 sts=2 fdm=marker:
