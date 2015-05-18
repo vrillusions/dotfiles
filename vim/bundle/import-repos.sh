@@ -132,6 +132,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
     import_repo "https://github.com/ngn/vim-buffing-wheel.git" buffing-wheel 130cf196
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
+    import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 4.2.0
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines bfbecf0
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold 08d94d4
