@@ -9,11 +9,14 @@ imap <A-UP> <ESC>gki
 imap <A-DOWN> <ESC>gji
 
 " Toggle paste mode {{{1
-nmap <Leader>p :set invpaste paste?<CR>
+nmap <Leader>p :setlocal paste! paste?<CR>
 
 " Toggle list characters {{{1
 " (TODO: roll this into a TogglePaste function)
-nmap <Leader>l :set list! list?<CR>
+nmap <Leader>l :setlocal list! list?<CR>
+
+" Toggle line wrap {{{1
+nmap <Leader>w :setlocal wrap! wrap?<CR>
 
 " Use <Leader><Space> to clear highlighting {{{1
 nmap <Leader><Space> :nohlsearch<CR>
@@ -38,7 +41,7 @@ nmap <C-J> <C-W><C-J>
 nmap <C-K> <C-W><C-K>
 nmap <C-L> <C-W><C-L>
 
-" <Leader>-r to repeate last replacement done {{{1
+" <Leader>-r to repeat last spelling replacement done {{{1
 nmap <Leader>r :spellrepall
 
 " Insert current date in a few ways {{{1
