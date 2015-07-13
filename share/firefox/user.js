@@ -52,6 +52,9 @@ user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.startup.homepage", "https://www.google.com");
 user_pref("browser.startup.page", 3);
 
+// Open searches in new tab
+user_pref("browser.search.openintab", true);
+
 
 // backspace key action (0 - goes back a page, 1 - scrolls up a page, >1 - disables)
 user_pref("browser.backspace_action", 2);
