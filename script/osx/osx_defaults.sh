@@ -264,6 +264,16 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 defaults write com.apple.safari LastOSVersionSafariWasLaunchedOn -string "10.10.1"
 
 
+# Terminal {{{1
+#####
+# TODO:2015-07-15:teddy: add 'pro modified' profile
+# New tabs open with default working directory
+defaults write com.apple.Terminal NewTabWorkingDirectoryBehavior -int 1
+
+# New windows open with default working directory
+defaults write com.apple.Terminal NewWindowWorkingDirectoryBehavior -int 1
+
+
 # Print notice to restart {{{1
 # First turn of command printing now
 set +x
