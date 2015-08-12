@@ -33,8 +33,8 @@ let NERDTreeDirArrows = 1  " fancy arrows
 if has("gui_macvim")
     " MacVIM
     set lines=45 columns=126    " width is to allow nerdTree
-    "set guifont=Inconsolata:h16 " MacVIM parses guifont differently
-    set guifont=Source\ Code\ Pro\ Light:h14 " MacVIM parses guifont differently
+    "set guifont=Inconsolata:h16
+    set guifont=Office\ Code\ Pro\ D\ Light:h14
 elseif has("win32") || has("win64")
     " Windows
     set lines=50 columns=126    " width is 106 to allow 100 + line numbers
