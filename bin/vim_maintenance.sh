@@ -18,124 +18,137 @@
 #
 # Only works on Mac and Linux currently
 #
+# Environment Variables:
+#   VERBOSE: Set to 'true' to output more information. Default is 'false'
+#
+# Exit codes:
+#    0  No error
+#   96  Problem while parsing options
+#  100  Directory didn't exist when trying to clean it
+#
 # This file is "Unlicensed." See <http://unlicense.org/> for terms.
 #
 
 
-### Bash options
-# exit upon receiving a non-zero exit code
 set -e
-# enable debuging
-#set -x
-# upon attempt to use an unset variable, print error and exit
 set -u
-# fail on first command in pipeline that fails, not last
-#set -o pipefail
 
 
-### Logging functions
+# -- script constants --
+# set script_dir to location this script is running in
+readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+readonly script_name="$(basename $0)"
+
+
+# -- logging functions --
 # Usage: log "What to log"
 log () {
+    # printf is good for scripts run manually when needed
     printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
 }
+
 # Usage: verbose "What to log if VERBOSE is true"
 verbose () {
-    if [[ "$VERBOSE" == "true" ]]; then
+    if [[ "${VERBOSE}" == "true" ]]; then
         log "$*"
     fi
 }
 
 
-# set script_dir to location this script is running in
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# set this here or can't use after getopts
-SCRIPT_NAME="$(basename $0)"
-# full command which can be printed out if needed
-SCRIPT_CMD="$*"
-
-
-### Option Handling
+# -- option handling --
 # Defaults
-BACKUP_DIR="${HOME}/.vim/backup"
-DAYS=180
-UNDO_DIR="${HOME}/.vim/undofiles"
+backup_dir="${HOME}/.vim/backup"
+days=180
+undo_dir="${HOME}/.vim/undofiles"
 VERBOSE=${VERBOSE:-"false"}
 
 while getopts ":hb:d:u:v" opt; do
     case $opt in
     h)
-        echo "Usage: ${SCRIPT_NAME} [OPTION]"
-        echo "       ${SCRIPT_NAME} install"
+        echo "Usage: ${script_name} [OPTION]"
+        echo "       ${script_name} install"
         echo 'Removes old backup, swap, and undo files created by vim. If'
-        echo 'called with ``install`` then will add an entry the crontab for'
+        echo 'called with ``install`` then will add an entry in the crontab for'
         echo 'the current user to run this daily.'
         echo
         echo 'Options:'
-        echo '  -h  This help message'
-        echo "  -b  Full path to backup directory (default: $BACKUP_DIR)"
-        echo "  -d  Remove temp files older than this many days (default: $DAYS)"
-        echo "  -u  Full path to undo directory (default: $UNDO_DIR)"
-        echo '  -v  Be verbose'
+        echo '  -h  this help message'
+        echo "  -b  full path to backup directory (default: ${backup_dir})"
+        echo "  -d  remove temp files older than this many days (default: ${days})"
+        echo "  -u  full path to undo directory (default: ${undo_dir})"
+        echo '  -v  be verbose'
         exit 0
         ;;
     b)
-        BACKUP_DIR=$OPTARG
+        backup_dir=${OPTARG}
         ;;
     d)
-        DAYS=$OPTARG
+        days=${OPTARG}
         ;;
     u)
-        UNDO_DIR=$OPTARG
+        undo_dir=${OPTARG}
         ;;
     v)
         VERBOSE=true
         ;;
     \?)
-        echo "Invalid option: -$OPTARG" >&2
-        exit 1
+        echo "Invalid option: -${OPTARG}" >&2
+        exit 96
         ;;
     :)
-        echo "Option -$OPTARG requires an argument" >&2
-        exit 1
+        echo "Option -${OPTARG} requires an argument" >&2
+        exit 96
         ;;
     esac
 done
-shift `expr $OPTIND - 1`
+shift `expr ${OPTIND} - 1`
 verbose "Additional arguments after options: $*"
 
 
-### Actual script begins here
+# -- additional functions --
+# usage: clean_dir "path of directory to clean"
+# Requires $xargs_opts and $days to be set before calling this
+function clean_dir() {
+    local source_dir
+    source_dir="$1"
+
+    if [[ -d "${source_dir}" ]]; then
+        log "Cleaning ${source_dir}"
+        cd "${source_dir}"
+        find . -mtime +${days} -not -name ".gitignore" -print0 \
+            | xargs ${xargs_opts} rm -f
+    else
+        log "${source_dir} is not a directory" >&2
+        exit 100
+    fi
+}
+
+
+# -- actual script begins here --
 # check if `install` was specified and update crontab
 if [[ "$*" == "install" ]]; then
     log "Installing script to user crontab"
-    croncmd="${SCRIPT_DIR}/${SCRIPT_NAME} >/dev/null"
-    cronjob="@daily $croncmd"
+    croncmd="${script_dir}/${script_name} >/dev/null"
+    cronjob="@daily ${croncmd}"
     # Need the `|| true` part or else it fails if a blank cron file
     ( crontab -l | grep -v "${croncmd}" || true ; echo "${cronjob}" ) | crontab -
     log "Added '${cronjob}' successfully"
 else
     # We use xargs here in case there's a lot of files to delete and rm can't
     # handle a lot of files at once.
-    XARGS_OPTS='-n 200 -0'
-    if [[ $(uname -s) != 'Darwin' ]]; then
+    xargs_opts='-n 200 -0'
+    if [[ "$(uname -s)" != 'Darwin' ]]; then
         # Not on mac so should have the "-r" option available
-        XARGS_OPTS="${XARGS_OPTS} -r"
+        xargs_opts="${xargs_opts} -r"
     fi
-    log "Cleaning ${BACKUP_DIR}"
-    cd "${BACKUP_DIR}"
-    find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-        | xargs ${XARGS_OPTS} rm -f
 
-    log "Cleaning ${UNDO_DIR}"
-    cd "${UNDO_DIR}"
-    find . -mtime +${DAYS} -not -name ".gitignore" -print0 \
-        | xargs ${XARGS_OPTS} rm -f
+    clean_dir "${backup_dir}"
+    clean_dir "${undo_dir}"
 fi
 
 log "Finished"
 
 
-# SECONDS is a bash builtin
 verbose "Script ran for ${SECONDS} seconds"
 
 exit 0
