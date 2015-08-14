@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Just a basic wraper around ssh-agent commands
+
+set -e
+set -u
+
+
+if pgrep -u "${LOGNAME}" -f 'ssh-agent -s' >/dev/null; then
+    echo "Detected running ssh-agent. Can not continue"
+    exit 96
+fi
+
+
+eval $(ssh-agent -s) >/dev/null
+
+echo "ssh-add: adding default keys you may be asked for password"
+ssh-add
+
+
+exit 0
