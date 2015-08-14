@@ -5,7 +5,7 @@ REM Commands are accurate as of version 5.1.2
 setlocal EnableExtensions EnableDelayedExpansion
 set title=%~nx0
 title %title%
-set spider_cmd="C:\Program Files\SpiderOak\SpiderOak.exe"
+set spider_cmd="C:\Program Files\SpiderOakONE\SpiderOakONE.exe"
 
 ECHO Make sure SpiderOak application is closed before continuing
 pause
