@@ -22,15 +22,31 @@ user_pref("security.tls.version.min", 1);
 // Require that we pass OCSP validation or don't continue
 user_pref("security.OCSP.require", true);
 
-// Disable 3rd party cookies (0 - allows all, 1 - Only originating server (recommended),
+// Disable 3rd party cookies (0 - allows all, 1 - Only originating server,
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
-user_pref('network.cookie.cookieBehavior', 1);
+// 3 with now p3p policy is the same as saying allow 3rd party cookies "From visited" in UI
+user_pref('network.cookie.cookieBehavior', 3);
 
 // Keep cookies for: 0 - (default) supplied time, 1 - Ask, 2 - for browser session only
 // 3 - number of days given in network.cookie.lifetime.days
 // Set this to 2 and use permit cookies to whitelist sites that can store cookies normally
 user_pref("network.cookie.lifetimePolicy", 2);
 
+// Even if above options would normally keep 3rd party cookies longer, force
+// them to be session cookies
+user_pref("network.cookie.thirdparty.sessionOnly", true);
+
+
+// Privacy / resource usage preferences
+
+// Don't do dns lookup when I hover over links
+user_pref("network.dns.disablePrefetch", true);
+
+// Don't initiate connections to those sites either
+user_pref("network.http.speculative-parallel-limit", 0);
+
+// Don't prefetch links that say they should be prefetched
+user_pref("network.prefetch-next", false);
 
 // Enable tracking protection (blocks sites that track visits across web)
 user_pref("privacy.trackingprotection.enabled", true);
