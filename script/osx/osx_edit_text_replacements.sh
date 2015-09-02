@@ -26,7 +26,7 @@ echo "WARNING THE FOLLOWING IS A DESTRUCTIVE PROCESS"
 echo "This will wipe all current text replacements and replace with the"
 echo "contents of ${replacements_file}."
 echo
-read -n 1 -p "Press ctrl-c to cancel, any other keey to continue" _unused
+read -n 1 -p "Press ctrl-c to cancel, any other key to continue" _unused
 
 
 date=$(date +%s)
@@ -35,7 +35,8 @@ declare -i i=0
 while read -r replace with; do
     plist+="{on=1;replace=\"$replace\";with=\"$with\";},"
     sql+="INSERT INTO 'ZUSERDICTIONARYENTRY' VALUES($((++i)),1,1,0,0,0,0,$date,NULL,NULL,NULL,NULL,NULL,\"$with\",\"$replace\",NULL);"
-done < <(sed 's/\\/\\\\/g;s/"/\\"/g' ${replacements_file})
+done < <(sed 's/"/\\"/g' ${replacements_file})
+#done < <(sed 's/\\/\\\\/g;s/"/\\"/g' ${replacements_file})
 
 sqlite3 ~/Library/Dictionaries/CoreDataUbiquitySupport/$USER~*/UserDictionary/local/store/UserDictionary.db \
     "delete from ZUSERDICTIONARYENTRY;$sql"
