@@ -140,7 +140,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ervandew/supertab.git" supertab b0ca47f
     import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 98169e3
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.3.0
-    #import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner v0.3.6
+    import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner 0.4.0
     import_repo "https://github.com/sukima/xmledit.git" xmledit v1.10.5
     log "Finished"
 fi
