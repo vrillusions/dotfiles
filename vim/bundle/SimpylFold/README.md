@@ -8,13 +8,35 @@ There's no shortage of Vim plugins for improved Python folding, but most seem to
 Installation
 ------------
 
+### Pathogen
+
 If you're using [Pathogen](https://github.com/tpope/vim-pathogen) and Git to manage your Vim plugins (highly recommended), you can just
 
     cd ~/.vim
     git submodule add https://github.com/tmhedberg/SimpylFold.git bundle/SimpylFold
     git submodule init
 
-and you're good to go. Otherwise, clone somewhere else or just grab the tarball, and drop the plugin file into your `~/.vim/ftplugin/python`.
+and you're good to go. 
+
+### Vundle
+
+If you use [Vundle](https://github.com/gmarik/Vundle.vim) then put in your `.vimrc`:
+
+    Plugin 'tmhedberg/SimpylFold'
+
+and then launch `vim` and run `:PluginInstall`.
+    
+### NeoBundle
+
+If you use [NeoBundle](https://github.com/Shougo/neobundle.vim) then put in your `.vimrc`:
+
+    NeoBundle 'tmhedberg/SimpylFold'
+
+and then launch `vim` and run `:NeoBundleInstall`.
+
+### Manually
+
+If you insist on doing this manually, then just clone this repo somewhere or just grab the tarball, and drop the plugin file into your `~/.vim/ftplugin/python`.
 
 Configuration
 -------------
@@ -26,6 +48,20 @@ No configuration is necessary. However, if you want to enable previewing of your
 And if you don't want to see your docstrings folded, add this:
 
     let g:SimpylFold_fold_docstring = 0
+
+In order for SimpylFold to be properly loaded in certain cases, you'll have to add lines like the following to your `.vimrc` (see issue #27):
+
+```vim
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+```
+
+If you have the above options set to different values anywhere (e.g. setting `foldmethod=syntax` in `.vimrc`, SimpylFold won't work properly.
+
+Usage
+-----
+
+SimpylFold doesn't define any custom commands. Just use Vim's built-in folding commands to expand and collapse folds. The most basic commands are `zc` to close a fold and `zo` to open one. See `:help fold-commands` for full documentation.
 
 Bugs
 ----
