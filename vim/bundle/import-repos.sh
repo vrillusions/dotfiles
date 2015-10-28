@@ -137,8 +137,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold f29ac75
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized 528a59f
-    import_repo "https://github.com/ervandew/supertab.git" supertab b0ca47f
-    import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 98169e3
+    import_repo "https://github.com/ervandew/supertab.git" supertab 9f7da6d
+    import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 85b5753
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.3.0
     import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner 0.4.0
     import_repo "https://github.com/sukima/xmledit.git" xmledit v1.10.5
