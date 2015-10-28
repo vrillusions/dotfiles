@@ -169,9 +169,9 @@ let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 " verify Bdelete.
 let g:BuffingWheelSkipMappings = 1
 command BuffingWheelClose call buffingwheel#cmd('Bdelete')
-noremap <silent> L :<C-u>BuffingWheelNext<CR>
-noremap <silent> H :<C-u>BuffingWheelPrevious<CR>
-noremap <silent> X :<C-u>BuffingWheelClose<CR>
+noremap <silent> L :<C-u>BufNext<CR>
+noremap <silent> H :<C-u>BufPrev<CR>
+noremap <silent> X :<C-u>BufDel<CR>
 
 " XMLEdit {{{2
 let g:xmledit_enable_html = 1   " Enable for html files
