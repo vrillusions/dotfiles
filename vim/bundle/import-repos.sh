@@ -133,7 +133,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
     import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
-    import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 4.2.0
+    import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 5.0.0
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold f29ac75
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized 528a59f

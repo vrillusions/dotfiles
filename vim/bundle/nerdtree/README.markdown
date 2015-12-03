@@ -44,46 +44,78 @@ The following features and functionality are provided by the NERD tree:
     as you left it
   * You can have a separate NERD tree for each tab, share trees across tabs,
     or a mix of both.
-  * By default the script overrides the default file browser (netw), so if
-    you :edit a directory a (slighly modified) NERD tree will appear in the
+  * By default the script overrides the default file browser (netrw), so if
+    you :edit a directory a (slightly modified) NERD tree will appear in the
     current window
   * A programmable menu system is provided (simulates right clicking on a node)
-    * one default menu plugin is provided to perform basic filesytem
+    * one default menu plugin is provided to perform basic filesystem
       operations (create/delete/move/copy files/directories)
   * There's an API for adding your own keymappings
 
 Installation
 ------------
 
-[pathogen.vim](https://github.com/tpope/vim-pathogen) is the recommended way to install nerdtree.
+####[pathogen.vim](https://github.com/tpope/vim-pathogen)
 
     cd ~/.vim/bundle
     git clone https://github.com/scrooloose/nerdtree.git
 
-Then reload vim, run `:helptags`, and check out `:help NERD_tree.txt`.
+Then reload vim, run `:Helptags`, and check out `:help NERD_tree.txt`.
+
+
+####[apt-vim](https://github.com/egalpin/apt-vim)
+
+    apt-vim install -y https://github.com/scrooloose/nerdtree.git
+
 
 
 Faq
 ---
 
-Q. Can I have the nerdtree on every tab automatically?
+> Is there any support for `git` flags?
 
-A. Nope. If this is something you want then chances are you aren't using tabs
-   and buffers as they were intended to be used. Read this
-   http://stackoverflow.com/questions/102384/using-vims-tabs-like-buffers
+Yes, install [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin).
 
-   If you are interested in this behavour then consider [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
 
-Changelog
----------
+> Can I have the nerdtree on every tab automatically?
 
-4.2.0 (2011-12-28)
+Nope. If this is something you want then chances are you aren't using tabs and
+buffers as they were intended to be used. Read this
+http://stackoverflow.com/questions/102384/using-vims-tabs-like-buffers
 
- * Add NERDTreeDirArrows option to make the UI use pretty arrow chars instead of the old +~| chars to define the tree structure (sickill)
- * shift the syntax highlighting out into its own syntax file (gnap) * add some mac specific options to the filesystem menu - for macvim only (andersonfreitas)
- * Add NERDTreeMinimalUI option to remove some non functional parts of the nerdtree ui (camthompson)
- * tweak the behaviour of :NERDTreeFind - see :help :NERDTreeFind for the new behaviour (benjamingeiger)
- * if no name is given to :Bookmark, make it default to the name of the target file/dir (minyoung)
- * use 'file' completion when doing copying, create, and move operations (EvanDotPro)
- * lots of misc bug fixes (paddyoloughlin, sdewald, camthompson, Vitaly Bogdanov, AndrewRadev, mathias, scottstvnsn, kml, wycats, me RAWR!)
+If you are interested in this behaviour then consider [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
 
+> How can I open a NERDTree automatically when vim starts up?
+
+Stick this in your vimrc: `autocmd vimenter * NERDTree`
+
+> How can I open a NERDTree automatically when vim starts up if no files were specified?
+
+Stick this in your vimrc
+
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+> How can I map a specific key or shortcut to open NERDTree?
+
+Stick this in your vimrc to open NERDTree with `Ctrl+n` (you can set whatever key you want):
+
+    map <C-n> :NERDTreeToggle<CR>
+
+> How can I close vim if the only window left open is a NERDTree?
+
+Stick this in your vimrc:
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+> Can I have different highlighting for different file extensions?
+
+See here: https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
+
+> How can I change default arrows?
+
+Use these variables in your vimrc. Note that below are default arrow symbols
+
+    let g:NERDTreeDirArrows = 1
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
