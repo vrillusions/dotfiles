@@ -1,0 +1,12 @@
+#!/bin/bash
+###
+
+set -e
+set -u
+
+
+echo -n "24 hour weighted BTC price in USD: "
+curl https://blockchain.info/q/24hrprice
+echo
+
+exit 0
