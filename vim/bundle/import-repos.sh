@@ -129,11 +129,12 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # These are listed in alphabetical order of the destination folder
     import_repo "https://github.com/chase/vim-ansible-yaml.git" ansible-yaml v1.0
-    import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
-    import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
+    #import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
+    #import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
     import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 5.0.0
+    import_repo "https://github.com/weynhamz/vim-plugin-minibufexpl.git" minibufexpl 349a9fb
     import_repo "https://github.com/rodjek/vim-puppet.git" puppet d881b93
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold f29ac75

@@ -129,6 +129,19 @@ let NERDTreeShowHidden = 1          " Including hidden
 " Ignored files for NERDTree
 let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
+" MiniBufExpl {{{2
+" With one line it doesn't keep current file highlighted
+"let g:miniBufExplMaxSize = 1       " max number of lines (default is 0)
+let g:miniBufExplCycleArround = 1  " Cycle around when reaching end
+let g:miniBufExplBRSplit = 0       " Put tabs at the top of the window
+
+" Next buffer
+noremap <silent> L :MBEbn<CR>
+" Previous buffer
+noremap <silent> H :MBEbp<CR>
+" Delete buffer but not window
+noremap <silent> X :MBEbd<CR>
+
 " ctrlP {{{2
 nmap <Leader>m      :CtrlPMRU<CR>
 let g:ctrlp_show_hidden = 1     " show hidden files
@@ -160,18 +173,6 @@ let g:secure_modelines_allowed_items = [
 
 " SimpylFold {{{2
 let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
-
-" buffing wheel and bbye {{{2
-" This depends on bbye plugin <https://github.com/moll/vim-bbye>
-" Use the Bdelete command from bbye instead of default bdelete so vim doesn't
-" close windows when I close the buffer.
-" BUG: because .vimrc is loaded before the pathogen plugins there's no way to
-" verify Bdelete.
-let g:BuffingWheelSkipMappings = 1
-command BuffingWheelClose call buffingwheel#cmd('Bdelete')
-noremap <silent> L :<C-u>BufNext<CR>
-noremap <silent> H :<C-u>BufPrev<CR>
-noremap <silent> X :<C-u>BufDel<CR>
 
 " XMLEdit {{{2
 let g:xmledit_enable_html = 1   " Enable for html files
