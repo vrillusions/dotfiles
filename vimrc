@@ -131,9 +131,10 @@ let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
 " MiniBufExpl {{{2
 " With one line it doesn't keep current file highlighted
-"let g:miniBufExplMaxSize = 1       " max number of lines (default is 0)
-let g:miniBufExplCycleArround = 1  " Cycle around when reaching end
-let g:miniBufExplBRSplit = 0       " Put tabs at the top of the window
+"let g:miniBufExplMaxSize = 1         " max number of lines (default is 0)
+let g:miniBufExplCycleArround = 1    " Cycle around when reaching end
+let g:miniBufExplBRSplit = 0         " Put tabs at the top of the window
+let g:miniBufExplUseSingleClick = 1  " Click once to open buffer
 
 " Next buffer
 noremap <silent> L :MBEbn<CR>
