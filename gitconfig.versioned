@@ -57,3 +57,4 @@
 	decorate = auto
 [rebase]
 	stat = true
+	autoStash = true
