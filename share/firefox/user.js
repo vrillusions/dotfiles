@@ -71,6 +71,9 @@ user_pref("browser.startup.page", 3);
 // Open searches in new tab
 user_pref("browser.search.openintab", true);
 
+// Show the full URL in url bar
+user_pref("browser.urlbar.trimURLs", true)
+
 
 // backspace key action (0 - goes back a page, 1 - scrolls up a page, >1 - disables)
 user_pref("browser.backspace_action", 2);
