@@ -9,12 +9,57 @@
 # Should work with "\M-o" for meta but doesn't
 "\eo": "\C-p\C-a\ef "
 
-# Bash completion settings
-#set match-hidden-files off
-set completion-ignore-case on
-# puts / after directories and * after programs
-set visible-stats on
-# don't beep, just show me the matching files
-set show-all-if-ambiguous on
 # Make meta+s cycle through (disabled because it doesn't work in ubuntu)
 #"\M-s": menu-complete
+
+# Bash specific settings
+# Actually not really bash specific but shows the $if command
+$if Bash
+    # don't beep at me - show me
+    set bell-style visible
+
+    #set match-hidden-files off
+    set completion-ignore-case on
+
+    # puts / after directories and * after programs
+    set visible-stats on
+
+    # don't beep, just show me the matching files
+    set show-all-if-ambiguous on
+
+    # Append "/" to all dirnames
+    #set mark-directories on
+    #set mark-symlinked-directories on
+$endif
+
+# Cygwin settings
+$if term=cygwin
+    # When running cygwin inside Console2 the visual bell doesn't work
+    set bell-style none
+
+    # the following line is actually
+    # equivalent to "\C-?": delete-char
+    "\e[3~": delete-char
+
+    # VT
+    "\e[1~": beginning-of-line
+    "\e[4~": end-of-line
+
+    # kvt
+    "\e[H": beginning-of-line
+    "\e[F": end-of-line
+
+    # rxvt and konsole (i.e. the KDE-app...)
+    "\e[7~": beginning-of-line
+    "\e[8~": end-of-line
+
+    # VT220
+    "\eOH": beginning-of-line
+    "\eOF": end-of-line
+
+    # Allow 8-bit input/output
+    set meta-flag on
+    set convert-meta off
+    set input-meta on
+    set output-meta on
+$endif
