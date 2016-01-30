@@ -16,6 +16,7 @@
 # Actually not really bash specific but shows the $if command
 $if Bash
     # don't beep at me - show me
+    # with this on you don't get visual or audio bell in OS X Terminal.app
     set bell-style visible
 
     #set match-hidden-files off
