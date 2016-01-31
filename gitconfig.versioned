@@ -58,3 +58,5 @@
 [rebase]
 	stat = true
 	autoStash = true
+[transfer]
+	fsckobjects = true
