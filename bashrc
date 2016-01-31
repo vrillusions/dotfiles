@@ -201,7 +201,7 @@ export HISTFILESIZE=1000000
 
 # set the timeformat when printing history. also tells bash to keep track of
 # timestamps when it's writing to history
-export HISTTIMEFORMAT="%Y:%m:%d %H:%M:%S  "
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S  "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
