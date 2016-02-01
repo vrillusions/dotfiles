@@ -72,7 +72,7 @@ user_pref("browser.startup.page", 3);
 user_pref("browser.search.openintab", true);
 
 // Show the full URL in url bar
-user_pref("browser.urlbar.trimURLs", true)
+user_pref("browser.urlbar.trimURLs", false);
 
 
 // backspace key action (0 - goes back a page, 1 - scrolls up a page, >1 - disables)
@@ -133,20 +133,22 @@ user_pref("browser.sessionstore.privacy_level_deferred", 2);
 user_pref("plugin.expose_full_path", true);
 
 
-//Tweaking Preferences from Mozilla KB
-//http://kb.mozillazine.org/Category:Tweaking_preferences
-// some of these values were taken from the above page for fast computer fast connection
-// but verified that the settings still exist
-// Not using the pipelining options just in case that causes issues
-//user_pref("network.http.pipelining", true);
-//user_pref("network.http.proxy.pipelining", true);
-//user_pref("network.http.pipelining.maxrequests", 8);
-user_pref("nglayout.initialpaint.delay", 0);
-user_pref("content.notify.interval", 750000);
-user_pref("content.max.tokenizing.time", 2250000);
-user_pref("content.interrupt.parsing", true);
-user_pref("content.notify.ontimer", true);
-user_pref("network.http.max-connections", 48);
-user_pref("network.http.max-connections-per-server", 16);
-user_pref("network.http.max-persistent-connections-per-proxy", 16);
-user_pref("network.http.max-persistent-connections-per-server", 8);
+// 2016-01-31: comment these out and reset in firefox since nowadays most
+// computers would fall under the fast computer fast connection
+////Tweaking Preferences from Mozilla KB
+////http://kb.mozillazine.org/Category:Tweaking_preferences
+//// some of these values were taken from the above page for fast computer fast connection
+//// but verified that the settings still exist
+//// Not using the pipelining options just in case that causes issues
+////user_pref("network.http.pipelining", true);
+////user_pref("network.http.proxy.pipelining", true);
+////user_pref("network.http.pipelining.maxrequests", 8);
+//user_pref("nglayout.initialpaint.delay", 0);
+//user_pref("content.notify.interval", 750000);
+//user_pref("content.max.tokenizing.time", 2250000);
+//user_pref("content.interrupt.parsing", true);
+//user_pref("content.notify.ontimer", true);
+//user_pref("network.http.max-connections", 48);
+//user_pref("network.http.max-connections-per-server", 16);
+//user_pref("network.http.max-persistent-connections-per-proxy", 16);
+//user_pref("network.http.max-persistent-connections-per-server", 8);
