@@ -101,6 +101,9 @@ user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (w
 // Disable hello
 user_pref("loop.enabled", false);
 
+// Disable autoplay of videos
+user_pref("media.autoplay.enabled", false);
+
 /**
  * default 1. 1 - show all images, 2 - block all images, 3 - prevent third party images
  * permissions.default.image = 1
