@@ -29,4 +29,7 @@ augroup filetypedetect
   " Git config
   " set it for gitconfig and gitconfig.versioned in dotfiles
   au! BufRead,BufNewFile gitconfig{,.versioned} setfiletype gitconfig
+
+  " Eyaml contains encrypted parts but is still mostly yaml
+  au! BufRead,BufNewFile *.eyaml setfiletype yaml
 augroup END
