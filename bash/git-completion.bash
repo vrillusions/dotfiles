@@ -1312,6 +1312,7 @@ _git_grep ()
 			--full-name --line-number
 			--extended-regexp --basic-regexp --fixed-strings
 			--perl-regexp
+			--threads
 			--files-with-matches --name-only
 			--files-without-match
 			--max-depth
@@ -1338,15 +1339,15 @@ _git_help ()
 {
 	case "$cur" in
 	--*)
-		__gitcomp "--all --info --man --web"
+		__gitcomp "--all --guides --info --man --web"
 		return
 		;;
 	esac
 	__git_compute_all_commands
 	__gitcomp "$__git_all_commands $(__git_aliases)
 		attributes cli core-tutorial cvs-migration
-		diffcore gitk glossary hooks ignore modules
-		namespaces repository-layout tutorial tutorial-2
+		diffcore everyday gitk glossary hooks ignore modules
+		namespaces repository-layout revisions tutorial tutorial-2
 		workflows
 		"
 }
@@ -1457,6 +1458,7 @@ _git_log ()
 			--relative-date --date=
 			--pretty= --format= --oneline
 			--show-signature
+			--cherry-mark
 			--cherry-pick
 			--graph
 			--decorate --decorate=
@@ -1812,7 +1814,7 @@ _git_config ()
 		return
 		;;
 	branch.*.rebase)
-		__gitcomp "false true"
+		__gitcomp "false true preserve interactive"
 		return
 		;;
 	remote.pushdefault)
@@ -2059,6 +2061,7 @@ _git_config ()
 		core.sparseCheckout
 		core.symlinks
 		core.trustctime
+		core.untrackedCache
 		core.warnAmbiguousRefs
 		core.whitespace
 		core.worktree
@@ -2413,8 +2416,8 @@ _git_stash ()
 		show,--*|branch,--*)
 			;;
 		branch,*)
-		  if [ $cword -eq 3 ]; then
-			__gitcomp_nl "$(__git_refs)";
+			if [ $cword -eq 3 ]; then
+				__gitcomp_nl "$(__git_refs)";
 			else
 				__gitcomp_nl "$(git --git-dir="$(__gitdir)" stash list \
 						| sed -n -e 's/:.*//p')"
