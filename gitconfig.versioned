@@ -16,11 +16,11 @@
 	ci = commit
 	cia = commit --amend
 	co = checkout
+	cob = checkout -b
 	cpx = cherry-pick -x
 	datetag = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -a -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	datetags = "!f(){ date=$(date \"+%Y%m%d%H%M\") && git tag -s -m \"$date\" $date \"$@\" && echo Tagged $date; }; f"
 	df = diff
-	dfc = diff --cached
 	dfs = diff --name-status
 	dfw = diff --color-words
 	fp = fetch --prune
@@ -39,6 +39,7 @@
 	sp = stash pop
 	sst = submodule status
 	st = status
+	staged = diff --cached
 	sti = status --ignored
 	sts = status --short --branch
 	su = submodule update
@@ -46,6 +47,8 @@
 	ta = tag -a
 	ts = tag -s
 	unstage = reset HEAD --
+	unwip = "!f(){ git log -n 1 | grep -q -c 'wip' && git reset HEAD~1; }; f"
+	wip = "!f(){ git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m 'wip'; }; f"
 [advice]
 	statusHints = false
 [gc]
