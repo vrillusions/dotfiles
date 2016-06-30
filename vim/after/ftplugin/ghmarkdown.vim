@@ -2,6 +2,8 @@ setlocal spell
 setlocal formatoptions+=ro
 " The three valid unordered list characters are -, *, and +
 setlocal comments=b:-,b:*,b:+
+" Markdown uses two trailing spaces to denote a line break
+let b:disable_StripWhiteSpaces = 1
 
 
 " Folding {{{1
