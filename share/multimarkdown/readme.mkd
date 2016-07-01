@@ -2,4 +2,19 @@
 
 ## Usage
 
-Place `style.css` in same folder your rendered html file is going to be (typically the same folder as the markdown file).  At the top of the markdown file add `CSS: style.css` followed by a blank line.  Then generate the html file like normal with `multimarkdown filename.mkd >filename.html`.  You can also host the css file somewhere and use that url in place of `style.css`.  I tried to do this by making a gist but the mime type returned is `text/plain` so browser won't treat it as a stylesheet.
+Place `style.css` in same folder your rendered html file is going to be (typically the same folder as the markdown file).  At the top of the markdown file add `CSS: style.css` followed by a blank line.  Then generate the html file like normal with `multimarkdown filename.mkd >filename.html`.  You can also host the css file somewhere and use that url in place of `style.css`.  I tried to do this by making a gist but the mime type returned is `text/plain` so browser won't treat it as a stylesheet.  Can also reference a full path with `CSS: file:///Users/todd.eddy/dotfiles/share/multimarkdown/style.css`.
+
+## Converting to PDF
+
+Uses `wkhtmltopdf` available on mac with `brew cask install wkhtmltopdf`
+
+Add `CSS: style.css  ` line from above. Note the two spaces afterwards so it forces a hard break when not using multimarkdown. Add a `{{TOC}}` if you want a table of contents. Then run following:
+
+    multimarkdown example.mkd >example.html
+    wkhtmltopdf \
+        --footer-left "[isodate]" \
+        --footer-center "CONFIDENTIAL" \
+        --footer-right "Page [page] of [toPage]" \
+        example.html example.pdf
+
+Note the stylesheet hasn't been updated so when printing a page it knows to expand URLs.  Can be done just hasn't been implemented yet.

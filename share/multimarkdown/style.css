@@ -238,3 +238,21 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* Style table of contents (ie: {{TOC}} ) */
+
+.TOC li {
+  margin-top: 2px;
+  padding-left: 0px;
+}
+
+.TOC ul {
+  list-style: circle outside;
+  margin: 0 0 0 30px;
+  padding: 0;
+}
+
+.TOC ul ul {
+  margin-left: 30px;
+  padding: 0 0 0 6px;
+}
