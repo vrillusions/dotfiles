@@ -18,3 +18,8 @@ Add `CSS: style.css  ` line from above. Note the two spaces afterwards so it for
         example.html example.pdf
 
 Note the stylesheet hasn't been updated so when printing a page it knows to expand URLs.  Can be done just hasn't been implemented yet.
+
+## Reference
+
+- http://fletcher.github.io/MultiMarkdown-5/syntax.html
+- http://daringfireball.net/projects/markdown/syntax
