@@ -17,7 +17,9 @@ call pathogen#helptags()
 set enc=utf-8                   " Always use UTF-8 encoding (needed for listchars)
 set backspace=indent,eol,start  " backspace over everything in insert mode
 set backup                      " keep a backup file
-set backupskip=/tmp/*           " but not of files in /tmp
+" TODO: add ~/temp/* and ~/tmp/* (need to expand $HOME manually though)
+" /tmp is skipped by default
+"set backupskip=/tmp/*           " but not of files in /tmp
 set history=1000                " how many lines of command line history to keep
 set ruler                       " show the cursor position all the time
 set showcmd                     " display incomplete commands
@@ -29,7 +31,7 @@ set showmatch                   " show matching brackets
 set laststatus=2                " always show status line
 set background=dark             " we are using a dark background
 set backupdir=~/.vim/backup     " where to save backups
-set directory=~/.vim/backup//   " where to save .swp files ('//' is intentional, see help)
+set directory^=~/.vim/backup//  " where to save .swp files ('//' is intentional, see help)
 set noerrorbells                " be quiet
 set vb                          " I really mean it
 set t_vb=                       " not a sound
