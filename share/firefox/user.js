@@ -36,6 +36,10 @@ user_pref("network.cookie.lifetimePolicy", 2);
 // them to be session cookies
 user_pref("network.cookie.thirdparty.sessionOnly", true);
 
+// These both make allowing self signed certs a little easier and prepopulates the accept
+// dialog with url
+user_pref("browser.xul.error_pages.expert_bad_cert", true);
+user_pref("browser.ssl_override_behavior", 2);
 
 // Privacy / resource usage preferences
 
@@ -63,6 +67,7 @@ user_pref("plugin.state.flash", 1);
 // Don't use new tab page
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtabpage.enhanced", false);
+user_pref("browser.newtab.preload", false);
 
 // Set default home page
 user_pref("browser.startup.homepage", "https://www.google.com");

@@ -11,9 +11,10 @@ mklink _gvimrc "dotfiles\gvimrc"
 REM directory doesn't need a hard link
 mklink /D .vim "dotfiles\vim"
 echo Additionally you can add firefox's user.js (currently not handled by
-echo script as the profile folder is unique)
+echo script as the profile folder is unique). Note I had to use /H to make
+echo it a hard link for firefox to pick it up.
 echo.
 echo Example:
 echo   cd %APPDATA%\Mozilla\Firefox\Profiles\ohrei0i4.default
-echo   mklink user.js %USERPROFILE%\dotfiles\share\firefox\user.js
+echo   mklink /H user.js %USERPROFILE%\dotfiles\share\firefox\user.js
 pause
