@@ -59,6 +59,7 @@
 	default = upstream
 [log]
 	decorate = auto
+	showSignature = true
 [rebase]
 	stat = true
 	autoStash = true
