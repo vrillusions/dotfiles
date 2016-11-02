@@ -1,9 +1,11 @@
 # You can specify your own 'Host *' before the generated one below to add
 # local customizations.
 Host *
+  # Ignore any GSSAPI options that are unknown in this version
+  # Preferably this would be placed at top of file in case it's used above
+  IgnoreUnknown GSSAPI*
   Protocol 2
-  # This isn't used much but better to default on than default off
-  VerifyHostKeyDNS yes
+  VerifyHostKeyDNS ask
   ServerAliveInterval 60
   ServerAliveCountMax 3
   GSSAPIAuthentication no
