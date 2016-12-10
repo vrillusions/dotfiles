@@ -14,23 +14,27 @@ BREWIN="${BREW} install"
 $BREW update
 $BREW upgrade
 
+$BREWIN ansible
 $BREWIN apg
 $BREWIN aspell --with-lang-en
 $BREWIN bash-completion
-$BREWIN ec2-api-tools
+$BREWIN coreutils
+$BREWIN git
 $BREWIN iftop
 $BREWIN ipcalc
 $BREWIN iperf
-$BREWIN lame
-$BREWIN lftp
-$BREWIN gpg
+$BREWIN iproute2mac
+$BREWIN jq
+#$BREWIN lftp  # guess has compile issues 2016-12-09
 $BREWIN minicom
 $BREWIN multimarkdown
 $BREWIN nmap
 $BREWIN p7zip
-$BREWIN postgresql
 $BREWIN proctools
-$BREWIN pwgen
+$BREWIN pstree
+$BREWIN pyenv
+$BREWIN pyenv-virtualenv
+$BREWIN pyenv-which-ext
 $BREWIN watch
 $BREWIN wget
 

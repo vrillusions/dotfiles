@@ -260,8 +260,9 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 # Safari {{{1
 #####
-# First attempt to prevent 'try the new safari' popup (wtf apple?)
-defaults write com.apple.safari LastOSVersionSafariWasLaunchedOn -string "10.10.1"
+# Stop the 'try the new safari' popup (wtf apple?)
+defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
+defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 10.99
 
 
 # Terminal {{{1
