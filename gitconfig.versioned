@@ -8,13 +8,13 @@
 [color]
 	ui = auto
 [diff]
-	# Disables the rename limit
 	renamelimit = 0
 [alias]
 	br = branch
 	changelog = shortlog --no-merges --format=\"[%h] %s\"
 	ci = commit
 	cia = commit --amend
+	ciad = commit --amend --date=\"$(date -j)\"
 	co = checkout
 	cob = checkout -b
 	cpx = cherry-pick -x
@@ -55,8 +55,8 @@
 	# Default is 6700 which can be a while
 	auto = 1024
 [push]
-	# Only push the current branch to it's matching upstream branch
 	default = upstream
+	recurseSubmodules = check
 [log]
 	decorate = auto
 	showSignature = true
@@ -65,3 +65,5 @@
 	autoStash = true
 [transfer]
 	fsckobjects = true
+[fetch]
+	prune = true
