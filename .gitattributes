@@ -1,0 +1,5 @@
+# Normalize line endings of text files
+* text=auto
+
+# Don't mess with line endings in vim/bundle/ since those are external
+vim/bundle/** -text=auto
