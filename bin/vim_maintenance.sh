@@ -37,7 +37,7 @@ set -u
 # -- script constants --
 # set script_dir to location this script is running in
 readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-readonly script_name="$(basename $0)"
+readonly script_name="$(basename "$0")"
 
 
 # -- logging functions --
@@ -68,7 +68,7 @@ while getopts ":hb:d:u:v" opt; do
         echo "Usage: ${script_name} [OPTION]"
         echo "       ${script_name} install"
         echo 'Removes old backup, swap, and undo files created by vim. If'
-        echo 'called with ``install`` then will add an entry in the crontab for'
+        echo 'called with "install" then will add an entry in the crontab for'
         echo 'the current user to run this daily.'
         echo
         echo 'Options:'
@@ -101,7 +101,7 @@ while getopts ":hb:d:u:v" opt; do
         ;;
     esac
 done
-shift `expr ${OPTIND} - 1`
+shift $(( OPTIND - 1 ))
 verbose "Additional arguments after options: $*"
 
 
@@ -115,7 +115,7 @@ function clean_dir() {
     if [[ -d "${source_dir}" ]]; then
         log "Cleaning ${source_dir}"
         cd "${source_dir}"
-        find . -mtime +${days} -not -name ".gitignore" -print0 \
+        find . -mtime +"${days}" -not -name ".gitignore" -print0 \
             | xargs ${xargs_opts} rm -f
     else
         log "${source_dir} is not a directory" >&2
