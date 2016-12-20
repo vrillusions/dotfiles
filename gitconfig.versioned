@@ -14,7 +14,7 @@
 	changelog = shortlog --no-merges --format=\"[%h] %s\"
 	ci = commit
 	cia = commit --amend
-	ciad = commit --amend --date=\"$(date -j)\"
+	ciad = "!git commit --amend --date=\"$(date)\""
 	co = checkout
 	cob = checkout -b
 	cpx = cherry-pick -x
