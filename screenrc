@@ -25,6 +25,13 @@ term screen-256color
 # add a bunch of information to the bottom of the screen
 # taken from http://shurl.net/1Is
 hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[%m/%d %c]%{W}'
+windowlist title "Num Name%=Location Flags"
+windowlist string "%03n %t%=%h %f"
+
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+# advertise hardstatus support to $TERMCAP
+termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
 
 # Keybindings
 ## bind <F7> to detach screen from this terminal
