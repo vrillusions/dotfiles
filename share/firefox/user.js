@@ -55,6 +55,10 @@ user_pref("network.prefetch-next", false);
 // Enable tracking protection (blocks sites that track visits across web)
 user_pref("privacy.trackingprotection.enabled", true);
 
+// How long to run a script before complaining. This seems to be an issue when I have
+// a lot of tabs.  Default is 10 seconds
+user_pref("dom.max_script_run_time", 20);
+
 
 // Set the default action for various plugins.
 // 0 - never activate
