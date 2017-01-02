@@ -57,6 +57,7 @@
 	auto = 1024
 [push]
 	default = upstream
+	followTags = true
 	recurseSubmodules = check
 [log]
 	decorate = auto
