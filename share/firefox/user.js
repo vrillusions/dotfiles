@@ -25,7 +25,7 @@ user_pref("security.OCSP.require", true);
 // Disable 3rd party cookies (0 - allows all, 1 - Only originating server,
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
 // 3 with now p3p policy is the same as saying allow 3rd party cookies "From visited" in UI
-user_pref('network.cookie.cookieBehavior', 3);
+user_pref('network.cookie.cookieBehavior', 0);
 
 // Keep cookies for: 0 - (default) supplied time, 1 - Ask, 2 - for browser session only
 // 3 - number of days given in network.cookie.lifetime.days
