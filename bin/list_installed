@@ -40,6 +40,8 @@ check_installed "lftp          " $(which lftp &>/dev/null     && lftp --version 
 check_installed "minicom       " $(which minicom &>/dev/null  && minicom --version | sed -n 1p | awk '{print $3}')
 check_installed "nmap          " $(which nmap &>/dev/null     && nmap --version | sed -n 2p | awk '{print $3}')
 check_installed "php           " $(which php &>/dev/null      && php --version | awk '{print $2}')
+check_installed "python2       " $(which python2 &>/dev/null  && python2 --version 2>&1 | awk '{print $2}')
+check_installed "python3       " $(which python3 &>/dev/null  && python3 --version 2>&1 | awk '{print $2}')
 check_installed "python        " $(which python &>/dev/null   && python --version 2>&1 | awk '{print $2}')
 check_installed "├─ fabric     " $(which fab &>/dev/null      && fab --version | sed -n 1p | awk '{print $2}')
 check_installed "├─ pyenv      " $(which pyenv &>/dev/null    && pyenv --version | awk '{print $2}')
