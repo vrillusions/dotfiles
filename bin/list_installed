@@ -43,7 +43,6 @@ check_installed "php           " $(which php &>/dev/null      && php --version |
 check_installed "python2       " $(which python2 &>/dev/null  && python2 --version 2>&1 | awk '{print $2}')
 check_installed "python3       " $(which python3 &>/dev/null  && python3 --version 2>&1 | awk '{print $2}')
 check_installed "python        " $(which python &>/dev/null   && python --version 2>&1 | awk '{print $2}')
-check_installed "├─ fabric     " $(which fab &>/dev/null      && fab --version | sed -n 1p | awk '{print $2}')
 check_installed "├─ pyenv      " $(which pyenv &>/dev/null    && pyenv --version | awk '{print $2}')
 check_installed "└─ virtualenv " $(which virtualenv &>/dev/null && virtualenv --version)
 check_installed "ruby          " $(which ruby &>/dev/null     && ruby --version | awk '{print $2}')
