@@ -46,7 +46,7 @@
 	sti = status --ignored
 	sts = status --short --branch
 	su = submodule update
-	sweep = "!git branch --merged | grep -v '\\*\\|master\\|develop\\|production' | xargs -n 1 git branch -d"
+	sweep = "!git branch --merged | grep -v '^\\* \\|  master\\|  develop\\|  production' | xargs -n 1 git branch -d"
 	ta = tag -a
 	ts = tag -s
 	unstage = reset HEAD --
