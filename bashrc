@@ -138,6 +138,9 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+alias rot13="tr 'a-zA-Z' 'n-za-mN-ZA-M'"
+
+
 # Default to gpg v2 if it exists
 test "$(which gpg2)" && alias gpg=gpg2 || true
 
