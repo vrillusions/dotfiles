@@ -22,6 +22,9 @@ user_pref("security.tls.version.min", 1);
 // Require that we pass OCSP validation or don't continue
 user_pref("security.OCSP.require", true);
 
+// Don't translate punycode
+user_pref("network.IDN_show_punycode", true);
+
 // Disable 3rd party cookies (0 - allows all, 1 - Only originating server,
 // 2 - no cookies, 3 - cookies allowed based on "cookie P3P policy")
 // 3 with now p3p policy is the same as saying allow 3rd party cookies "From visited" in UI
