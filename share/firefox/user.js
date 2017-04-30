@@ -1,5 +1,8 @@
 /* Make custom changes here
  *
+ * DO NOT EDIT WITH NOTEPAD++ ON WINDOWS, IT WILL BREAK THE HARD LINK THAT EXISTS
+ * GVIM ON WINDOWS WORKS CORRECTLY
+ *
  * To make a manual change to preferences, you can visit the URL about:config
  * For more information, see http://www.mozilla.org/unix/customizing.html#prefs
  *
@@ -61,6 +64,9 @@ user_pref("privacy.trackingprotection.enabled", true);
 // How long to run a script before complaining. This seems to be an issue when I have
 // a lot of tabs.  Default is 10 seconds
 user_pref("dom.max_script_run_time", 20);
+
+// Don't keep checking for captive portal
+user_pref("network.captive-portal-service.enabled", false);
 
 
 // Set the default action for various plugins.
