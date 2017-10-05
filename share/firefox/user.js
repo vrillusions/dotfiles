@@ -18,7 +18,7 @@ user_pref("security.warn_leaving_secure", false);
 user_pref("security.warn_submit_insecure", false);
 user_pref("security.warn_viewing_mixed", false);
 
-// Set minimum tls version: (0 - SSLv3 (default), 1 - TLSv1, 2 - TLSv1.1, 3 - TLSv1.2)
+// Set minimum tls version: (0 - SSLv3, 1 - TLSv1 (default in later versions), 2 - TLSv1.1, 3 - TLSv1.2)
 // SSLv3 should be avoided due to POODLE attack
 user_pref("security.tls.version.min", 1);
 
@@ -60,6 +60,7 @@ user_pref("network.prefetch-next", false);
 
 // Enable tracking protection (blocks sites that track visits across web)
 user_pref("privacy.trackingprotection.enabled", true);
+user_pref("privacy.trackingprotection.ui.enabled", true);
 
 // How long to run a script before complaining. This seems to be an issue when I have
 // a lot of tabs.  Default is 10 seconds
