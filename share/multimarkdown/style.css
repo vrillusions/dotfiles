@@ -50,13 +50,13 @@ a:active {
 
 pre, code {
   font-size: 11px; font-family: monaco, courier, consolas, monospace;
+  background: #f1f5f9;
 }
 
 pre {
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #c7cfd5;
-  background: #f1f5f9;
   margin: 20px 0;
   padding: 8px;
   text-align: left;
