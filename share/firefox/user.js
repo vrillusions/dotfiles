@@ -10,7 +10,7 @@
  * case the generated file gets overwritten or reset
  */
 
-// Security Options
+// -- Security Options --
 // These are the warnings you get on new installs, personally don't need to see them
 //don't need to see these everytime I install a new version
 user_pref("security.warn_entering_secure", false);
@@ -47,8 +47,8 @@ user_pref("network.cookie.thirdparty.sessionOnly", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("browser.ssl_override_behavior", 2);
 
-// Privacy / resource usage preferences
 
+// -- Privacy / resource usage preferences --
 // Don't do dns lookup when I hover over links
 user_pref("network.dns.disablePrefetch", true);
 
@@ -69,16 +69,16 @@ user_pref("dom.max_script_run_time", 20);
 // Don't keep checking for captive portal
 user_pref("network.captive-portal-service.enabled", false);
 
-
 // Set the default action for various plugins.
 // 0 - never activate
 // 1 - ask to activate
 // 2 - always activate
 user_pref("plugin.state.flash", 1);
 
-
 // Other UI tweaks not related to performance articles below
 // Don't use new tab page
+user_pref("browser.newtabpage.introShown", true);
+user_pref("browser.newtabpage.activity-stream.enabled", false);
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtab.preload", false);
@@ -92,7 +92,6 @@ user_pref("browser.search.openintab", true);
 
 // Show the full URL in url bar
 user_pref("browser.urlbar.trimURLs", false);
-
 
 // backspace key action (0 - goes back a page, 1 - scrolls up a page, >1 - disables)
 user_pref("browser.backspace_action", 2);
@@ -123,11 +122,6 @@ user_pref("loop.enabled", false);
 // Disable autoplay of videos
 user_pref("media.autoplay.enabled", false);
 
-/**
- * default 1. 1 - show all images, 2 - block all images, 3 - prevent third party images
- * permissions.default.image = 1
- */
-
 // FF 4.0 settings
 // When saving state between browser restarts it has saved session cookies for a
 // while now.  In FF4.0 it now saves session data for HTTPS sites as well. This
@@ -153,6 +147,20 @@ user_pref("browser.sessionstore.privacy_level_deferred", 2);
 // other settings recommended by that site that don't necessarily deal with performance
 // (verified they do exist as of Sept 14, 2007
 user_pref("plugin.expose_full_path", true);
+
+
+// -- FF58 tweaks --
+// Don't save passwords and logins
+user_pref("signon.rememberSignons", false);
+// Don't mind saving addresses but not credit cards
+user_pref("dom.forms.autocomplete.formautofill", true);
+user_pref("extensions.formautofill.firstTimeUse", false);
+user_pref("extensions.formautofill.creditCards.enabled", false);
+
+// UI tweaks
+user_pref("browser.tabs.extraDragSpace", true);
+user_pref("browser.uitour.enabled", false);
+user_pref("browser.pocket.enabled", false);
 
 
 // 2016-01-31: comment these out and reset in firefox since nowadays most
