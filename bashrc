@@ -140,6 +140,10 @@ alias .....="cd ../../../.."
 
 alias rot13="tr 'a-zA-Z' 'n-za-mN-ZA-M'"
 
+alias h='history 25'
+alias la='ls -aF'
+alias lf='ls -FA'
+alias ll='ls -lAF'
 
 # Default to gpg v2 if it exists
 test "$(which gpg2)" && alias gpg=gpg2 || true
