@@ -120,6 +120,14 @@ set cursorline            " highlight row cursor is on
 hi CursorLine cterm=NONE ctermbg=235
 
 " Plugin settings {{{1
+" Ale {{{2
+let g:ale_linter_aliases = {
+  \ 'ghmarkdown': 'markdown',
+  \ }
+let g:ale_lint_delay = 2000  " Delay in msec
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " NERDTree {{{2
 map <Leader>n :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1          " Quit on opening files from the tree

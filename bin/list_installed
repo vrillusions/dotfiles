@@ -44,7 +44,7 @@ check_installed "python2       " $(which python2 &>/dev/null  && python2 --versi
 check_installed "python3       " $(which python3 &>/dev/null  && python3 --version 2>&1 | awk '{print $2}')
 check_installed "python        " $(which python &>/dev/null   && python --version 2>&1 | awk '{print $2}')
 check_installed "├─ pyenv      " $(which pyenv &>/dev/null    && pyenv --version | awk '{print $2}')
-check_installed "└─ virtualenv " $(which virtualenv &>/dev/null && virtualenv --version)
+check_installed "└─ virtualenv " $(which virtualenv &>/dev/null && virtualenv --version 2>/dev/null)
 check_installed "ruby          " $(which ruby &>/dev/null     && ruby --version | awk '{print $2}')
 check_installed "rvm           " $(which rvm &>/dev/null      && rvm --version | grep . | awk '{print $2}')
 check_installed "screen        " $(which screen &>/dev/null   && screen --version | awk '{print $3}')
@@ -59,5 +59,12 @@ check_installed "wget          " $(which wget &>/dev/null     && wget --version 
 #check_installed "    ├─ uglify-js    " $(which -s npm      && npm ls -g | grep uglify-js       | awk -F@ '{print $2}')
 #check_installed "    ├─ forgetful    " $(which -s npm      && npm ls -g | grep forgetful       | awk -F@ '{print $2}')
 #check_installed "    └─ csv2par      " $(which -s npm      && npm ls -g | grep csv2par         | awk -F@ '{print $2}')
+
+printf "\n%b\n" "Used by vim-ale:"
+check_installed "shellcheck    " $(which shellcheck &>/dev/null && shellcheck --version | awk '/^version/ {print $2}')
+check_installed "write-good    " $(which write-good &>/dev/null && write-good --version | awk '{print $3}')
+check_installed "proselint     " $(which proselint &>/dev/null  && proselint --version)
+check_installed "prettier      " $(which prettier &>/dev/null   && prettier --version)
+check_installed "yamllint      " $(which yamllint &>/dev/null   && yamllint --version | awk '{print $2}')
 
 exit 0

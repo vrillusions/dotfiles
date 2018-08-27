@@ -128,6 +128,7 @@ read -p "Continue with reload [y/N]? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # These are listed in alphabetical order of the destination folder
+    import_repo "https://github.com/w0rp/ale" ale v2.1.0
     import_repo "https://github.com/pearofducks/ansible-vim.git" ansible-vim 1.0
     #import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
     #import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
