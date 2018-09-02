@@ -8,6 +8,21 @@ set -e
 plistbuddy_cmd="/usr/libexec/PlistBuddy -c"
 prefs_home="${HOME}/Library/Preferences"
 
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "This should only run on Mac OS" >&2
+    exit 1
+fi
+
+if ! command -v "$(awk '{print $1}' <(echo ${plistbuddy_cmd}))" >/dev/null; then
+    echo "Unable to find ${plistbuddy_cmd}" >&2
+    exit 1
+fi
+
+if ! command -v sw_vers >/dev/null; then
+    echo "Unable to find sw_vers" >&2
+    exit 1
+fi
+
 
 # Usage: add_menu_item "Item to add to menu if not exist"
 add_menu_item () {
@@ -30,56 +45,69 @@ add_menu_item () {
     set -x
 }
 
+# Gives 3 item array [0] - major, [1] - minor, [2] - patch
+read -a osx_version < <(v=sw_vers; echo ${v//\./ })
+if [[ ${osx_version[1]} -ge 13 ]]; then
+    global_domain='-globalDomain'
+else
+    global_domain='NSGlobalDomain'
+fi
+
 
 # From here down print the command as it's being run
 set -x
 
 
+# Fonts {{{1
+#####
+cp ~/dotfiles/share/fonts/Inconsolata.otf ~/Library/Fonts/
+
+
 # General {{{1
 #####
 # Enable auto text substitution
-defaults write NSGlobalDomain WebAutomaticTextReplacementEnabled -bool true
+defaults write ${global_domain} WebAutomaticTextReplacementEnabled -bool true
 
 # Disable auto spell correction
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write ${global_domain} NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable auto quote substitution
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write ${global_domain} NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable auto dash substitution (leaving it around for now)
-#defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+#defaults write ${global_domain} NSAutomaticDashSubstitutionEnabled -bool false
 
 # Disable resume
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write ${global_domain} NSQuitAlwaysKeepsWindows -bool false
 
 # Check for updates daily instead of weekly
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Enable full keyboard access so can tab in dialog boxes
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write ${global_domain} AppleKeyboardUIMode -int 3
 
 # Allow subpixel font rending on non apple monitors
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
+defaults write ${global_domain} AppleFontSmoothing -int 2
 
 # Among other things this doesn't keep the help window on top
 defaults write com.apple.helpviewer DevMode -bool true
 
 # Turn off folder springing (you can hit space to use it when you want)
-defaults write NSGlobalDomain com.apple.springing.enabled -bool false
+defaults write ${global_domain} com.apple.springing.enabled -bool false
 
 # Display time as "Jan 10 4:18 PM"
 defaults write com.apple.menuextra.clock DateFormat -string "MMM d  h:mm a"
 
 # Expand save dialog by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write ${global_domain} NSNavPanelExpandedStateForSaveMode -bool true
+defaults write ${global_domain} NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # Expand print dialog by default
-defaults write NSGlobalDomain NSPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain NSPrintingExpandedStateForPrint2 -bool true
+defaults write ${global_domain} NSPrintingExpandedStateForPrint -bool true
+defaults write ${global_domain} NSPrintingExpandedStateForPrint2 -bool true
 
 # Don't save to icloud by default
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write ${global_domain} NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Turn off shadow when doing screen captures
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -87,14 +115,14 @@ defaults write com.apple.screencapture disable-shadow -bool true
 # Disable “natural” scrolling although this is the first thing I change on new
 # system.
 # NOTE: If you have scroll reverser installed then leave this to true
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+defaults write ${global_domain} com.apple.swipescrolldirection -bool false
 
 # Disable press and hold so key repeat is faster
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write ${global_domain} ApplePressAndHoldEnabled -bool false
 
 # Set short delay till repeat and then set repeat rate fast
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write ${global_domain} InitialKeyRepeat -int 15
+defaults write ${global_domain} KeyRepeat -int 2
 
 
 # Script Editor {{{1
@@ -112,6 +140,8 @@ defaults write com.apple.scriptmenu PutAppScriptsFirst -bool true
 #####
 # Show ~/Library in finder (this likes to get reset it seems)
 chflags nohidden ~/Library
+# And this seems to not get removed properly either
+xattr -d com.apple.FinderInfo ~/Library
 
 # Disable warning when emptying trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -141,8 +171,12 @@ defaults write com.apple.finder NewWindowTarget -string "PfHm"
 # Default search current folder
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
+# Hide tags in sidebar but show places
+defaults write com.apple.finder SidebarTagsSctionDisclosedState -bool false
+defaults write com.apple.finder SidebarPlacesSectionDisclosedState -bool true
+
 # Make sidebar icons small (1), medium (2), or large (3)
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+defaults write ${global_domain} NSTableViewDefaultSizeMode -int 1
 
 # Set desktop how I like
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true

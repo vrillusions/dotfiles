@@ -6,6 +6,15 @@ Have kept this in subversion for a while but finally cleaned up all the sensitiv
 
 While I don't expect anyone to use this on their system but pick and choose what they want, here's how I set it up on a new computer.
 
+- first off should generate an ssh key and add it to github:
+
+```shell
+ssh-keygen -t rsa -b 2048 -N "" \
+    -C "${USER}@$(hostname -s)_$(date +%Y-%m-%d)" \
+    -f ~/.ssh/id_rsa -q
+cat ~/.ssh/id_rsa.pub
+```
+
 - after clone, run `./createlinks.sh`
     - for some files I maintain a separate versioned file like my `gitconfig` since my actual one has a signing key and author fields could change if I'm at work.  This will notice I don't have a `gitconfig` and copy from `gitconfig.versioned`.  This will be done to other files as well
     - creates symlinks for the specified files.
