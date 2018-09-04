@@ -17,54 +17,54 @@ check_installed() {
     local version="${2:-"FALSE"}"
 
     if [ "${version}" != 'FALSE' ]; then
-        printf "${green}%s${attr_reset} -- %s\n" "${description}" "${version}"
+        printf "${green}%s${attr_reset} -- %s\\n" "${description}" "${version}"
     else
-        printf "${red}%s${attr_reset}\n" "${description}"
+        printf "${red}%s${attr_reset}\\n" "${description}"
     fi
 }
 
 
-printf "%b\n" "Used in bashrc:"
-check_installed "aspell        " $(which aspell &>/dev/null   && aspell --version | awk '{print $9}' | sed -e 's/)//g')
+printf "%b\\n" "Used in bashrc:"
+check_installed "aspell        " "$(command -v aspell &>/dev/null   && aspell --version | awk '{print $9}' | sed -e 's/)//g')"
 
-printf "\n%b\n" "Other:"
+printf "\\n%b\\n" "Other:"
 # In alphabetical order
-check_installed "7zip          " $(which 7za &>/dev/null      && 7za --help | sed -n 3p | awk '{print $3}')
-check_installed "apg           " $(which apg &>/dev/null      && apg -v | sed -n 2p | awk '{print $2}')
-check_installed "bash          " $(which bash &>/dev/null     && bash --version | sed -n 1p | awk '{print $4}')
-check_installed "curl          " $(which curl &>/dev/null     && curl --version | sed -n 1p | awk '{print $2}')
-check_installed "dig           " $(which dig &>/dev/null      && dig -v 2>&1 | awk '{print $2}')
-check_installed "git           " $(which git &>/dev/null      && git --version | awk '{print $3}')
-check_installed "ipcalc        " $(which ipcalc &>/dev/null   && ipcalc --version)
-check_installed "lftp          " $(which lftp &>/dev/null     && lftp --version | sed -n 1p | awk '{print $4}')
-check_installed "minicom       " $(which minicom &>/dev/null  && minicom --version | sed -n 1p | awk '{print $3}')
-check_installed "nmap          " $(which nmap &>/dev/null     && nmap --version | sed -n 2p | awk '{print $3}')
-check_installed "php           " $(which php &>/dev/null      && php --version | awk '{print $2}')
-check_installed "python2       " $(which python2 &>/dev/null  && python2 --version 2>&1 | awk '{print $2}')
-check_installed "python3       " $(which python3 &>/dev/null  && python3 --version 2>&1 | awk '{print $2}')
-check_installed "python        " $(which python &>/dev/null   && python --version 2>&1 | awk '{print $2}')
-check_installed "├─ pyenv      " $(which pyenv &>/dev/null    && pyenv --version | awk '{print $2}')
-check_installed "└─ virtualenv " $(which virtualenv &>/dev/null && virtualenv --version 2>/dev/null)
-check_installed "ruby          " $(which ruby &>/dev/null     && ruby --version | awk '{print $2}')
-check_installed "rvm           " $(which rvm &>/dev/null      && rvm --version | grep . | awk '{print $2}')
-check_installed "screen        " $(which screen &>/dev/null   && screen --version | awk '{print $3}')
-check_installed "vim           " $(which vim &>/dev/null      && vim --version | sed -n 1p | awk '{print $5}')
-check_installed "wget          " $(which wget &>/dev/null     && wget --version | sed -n 1p | awk '{print $3}')
+check_installed "7zip          " "$(command -v 7za &>/dev/null      && 7za --help | awk '/^p7zip/ {print $3}')"
+check_installed "apg           " "$(command -v apg &>/dev/null      && apg -v | awk '/^version/ {print $2}')"
+check_installed "bash          " "$(command -v bash &>/dev/null     && bash --version | awk '/version/ {print $4}')"
+check_installed "curl          " "$(command -v curl &>/dev/null     && curl --version | awk '/^curl/ {print $2}')"
+check_installed "dig           " "$(command -v dig &>/dev/null      && dig -v 2>&1 | awk '{print $2}')"
+check_installed "git           " "$(command -v git &>/dev/null      && git --version | awk '{print $3}')"
+check_installed "ipcalc        " "$(command -v ipcalc &>/dev/null   && ipcalc --version)"
+check_installed "lftp          " "$(command -v lftp &>/dev/null     && lftp --version | awk '/Version/ {print $4}')"
+check_installed "minicom       " "$(command -v minicom &>/dev/null  && minicom --version | awk '/^minicom version/ {print $3}')"
+check_installed "nmap          " "$(command -v nmap &>/dev/null     && nmap --version | awk '/^Nmap version/ {print $3}')"
+check_installed "php           " "$(command -v php &>/dev/null      && php --version | awk '/^PHP/ {print $2}')"
+check_installed "python2       " "$(command -v python2 &>/dev/null  && python2 --version 2>&1 | awk '{print $2}')"
+check_installed "python3       " "$(command -v python3 &>/dev/null  && python3 --version 2>&1 | awk '{print $2}')"
+check_installed "python        " "$(command -v python &>/dev/null   && python --version 2>&1 | awk '{print $2}')"
+check_installed "├─ pyenv      " "$(command -v pyenv &>/dev/null    && pyenv --version | awk '{print $2}')"
+check_installed "└─ virtualenv " "$(command -v virtualenv &>/dev/null && virtualenv --version 2>/dev/null)"
+check_installed "ruby          " "$(command -v ruby &>/dev/null     && ruby --version | awk '{print $2}')"
+check_installed "rvm           " "$(command -v rvm &>/dev/null      && rvm --version | grep . | awk '{print $2}')"
+check_installed "screen        " "$(command -v screen &>/dev/null   && screen --version | awk '{print $3}')"
+check_installed "vim           " "$(command -v vim &>/dev/null      && vim --version | awk '/^VIM/ {print $5}')"
+check_installed "wget          " "$(command -v wget &>/dev/null     && wget --version | awk '/Wget.*built/ {print $3}')"
 # Leaving this here as an example of dependencies
-#check_installed "node.js             " $(which -s node     && node --version)
-#check_installed "└─ npm              " $(which -s npm      && npm --version)
-#check_installed "    ├─ jslint       " $(which -s npm      && npm ls -g | grep jslint | awk -F@ '{print $2}')
-#check_installed "    ├─ less         " $(which -s npm      && npm ls -g | grep less   | awk -F@ '{print $2}')
-#check_installed "    ├─ coffee-script" $(which -s npm      && npm ls -g | grep coffee-script   | awk -F@ '{print $2}')
-#check_installed "    ├─ uglify-js    " $(which -s npm      && npm ls -g | grep uglify-js       | awk -F@ '{print $2}')
-#check_installed "    ├─ forgetful    " $(which -s npm      && npm ls -g | grep forgetful       | awk -F@ '{print $2}')
-#check_installed "    └─ csv2par      " $(which -s npm      && npm ls -g | grep csv2par         | awk -F@ '{print $2}')
+#check_installed "node.js             " $(command -v -s node     && node --version)
+#check_installed "└─ npm              " $(command -v -s npm      && npm --version)
+#check_installed "    ├─ jslint       " $(command -v -s npm      && npm ls -g | grep jslint | awk -F@ '{print $2}')
+#check_installed "    ├─ less         " $(command -v -s npm      && npm ls -g | grep less   | awk -F@ '{print $2}')
+#check_installed "    ├─ coffee-script" $(command -v -s npm      && npm ls -g | grep coffee-script   | awk -F@ '{print $2}')
+#check_installed "    ├─ uglify-js    " $(command -v -s npm      && npm ls -g | grep uglify-js       | awk -F@ '{print $2}')
+#check_installed "    ├─ forgetful    " $(command -v -s npm      && npm ls -g | grep forgetful       | awk -F@ '{print $2}')
+#check_installed "    └─ csv2par      " $(command -v -s npm      && npm ls -g | grep csv2par         | awk -F@ '{print $2}')
 
-printf "\n%b\n" "Used by vim-ale:"
-check_installed "shellcheck    " $(which shellcheck &>/dev/null && shellcheck --version | awk '/^version/ {print $2}')
-check_installed "write-good    " $(which write-good &>/dev/null && write-good --version | awk '{print $3}')
-check_installed "proselint     " $(which proselint &>/dev/null  && proselint --version)
-check_installed "prettier      " $(which prettier &>/dev/null   && prettier --version)
-check_installed "yamllint      " $(which yamllint &>/dev/null   && yamllint --version | awk '{print $2}')
+printf "\\n%b\\n" "Used by vim-ale:"
+check_installed "shellcheck    " "$(command -v shellcheck &>/dev/null && shellcheck --version | awk '/^version/ {print $2}')"
+check_installed "write-good    " "$(command -v write-good &>/dev/null && write-good --version | awk '{print $3}')"
+check_installed "proselint     " "$(command -v proselint &>/dev/null  && proselint --version)"
+check_installed "prettier      " "$(command -v prettier &>/dev/null   && prettier --version)"
+check_installed "yamllint      " "$(command -v yamllint &>/dev/null   && yamllint --version | awk '{print $2}')"
 
 exit 0
