@@ -32,6 +32,17 @@ mklink user.js "%script_dir%share\firefox\user.js"
 popd
 
 echo.
+echo Attempting to symlink Thunderbird user.js to default profile.
+echo If you get an error here view script for commands to run.
+echo.
+
+REM This assumes that there's a single profile that ends with ".default"
+pushd "%APPDATA%\Thunderbird\Profiles\*.default" || goto _error
+mklink user.js "%script_dir%share\thunderbird\user.js"
+popd
+
+
+echo.
 echo Finished successfully
 pause
 goto :EOF
