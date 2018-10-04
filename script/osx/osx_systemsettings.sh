@@ -35,7 +35,7 @@ set -x
 #sudo rm -f /var/vm/sleepimage
 
 # Disable local time machine snapshots
-sudo tmutil disablelocal
+#sudo tmutil disablelocal
 
 # Disable motion sensor since there's no spinning disk to save
 sudo pmset -a sms 0
