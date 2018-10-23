@@ -11,6 +11,7 @@
 	renamelimit = 0
 [alias]
 	br = branch
+	brl = branch --format '%(HEAD) %(refname:short)%(if)%(upstream)%(then) -> %(color:red)%(upstream:short) %(color:cyan)%(upstream:track)%(end)'
 	changelog = shortlog --no-merges --format=\"[%h] %s\"
 	ci = commit
 	cia = commit --amend
