@@ -18,7 +18,7 @@ set -u
 # -- script constants --
 # set script_dir to location this script is running in
 readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-readonly script_name="$(basename $0)"
+readonly script_name="$(basename "$0")"
 # full command before getopts
 #readonly script_cmd="$*"
 
@@ -29,7 +29,7 @@ log () {
     # logger will output to syslog, useful for background tasks
     #logger -s -t "${script_name}" -- "$*"
     # printf is good for scripts run manually when needed
-    printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
+    printf "%b\\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
 }
 
 # Usage: verbose "What to log if VERBOSE is true"
@@ -48,7 +48,7 @@ VERBOSE=${VERBOSE:-"false"}
 while getopts ":hvr:" opt; do
     case ${opt} in
     h)
-        echo "Usage: $(basename $0) [OPTION] [ <filename> ]"
+        echo "Usage: ${script_name} [OPTION] [ <filename> ]"
         echo 'Description NOT SET'
         echo
         echo 'Options:'
@@ -73,7 +73,7 @@ while getopts ":hvr:" opt; do
         ;;
     esac
 done
-shift $(expr ${OPTIND} - 1)
+shift $(( OPTIND - 1 ))
 verbose "Additional arguments after options: $*"
 
 
