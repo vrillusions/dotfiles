@@ -41,6 +41,7 @@ user_pref("network.cookie.lifetimePolicy", 2);
 // Even if above options would normally keep 3rd party cookies longer, force
 // them to be session cookies
 user_pref("network.cookie.thirdparty.sessionOnly", true);
+user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 
 // These both make allowing self signed certs a little easier and prepopulates the accept
 // dialog with url
@@ -112,15 +113,30 @@ user_pref("general.warnOnAboutConfig", false);
 user_pref("layout.spellcheckDefault", 2);
 
 // Tab settings
-user_pref("browser.search.openintab", true); //when searching
+user_pref("browser.search.openintab", true); // from searching
+user_pref("browser.urlbar.openintab", true); // from url bar
 user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (default)
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
 
-// Disable hello
-user_pref("loop.enabled", false);
-
-// Disable autoplay of videos
-user_pref("media.autoplay.enabled", false);
+// Autoplay options
+// Disable autoplay of videos (Prior to v63.0)
+//user_pref("media.autoplay.enabled", false);
+// Starting with v63 the above option is ignored and instead of consists of
+// several options and defaults to allow autoplay again and none of this was
+// mentioned in release notes... Yeah a little salty over this Mozilla.
+// 0 - allow, 1 - block, 2 - ask
+user_pref("media.autoplay.default", 1);
+// Makes setting visible in preferences
+user_pref("media.autoplay.ask-permission", true);
+// Don't autoplay muted videos either.
+user_pref("media.autoplay.allow-muted", false);
+// will autoplay media if you hover mouse over it. Unsure if that includes
+// video with audio.  At least in v63.0 this doesn't seem to work correctly.
+// For example with all above options accuweather.com will still autoplay some
+// smaller videos with muted audio.  youtube.com will autoplay videos with
+// sound as you navigate around site.  Reloading a page will respect the
+// default autoplay option set above.  TL;DR: Don't expect it to always work.
+user_pref("media.autoplay.enabled.user-gestures-needed", true);
 
 // FF 4.0 settings
 // When saving state between browser restarts it has saved session cookies for a
