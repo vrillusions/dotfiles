@@ -22,7 +22,8 @@ brew info --json=v1 --installed \
         '.[]
         | {name: .name,
            precompiled: .installed[0].poured_from_bottle,
-           options: .installed[0].used_options}'
+           options: .installed[0].used_options,
+           version: .installed[0].version}'
 
 
 exit 0
