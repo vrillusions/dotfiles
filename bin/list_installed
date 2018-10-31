@@ -36,6 +36,7 @@ check_installed "curl          " "$(command -v curl &>/dev/null     && curl --ve
 check_installed "dig           " "$(command -v dig &>/dev/null      && dig -v 2>&1 | awk '{print $2}')"
 check_installed "git           " "$(command -v git &>/dev/null      && git --version | awk '{print $3}')"
 check_installed "ipcalc        " "$(command -v ipcalc &>/dev/null   && ipcalc --version)"
+check_installed "jq            " "$(command -v jq &>/dev/null       && jq --version | sed -e 's/jq-//')"
 check_installed "lftp          " "$(command -v lftp &>/dev/null     && lftp --version | awk '/Version/ {print $4}')"
 check_installed "minicom       " "$(command -v minicom &>/dev/null  && minicom --version | awk '/^minicom version/ {print $3}')"
 check_installed "nmap          " "$(command -v nmap &>/dev/null     && nmap --version | awk '/^Nmap version/ {print $3}')"
