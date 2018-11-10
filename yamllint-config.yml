@@ -1,0 +1,4 @@
+# vim: set ft=yaml :
+# ~/.config/yamllint/config - user level yamllint configuration
+---
+extends: relaxed

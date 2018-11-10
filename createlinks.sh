@@ -18,7 +18,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
 # Usage: relink "destination" "source"
 function relink() {
-  ln -s -n -v $2 $1 || true
+  ln -s -n -v "$2" "$1" || true
 }
 
 # Checks if directory exists, if not creates it with minimal permissions.
@@ -63,7 +63,7 @@ create_dir "${XDG_DATA_HOME}"
 
 # Use XDG directories for git. Requires v1.7.12+
 if [ -f "${HOME}/.gitconfig" ]; then
-    echo "~/.gitconfig already exists, not using new config structure"
+    echo "${HOME}/.gitconfig already exists, not using new config structure"
 else
     create_dir "${XDG_CONFIG_HOME}/git"
     cd "${XDG_CONFIG_HOME}/git"
@@ -84,6 +84,12 @@ rm -f "${HOME}/.screenrc"
 create_dir "${XDG_CONFIG_HOME}/screen"
 cd "${XDG_CONFIG_HOME}/screen"
 relink screenrc "${dotfiles}/screenrc"
+cd "${HOME}"
+
+# put yamllint config in XDG directory
+create_dir "${XDG_CONFIG_HOME}/yamllint"
+cd "${XDG_CONFIG_HOME}/yamllint"
+relink config "${dotfiles}/yamllint-config.yml"
 cd "${HOME}"
 
 # Comment out since bloomfilter doesn't seem to work. Use -r wordlist instead
