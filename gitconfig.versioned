@@ -38,6 +38,7 @@
 	prp = pull --rebase --prune
 	ps = push --recurse-submodules=check
 	psf = push --recurse-submodules=check --force-with-lease
+	reflg = reflog --format='%C(auto)%h %<|(17)%gd %C(blue)%ci%C(auto) %d %s'
 	restore = checkout --
 	sd = "!f(){ date=$(date \"+%Y-%m-%dT%H:%M:%S%z\") && git stash save \"$date $@\"; }; f"
 	si = submodule init
