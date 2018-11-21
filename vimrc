@@ -165,21 +165,22 @@ let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than
 " securemodelines {{{2
 " have to specify full list
 let g:secure_modelines_allowed_items = [
-            \ "textwidth",   "tw",
-            \ "softtabstop", "sts",
-            \ "tabstop",     "ts",
-            \ "shiftwidth",  "sw",
+            \ "autoindent",  "ai",   "noautoindent", "noai",
+            \ "cindent",     "cin",  "nocindent", "nocin",
             \ "expandtab",   "et",   "noexpandtab", "noet",
             \ "filetype",    "ft",
+            \ "foldlevel",   "fdl",
             \ "foldmethod",  "fdm",
+            \ "list", "nolist",
             \ "readonly",    "ro",   "noreadonly", "noro",
             \ "rightleft",   "rl",   "norightleft", "norl",
-            \ "cindent",     "cin",  "nocindent", "nocin",
+            \ "shiftwidth",  "sw",
             \ "smartindent", "si",   "nosmartindent", "nosi",
-            \ "autoindent",  "ai",   "noautoindent", "noai",
+            \ "softtabstop", "sts",
             \ "spell",  "nospell",
             \ "spelllang",
-            \ "list", "nolist"
+            \ "tabstop",     "ts",
+            \ "textwidth",   "tw",
             \ ]
 
 " SimpylFold {{{2

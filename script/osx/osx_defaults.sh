@@ -13,8 +13,10 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
     exit 1
 fi
 
-if ! command -v "$(awk '{print $1}' <(echo ${plistbuddy_cmd}))" >/dev/null; then
-    echo "Unable to find ${plistbuddy_cmd}" >&2
+# The parameter expansion is needed since the command fails if called with
+# nothing after the -c
+if ! command -v "${plistbuddy_cmd%% *}" >/dev/null; then
+    echo "Unable to find ${plistbuddy_cmd%% *}" >&2
     exit 1
 fi
 
@@ -35,24 +37,27 @@ add_menu_item () {
     local menu_item_exists
     menu_item="$*"
     menu_item_exists=$($plistbuddy_cmd "Print :menuExtras:" \
-        ${prefs_home}/com.apple.systemuiserver.plist \
-        | grep "${menu_item}" &>/dev/null ; echo $?)
-    if [ $menu_item_exists -eq 1 ]; then
+        "${prefs_home}/com.apple.systemuiserver.plist" \
+            | grep "${menu_item}" &>/dev/null ; echo $?)
+    if [[ $menu_item_exists -eq 1 ]]; then
         echo "Adding ${menu_item} to toolbar"
         $plistbuddy_cmd "Add :menuExtras:0 string ${menu_item}" \
-            ${prefs_home}/com.apple.systemuiserver.plist
+            "${prefs_home}/com.apple.systemuiserver.plist"
     fi
     set -x
 }
 
 # Gives 3 item array [0] - major, [1] - minor, [2] - patch
-read -a osx_version < <(v=sw_vers; echo ${v//\./ })
+read -r -a osx_version < <(v=sw_vers; echo ${v//\./ })
 if [[ ${osx_version[1]} -ge 13 ]]; then
     global_domain='-globalDomain'
 else
     global_domain='NSGlobalDomain'
 fi
 
+
+# Close system preferences so settings don't get clobbered
+osascript -e 'tell application "System Preferences" to quit'
 
 # From here down print the command as it's being run
 set -x
@@ -141,7 +146,8 @@ defaults write com.apple.scriptmenu PutAppScriptsFirst -bool true
 # Show ~/Library in finder (this likes to get reset it seems)
 chflags nohidden ~/Library
 # And this seems to not get removed properly either
-xattr -d com.apple.FinderInfo ~/Library
+# silence errors and error message if attribute isn't set
+xattr -d com.apple.FinderInfo ~/Library 2>/dev/null || true
 
 # Disable warning when emptying trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -183,12 +189,12 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" ${prefs_home}/com.apple.finder.plist
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:gridSpacing 85" ${prefs_home}/com.apple.finder.plist
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:iconSize 32" ${prefs_home}/com.apple.finder.plist
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" ${prefs_home}/com.apple.finder.plist
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" ${prefs_home}/com.apple.finder.plist
-$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ${prefs_home}/com.apple.finder.plist
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:arrangeBy name" "${prefs_home}/com.apple.finder.plist"
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:gridSpacing 85" "${prefs_home}/com.apple.finder.plist"
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:iconSize 32" "${prefs_home}/com.apple.finder.plist"
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" "${prefs_home}/com.apple.finder.plist"
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showIconPreview true" "${prefs_home}/com.apple.finder.plist"
+$plistbuddy_cmd "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" "${prefs_home}/com.apple.finder.plist"
 
 # Turn off confirmation when changing file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -317,4 +323,4 @@ echo "Finished. Save any work you have and restart the computer now"
 echo
 
 # vim settings {{{1
-# vim: set fdm=marker:
+# vim: set fdm=marker fdl=0:
