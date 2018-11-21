@@ -297,6 +297,12 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
+# Show Data in the Disk graph (instead of IO)
+defaults write com.apple.ActivityMonitor DiskGraphType -int 1
+
+# Show Data in the Network graph (instead of packets)
+defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
+
 
 # Safari {{{1
 #####
