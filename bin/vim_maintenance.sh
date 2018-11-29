@@ -115,7 +115,7 @@ function clean_dir() {
     if [[ -d "${source_dir}" ]]; then
         log "Cleaning ${source_dir}"
         cd "${source_dir}"
-        find . -mtime +"${days}" -not -name ".gitignore" -print0 \
+        find . -type f -mtime +"${days}" -not -name ".gitignore" -print0 \
             | xargs ${xargs_opts} rm -f
     else
         log "${source_dir} is not a directory" >&2
