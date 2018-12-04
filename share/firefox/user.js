@@ -76,7 +76,8 @@ user_pref("network.captive-portal-service.enabled", false);
 // 2 - always activate
 user_pref("plugin.state.flash", 1);
 
-// Other UI tweaks not related to performance articles below
+
+// -- Other UI tweaks not related to performance articles below --
 // Don't use new tab page
 user_pref("browser.newtabpage.introShown", true);
 user_pref("browser.newtabpage.activity-stream.enabled", false);
@@ -149,6 +150,9 @@ user_pref("media.autoplay.enabled.user-gestures-needed", true);
 user_pref("browser.sessionstore.privacy_level", 2);
 // What to do when quiting normally, default is 1
 user_pref("browser.sessionstore.privacy_level_deferred", 2);
+
+// Disable autoscroll when middle click and not over a link
+user_pref("general.autoScroll", false);
 
 
 // see http://www.tweakfactor.com/articles/tweaks/firefoxtweak/4.html
