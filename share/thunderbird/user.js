@@ -17,6 +17,11 @@ user_pref("security.OCSP.require", true);
 user_pref("security.disable_button.openCertManager", false);
 
 
+// -- Possibly temporary workaround for bugs --
+// Adding in v60 when set to default of true can break address and calendar sync
+user_pref("network.cookie.same-site.enabled", false);
+
+
 // -- Mail Options --
 // What it should do when sending an HTML message to someone that may not be
 // able to view it.
