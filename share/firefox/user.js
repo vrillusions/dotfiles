@@ -91,6 +91,8 @@ user_pref("browser.startup.page", 3);
 
 // Open searches in new tab
 user_pref("browser.search.openintab", true);
+// Open bookmarks in new tab
+user_pref("browser.tabs.loadBookmarksInTabs", true);
 
 // Show the full URL in url bar
 user_pref("browser.urlbar.trimURLs", false);
