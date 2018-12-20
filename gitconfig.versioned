@@ -75,3 +75,4 @@
 	fsckobjects = true
 [fetch]
 	prune = true
+	pruneTags = true
