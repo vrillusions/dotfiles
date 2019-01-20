@@ -69,7 +69,6 @@ else
     cd "${XDG_CONFIG_HOME}/git"
     relink config "${dotfiles}/gitconfig"
     relink ignore "${dotfiles}/gitignore"
-    cd "${HOME}"
 fi
 
 # put lftprc in XDG directory
@@ -77,20 +76,17 @@ rm -f "${HOME}/.lftprc"
 create_dir "${XDG_CONFIG_HOME}/lftp"
 cd "${XDG_CONFIG_HOME}/lftp"
 relink rc "${dotfiles}/lftprc"
-cd "${HOME}"
 
 # put screenrc in XDG directory
 rm -f "${HOME}/.screenrc"
 create_dir "${XDG_CONFIG_HOME}/screen"
 cd "${XDG_CONFIG_HOME}/screen"
 relink screenrc "${dotfiles}/screenrc"
-cd "${HOME}"
 
 # put yamllint config in XDG directory
 create_dir "${XDG_CONFIG_HOME}/yamllint"
 cd "${XDG_CONFIG_HOME}/yamllint"
 relink config "${dotfiles}/yamllint-config.yml"
-cd "${HOME}"
 
 # Comment out since bloomfilter doesn't seem to work. Use -r wordlist instead
 ## see if we need to generate bloom filter for apg
