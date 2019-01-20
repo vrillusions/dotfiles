@@ -31,7 +31,7 @@ printf "\\n%b\\n" "Other:"
 # In alphabetical order
 check_installed "7zip          " "$(command -v 7za &>/dev/null      && 7za --help | awk '/^p7zip/ {print $3}')"
 check_installed "apg           " "$(command -v apg &>/dev/null      && apg -v | awk '/^version/ {print $2}')"
-check_installed "bash          " "$(command -v bash &>/dev/null     && bash --version | awk '/version/ {print $4}')"
+check_installed "bash          " "$(command -v bash &>/dev/null     && bash --version | awk '/bash/ {print $4}')"
 check_installed "curl          " "$(command -v curl &>/dev/null     && curl --version | awk '/^curl/ {print $2}')"
 check_installed "dig           " "$(command -v dig &>/dev/null      && dig -v 2>&1 | awk '{print $2}')"
 check_installed "git           " "$(command -v git &>/dev/null      && git --version | awk '{print $3}')"
