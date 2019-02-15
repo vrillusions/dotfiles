@@ -76,6 +76,15 @@ user_pref("network.captive-portal-service.enabled", false);
 // 2 - always activate
 user_pref("plugin.state.flash", 1);
 
+// Don't recommend extensions
+// on addon page
+user_pref("browser.discovery.enabled", false);
+// when going to websites
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
+
+// Set rel=noopener for target=_blank (search for nooperner for reasoning) (in v65)
+user_pref("dom.targetBlankNoOpener.enabled", true);
+
 
 // -- Other UI tweaks not related to performance articles below --
 // Don't use new tab page
