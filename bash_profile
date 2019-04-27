@@ -2,6 +2,7 @@
 # essentially only when logging in via ssh or directly on machine
 # see /usr/share/doc/bash/examples/startup-files for examples.
 # the files are located in the bash-doc package.
+# shellcheck disable=SC1090
 
 # the default umask is set in /etc/login.defs
 #umask 022
@@ -11,21 +12,21 @@
 unset MAILCHECK
 
 # include .bashrc if it exists
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+if [ -f "${HOME}/.bashrc" ]; then
+    source "${HOME}/.bashrc"
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-    export PATH=~/bin:"${PATH}"
+if [ -d "${HOME}/bin" ] ; then
+    export PATH="${HOME}/bin:${PATH}"
 fi
 # same for dotfiles/bin
-if [ -d ~/dotfiles/bin ] ; then
-    export PATH=~/dotfiles/bin:"${PATH}"
+if [ -d "${HOME}/dotfiles/bin" ] ; then
+    export PATH="${HOME}/dotfiles/bin:${PATH}"
 fi
 
 # load ~/.bash_profile_local if it exists
-if [ -f ~/.bash_profile_local ]; then
-    . ~/.bash_profile_local
+if [ -f "${HOME}/.bash_profile_local" ]; then
+    source "${HOME}/.bash_profile_local"
 fi
 

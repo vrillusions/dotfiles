@@ -2,15 +2,18 @@
 # this includes xterm and variants
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+# shellcheck disable=SC1090
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+
 # include .bashrc_local_pre at top of file if it exists {{{1
 # This is for setting environment variables and such that need to be set early
-if [ -f ~/.bashrc_local_pre ]; then
-    . ~/.bashrc_local_pre
+if [ -f "${HOME}/.bashrc_local_pre" ]; then
+    source "${HOME}/.bashrc_local_pre"
 fi
+
 
 # Use vim for editor {{{1
 # ubuntu creates a fake vim bin as a hint to use apt-get, so can't fall back
@@ -20,25 +23,29 @@ export EDITOR=vim
 # Make less more friendly for non-text input files, see lesspipe(1) {{{1
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-#
+
 # svn prompt (commented out) {{{1
 # Don't use svn any more so don't bother decorating prompt
 #source ~/.bash/svn.bash
+
 
 # git prompt {{{1
 export GIT_PS1_SHOWDIRTYSTATE=true      # adds a * if there are unstaged changes, + if staged changes
 export GIT_PS1_SHOWUNTRACKEDFILES=true  # adds a % if there are untracked files
 #source ~/.bash/git-completion.bash
 # this only loads the git prompt stuff which is all I really need for here
-source ~/.bash/git-prompt.sh
+source "${HOME}/.bash/git-prompt.sh"
+
 
 # Prompt colorization {{{1
 # some variables to make this stuff readable
 _RESET=$(tput sgr0)
 _BR_RED=$(tput setaf 9)
+# shellcheck disable=SC2034
 _GREEN=$(tput setaf 2)
 _BR_GREEN=$(tput setaf 10)
 _BR_BLUE=$(tput setaf 12)
+# shellcheck disable=SC2034
 _WHITE=$(tput setaf 15)
 # Define this in ~/.bashrc_local_pre to change the color
 PROMPT_HOST_COLOR=${PROMPT_HOST_COLOR:-$_BR_GREEN}
@@ -64,9 +71,10 @@ PS1+="\[${_RESET}\]\$ "
 # PROMPT_HOST_COLOR is no longer needed and mess up the output of `env`
 unset PROMPT_HOST_COLOR
 
+
 # Enable color support of ls and also add handy aliases {{{1
 if [ -x /usr/bin/dircolors ]; then
-    eval "`dircolors -b`"
+    eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
@@ -112,19 +120,21 @@ export LSCOLORS="gxfxcxdxbxegedabagacad"
 # commenting out since in ubuntu there are many more options I need to check
 #export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
 
+
 # XDG Basedir Setup {{{1
 # To override these add them to ~/.bashrc_local_pre
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
+
 # Alias definitions {{{1
 # TODO:2014-01-27:teddy: move to separate file, like ~/.bash/aliases
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-alias irssi='TERM=screen screen -S irssi irssi'
-alias screen='TERM=screen screen'
+alias irssi='TERM=screen \screen -S irssi irssi'
+alias screen='TERM=screen \screen'
 alias gvim='gvim --remote-tab-silent'
 # opens last vim file
 alias lvim='vim -c "normal '\''0"'
@@ -140,13 +150,13 @@ alias .....="cd ../../../.."
 
 alias rot13="tr 'a-zA-Z' 'n-za-mN-ZA-M'"
 
-alias h='history 25'
+alias h='history 50'
 alias la='ls -aF'
 alias lf='ls -FA'
 alias ll='ls -lAF'
 
 # Default to gpg v2 if it exists
-test "$(which gpg2)" && alias gpg=gpg2 || true
+command -v gpg2 2>/dev/null && alias gpg=gpg2
 
 # Commenting this out as the bloomfilter stuff doesn't seem to work
 # Instead use the -r wordlist option which is slower but seems to work
@@ -159,17 +169,19 @@ if command -v apg >/dev/null 2>&1; then
     alias apg='apg -E O1IB'
 fi
 
+
 # Spellcheck function {{{1
 # Type `sp someword` to spellcheck it
 sp () {
-    if [ "$(which ispell)" != "" ]; then
+    if command -v ispell 2>/dev/null; then
         echo "$*" | ispell -a
-    elif [ "$(which aspell)" != "" ]; then
+    elif command -v aspell 2>/dev/null; then
         echo "$*" | aspell -a
     else
         echo "Could not find ispell or aspell"
     fi
 }
+
 
 # Load bash_completion (commented out) {{{1
 # MOST COMPUTERS PULL THIS AUTOMATICALLY, ADD TO ~/.bashrc_local IF
@@ -181,6 +193,7 @@ sp () {
 #    . /etc/bash_completion
 #fi
 
+
 # Set application configs (when supported) to XDG locations {{{1
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
@@ -190,13 +203,14 @@ export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 export PACKER_CACHE_DIR="${XDG_CACHE_HOME}/packer"
 
+
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth
 
-# Ignore `ls`.
-export HISTIGNORE="ls"
+# Don't log basic commands
+export HISTIGNORE="ls *:ll:la:lf:h"
 
 # append history instead of overwrite
 shopt -s histappend
@@ -224,9 +238,10 @@ CDPATH='.:..:../..:~'
 export CLICOLOR=true
 # --- END BASH SPECIFIC OPTIONS ---
 
+
 # include .bashrc_local if it exists {{{1
-if [ -f ~/.bashrc_local ]; then
-    . ~/.bashrc_local
+if [ -f "${HOME}/.bashrc_local" ]; then
+    source "${HOME}/.bashrc_local"
 fi
 
 # vim: fdm=marker:
