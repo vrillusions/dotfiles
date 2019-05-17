@@ -24,10 +24,12 @@ function! ale_linters#markdown#remark_lint#Handle(buffer, lines) abort
         \   'type': l:match[6] is# 'error' ? 'E' : 'W',
         \   'text': l:match[7],
         \}
+
         if l:match[3] isnot# ''
             let l:item.end_lnum = l:match[4] + 0
             let l:item.end_col = l:match[5] + 0
         endif
+
         call add(l:output, l:item)
     endfor
 
@@ -37,10 +39,10 @@ endfunction
 call ale#linter#Define('markdown', {
 \   'name': 'remark_lint',
 \   'aliases': ['remark-lint'],
-\   'executable_callback': ale#node#FindExecutableFunc('markdown_remark_lint', [
+\   'executable': {b -> ale#node#FindExecutable(b, 'markdown_remark_lint', [
 \       'node_modules/.bin/remark',
-\   ]),
-\   'command_callback': 'ale_linters#markdown#remark_lint#GetCommand',
+\   ])},
+\   'command': function('ale_linters#markdown#remark_lint#GetCommand'),
 \   'callback': 'ale_linters#markdown#remark_lint#Handle',
 \   'output_stream': 'stderr',
 \})

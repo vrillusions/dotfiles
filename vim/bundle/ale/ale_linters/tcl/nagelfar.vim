@@ -15,7 +15,6 @@ function! ale_linters#tcl#nagelfar#Handle(buffer, lines) abort
     " Line   5: W Found constant "bepa" which is also a variable.
     " Line  13: E Wrong number of arguments (3) to "set"
     " Line  93: N Close brace not aligned with line 90 (4 0)
-
     let l:pattern = '^Line\s\+\([0-9]\+\): \([NEW]\) \(.*\)$'
     let l:output = []
 
@@ -33,8 +32,8 @@ endfunction
 call ale#linter#Define('tcl', {
 \   'name': 'nagelfar',
 \   'output_stream': 'stdout',
-\   'executable_callback': ale#VarFunc('tcl_nagelfar_executable'),
-\   'command_callback': 'ale_linters#tcl#nagelfar#GetCommand',
+\   'executable': {b -> ale#Var(b, 'tcl_nagelfar_executable')},
+\   'command': function('ale_linters#tcl#nagelfar#GetCommand'),
 \   'callback': 'ale_linters#tcl#nagelfar#Handle',
 \   'lint_file': 1,
 \})

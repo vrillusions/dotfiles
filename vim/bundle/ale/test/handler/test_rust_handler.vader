@@ -8,7 +8,7 @@ Execute(The Rust handler should handle rustc output):
   \     'end_lnum': 15,
   \     'type': 'E',
   \     'col': 5,
-  \     'end_col': 8,
+  \     'end_col': 7,
   \     'text': 'expected one of `.`, `;`, `?`, `}`, or an operator, found `for`',
   \   },
   \   {
@@ -16,7 +16,7 @@ Execute(The Rust handler should handle rustc output):
   \      'end_lnum': 13,
   \      'type': 'E',
   \      'col': 7,
-  \      'end_col': 10,
+  \      'end_col': 9,
   \      'text': 'no method named `wat` found for type `std::string::String` in the current scope',
   \   },
   \ ],
@@ -84,7 +84,7 @@ Execute(The Rust handler should handle cargo output):
   \     'end_lnum': 15,
   \     'type': 'E',
   \     'col': 5,
-  \     'end_col': 8,
+  \     'end_col': 7,
   \     'text': 'expected one of `.`, `;`, `?`, `}`, or an operator, found `for`',
   \   },
   \   {
@@ -92,7 +92,7 @@ Execute(The Rust handler should handle cargo output):
   \     'end_lnum': 13,
   \     'type': 'E',
   \     'col': 7,
-  \     'end_col': 10,
+  \     'end_col': 9,
   \     'text': 'no method named `wat` found for type `std::string::String` in the current scope',
   \   },
   \ ],
@@ -158,7 +158,7 @@ Execute(The Rust handler should should errors from expansion spans):
   \     'end_lnum': 4,
   \     'type': 'E',
   \     'col': 21,
-  \     'end_col': 23,
+  \     'end_col': 22,
   \     'text': 'mismatched types: expected bool, found integral variable',
   \   },
   \ ],
@@ -208,7 +208,7 @@ Execute(The Rust handler should show detailed errors):
   \     'end_lnum': 4,
   \     'type': 'E',
   \     'col': 21,
-  \     'end_col': 23,
+  \     'end_col': 22,
   \     'text': 'mismatched types: expected bool, found integral variable',
   \   },
   \ ],
@@ -282,6 +282,151 @@ Execute(The Rust handler should find correct files):
   \       'message': 'aborting due to previous error',
   \       'spans': [
   \       ]
+  \     },
+  \   }),
+  \ ])
+
+Execute(The Rust handler should remove secondary spans if set):
+  call ale#test#SetFilename('src/noerrors/mod.rs')
+
+  let g:ale_rust_ignore_secondary_spans = 0
+  AssertEqual
+  \ [
+  \   {
+  \     'lnum': 1,
+  \     'end_lnum': 1,
+  \     'type': 'E',
+  \     'end_col': 20,
+  \     'col': 1,
+  \     'text': 'this function takes 1 parameter but 0 were supplied: defined here',
+  \   },
+  \   {
+  \     'lnum': 1,
+  \     'end_lnum': 1,
+  \     'type': 'E',
+  \     'end_col': 45,
+  \     'col': 40,
+  \     'text': 'this function takes 1 parameter but 0 were supplied: expected 1 parameter',
+  \   },
+  \ ],
+  \ ale#handlers#rust#HandleRustErrors(bufnr(''), [
+  \   '',
+  \   'fn test(x: u8) -> u8 { x } fn main() { x(); }',
+  \   json_encode({
+  \     'message': {
+  \       'code': {
+  \         'code': 'E0061',
+  \         'explanation': 'Dummy explanation; not used'
+  \       },
+  \       'level': 'error',
+  \       'message': 'this function takes 1 parameter but 0 were supplied',
+  \       'spans': [
+  \         {
+  \           'byte_end': 20,
+  \           'byte_start': 0,
+  \           'column_end': 21,
+  \           'column_start': 1,
+  \           'file_name': 'src/noerrors/mod.rs',
+  \           'is_primary': v:false,
+  \           'label': 'defined here',
+  \           'line_end': 1,
+  \           'line_start': 1,
+  \         },
+  \         {
+  \           'byte_end': 45,
+  \           'byte_start': 39,
+  \           'column_end': 46,
+  \           'column_start': 40,
+  \           'file_name': '<anon>',
+  \           'is_primary': v:true,
+  \           'label': 'expected 1 parameter',
+  \           'line_end': 1,
+  \           'line_start': 1,
+  \         },
+  \       ]
+  \     },
+  \   }),
+  \   json_encode({
+  \     'message': {
+  \       'code': v:null,
+  \       'level': 'error',
+  \       'message': 'aborting due to previous error',
+  \       'spans': []
+  \     },
+  \   }),
+  \   json_encode({
+  \     'message': {
+  \       'code': v:null,
+  \       'level': 'error',
+  \       'message': 'For more information about this error, try `rustc --explain E0061`.',
+  \       'spans': []
+  \     },
+  \   }),
+  \ ])
+
+  let g:ale_rust_ignore_secondary_spans = 1
+  AssertEqual
+  \ [
+  \   {
+  \     'lnum': 1,
+  \     'end_lnum': 1,
+  \     'type': 'E',
+  \     'end_col': 45,
+  \     'col': 40,
+  \     'text': 'this function takes 1 parameter but 0 were supplied: expected 1 parameter',
+  \   },
+  \ ],
+  \ ale#handlers#rust#HandleRustErrors(bufnr(''), [
+  \   '',
+  \   'fn test(x: u8) -> u8 { x } fn main() { x(); }',
+  \   json_encode({
+  \     'message': {
+  \       'code': {
+  \         'code': 'E0061',
+  \         'explanation': 'Dummy explanation; not used'
+  \       },
+  \       'level': 'error',
+  \       'message': 'this function takes 1 parameter but 0 were supplied',
+  \       'spans': [
+  \         {
+  \           'byte_end': 20,
+  \           'byte_start': 0,
+  \           'column_end': 21,
+  \           'column_start': 1,
+  \           'file_name': 'src/noerrors/mod.rs',
+  \           'is_primary': v:false,
+  \           'label': 'defined here',
+  \           'line_end': 1,
+  \           'line_start': 1,
+  \         },
+  \         {
+  \           'byte_end': 45,
+  \           'byte_start': 39,
+  \           'column_end': 46,
+  \           'column_start': 40,
+  \           'file_name': '<anon>',
+  \           'is_primary': v:true,
+  \           'label': 'expected 1 parameter',
+  \           'line_end': 1,
+  \           'line_start': 1,
+  \         },
+  \       ]
+  \     },
+  \   }),
+  \   json_encode({
+  \     'message': {
+  \       'code': v:null,
+  \       'level': 'error',
+  \       'message': 'aborting due to previous error',
+  \       'spans': []
+  \     },
+  \   }),
+  \   json_encode({
+  \     'message': {
+  \       'code': v:null,
+  \       'level': 'error',
+  \       'message': 'For more information about this error, try `rustc --explain E0061`.',
+  \       'spans': []
   \     },
   \   }),
   \ ])

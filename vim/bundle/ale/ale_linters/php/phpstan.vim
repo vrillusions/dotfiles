@@ -6,15 +6,19 @@ let g:ale_php_phpstan_executable = get(g:, 'ale_php_phpstan_executable', 'phpsta
 let g:ale_php_phpstan_level = get(g:, 'ale_php_phpstan_level', '4')
 let g:ale_php_phpstan_configuration = get(g:, 'ale_php_phpstan_configuration', '')
 
-function! ale_linters#php#phpstan#GetCommand(buffer) abort
+function! ale_linters#php#phpstan#GetCommand(buffer, version) abort
     let l:configuration = ale#Var(a:buffer, 'php_phpstan_configuration')
     let l:configuration_option = !empty(l:configuration)
     \   ? ' -c ' . l:configuration
     \   : ''
 
+    let l:error_format = ale#semver#GTE(a:version, [0, 10, 3])
+    \   ? ' --error-format raw'
+    \   : ' --errorFormat raw'
+
     return '%e analyze -l'
     \   . ale#Var(a:buffer, 'php_phpstan_level')
-    \   . ' --errorFormat raw'
+    \   . l:error_format
     \   . l:configuration_option
     \   . ' %s'
 endfunction
@@ -40,7 +44,12 @@ endfunction
 
 call ale#linter#Define('php', {
 \   'name': 'phpstan',
-\   'executable_callback': ale#VarFunc('php_phpstan_executable'),
-\   'command_callback': 'ale_linters#php#phpstan#GetCommand',
+\   'executable': {b -> ale#Var(b, 'php_phpstan_executable')},
+\   'command': {buffer -> ale#semver#RunWithVersionCheck(
+\       buffer,
+\       ale#Var(buffer, 'php_phpstan_executable'),
+\       '%e --version',
+\       function('ale_linters#php#phpstan#GetCommand'),
+\   )},
 \   'callback': 'ale_linters#php#phpstan#Handle',
 \})

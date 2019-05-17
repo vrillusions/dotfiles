@@ -1,27 +1,22 @@
 " Vim syntax file
 " Language: Ansible YAML/Jinja templates
 " Maintainer: Dave Honneffer <pearofducks@gmail.com>
-" Last Change: 2015.09.06
-
-if exists("b:current_syntax")
-  finish
-endif
+" Last Change: 2018.02.08
 
 if !exists("main_syntax")
   let main_syntax = 'yaml'
 endif
 
-let b:current_syntax = ''
-unlet b:current_syntax
-runtime! syntax/yaml.vim
+if exists('b:current_syntax')
+  let s:current_syntax=b:current_syntax
+  unlet b:current_syntax
+endif
 
-let b:current_syntax = ''
-unlet b:current_syntax
-syntax include @Yaml syntax/yaml.vim
-
-let b:current_syntax = ''
-unlet b:current_syntax
 syntax include @Jinja syntax/jinja2.vim
+
+if exists('s:current_syntax')
+  let b:current_syntax=s:current_syntax
+endif
 
 " Jinja
 " ================================
@@ -37,6 +32,12 @@ highlight link jinjaVarDelim Delimiter
 " YAML
 " ================================
 
+if exists("g:ansible_yamlKeyName")
+  let s:yamlKey = g:ansible_yamlKeyName
+else
+  let s:yamlKey = "yamlBlockMappingKey"
+endif
+
 " Reset some YAML to plain styling
 " the number 80 in Ansible isn't any more important than the word root
 highlight link yamlInteger NONE
@@ -44,6 +45,9 @@ highlight link yamlBool NONE
 highlight link yamlFlowString NONE
 " but it does make sense we visualize quotes easily
 highlight link yamlFlowStringDelimiter Delimiter
+" This is only found in stephypy/vim-yaml, since it's one line it isn't worth
+" making conditional
+highlight link yamlConstant NONE
 
 fun! s:attribute_highlight(attributes)
   if a:attributes =~ 'a'
@@ -67,7 +71,7 @@ else
 endif
 
 if exists("g:ansible_name_highlight")
-  syn keyword ansible_name name containedin=yamlBlockMappingKey contained
+  execute 'syn keyword ansible_name name containedin='.s:yamlKey.' contained'
   if g:ansible_name_highlight =~ 'd'
     highlight link ansible_name Comment
   else
@@ -75,12 +79,26 @@ if exists("g:ansible_name_highlight")
   endif
 endif
 
-syn keyword ansible_debug_keywords debug containedin=yamlBlockMappingKey contained
+execute 'syn keyword ansible_debug_keywords debug containedin='.s:yamlKey.' contained'
 highlight link ansible_debug_keywords Debug
 
-syn match ansible_with_keywords "\vwith_.+" containedin=yamlBlockMappingKey contained
-syn keyword ansible_special_keywords include until retries delay when only_if become become_user block rescue always notify containedin=yamlBlockMappingKey contained
-highlight link ansible_with_keywords Statement
-highlight link ansible_special_keywords Statement
+if exists("g:ansible_extra_keywords_highlight")
+  execute 'syn keyword ansible_extra_special_keywords register always_run changed_when failed_when no_log args vars delegate_to ignore_errors containedin='.s:yamlKey.' contained'
+  highlight link ansible_extra_special_keywords Statement
+endif
+
+execute 'syn keyword ansible_normal_keywords include include_tasks import_tasks until retries delay when only_if become become_user block rescue always notify containedin='.s:yamlKey.' contained'
+if exists("g:ansible_normal_keywords_highlight")
+  execute 'highlight link ansible_normal_keywords '.g:ansible_normal_keywords_highlight
+else
+  highlight link ansible_normal_keywords Statement
+endif
+
+execute 'syn match ansible_with_keywords "\vwith_.+" containedin='.s:yamlKey.' contained'
+if exists("g:ansible_with_keywords_highlight")
+  execute 'highlight link ansible_with_keywords '.g:ansible_with_keywords_highlight
+else
+  highlight link ansible_with_keywords Statement
+endif
 
 let b:current_syntax = "ansible"

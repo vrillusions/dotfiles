@@ -8,6 +8,7 @@ function! ale_linters#puppet#languageserver#GetProjectRoot(buffer) abort
     " there's no requirement to have it, so fall back to the other possible
     " Puppet module directories
     let l:root_path = ale#path#FindNearestFile(a:buffer, 'metadata.json')
+
     if !empty(l:root_path)
         return fnamemodify(l:root_path, ':h')
     endif
@@ -17,6 +18,7 @@ function! ale_linters#puppet#languageserver#GetProjectRoot(buffer) abort
     \   'templates',
     \]
         let l:root_path = ale#path#FindNearestDirectory(a:buffer, l:test_path)
+
         if !empty(l:root_path)
             return fnamemodify(l:root_path, ':h:h')
         endif
@@ -28,8 +30,8 @@ endfunction
 call ale#linter#Define('puppet', {
 \   'name': 'languageserver',
 \   'lsp': 'stdio',
-\   'executable_callback': ale#VarFunc('puppet_languageserver_executable'),
+\   'executable': {b -> ale#Var(b, 'puppet_languageserver_executable')},
 \   'command': '%e --stdio',
 \   'language': 'puppet',
-\   'project_root_callback': 'ale_linters#puppet#languageserver#GetProjectRoot',
+\   'project_root': function('ale_linters#puppet#languageserver#GetProjectRoot'),
 \})

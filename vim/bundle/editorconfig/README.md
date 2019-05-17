@@ -7,12 +7,13 @@ This is an [EditorConfig][] plugin for Vim. This plugin could be found on both
 
 ## Installation
 
-If your Vim is not compiled with `+python` feature (You can verify if the
-`+python` feature is included by running `:ver`.  Most Linux distributions and
-with the official Windows binary have the `+python` feature enabled), please
-first download the [EditorConfig core][] and follow the instructions in the
-README and INSTALL files to install it. This plugin would NOT work if neither
-`+python` nor EditorConfig core is available.
+If your Vim is not compiled with `+python` or `+python3` feature (You can verify
+if the `+python` or `+python3` feature is included by running `:ver`. Most Linux
+distributions and with the official Windows binary have the `+python` and
+`+python3` feature enabled), please first download the [EditorConfig core][] and
+follow the instructions in the README and INSTALL files to install it. This
+plugin would NOT work if neither `+python`/`+python3` nor EditorConfig core is
+available.
 
 To install this plugin, you can use one of the following ways:
 
@@ -52,7 +53,8 @@ The EditorConfig Vim plugin supports the following EditorConfig [properties][]:
 ## Recommended Options
 
 All of the options which are supported are documented in [editorconfig.txt][]
-and can be viewed by executing the following: `:help editorconfig`.
+and can be viewed by executing the following: `:help editorconfig`. You may
+need to execute `:helptags ALL` so that Vim is aware of editorconfig.txt.
 
 #### Excluded patterns.
 
@@ -68,6 +70,16 @@ If you wanted to avoid loading EditorConfig for any remote files over ssh:
 Of course these two items could be combined into the following:
 
 > let g:EditorConfig_exclude_patterns = ['fugitive://.\*', 'scp://.\*']
+
+#### Disable rules
+
+You might want to override some project-specific EditorConfig rules in global
+or local vimrc in some cases, e.g., to resolve conflicts of trailing whitespace 
+trimming and buffer autosaving.
+
+> let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
+
+You are able to disable any supported EditorConfig properties.
 
 #### Exec Path
 

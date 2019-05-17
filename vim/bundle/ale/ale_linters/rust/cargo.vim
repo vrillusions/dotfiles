@@ -9,6 +9,8 @@ call ale#Set('rust_cargo_check_tests', 0)
 call ale#Set('rust_cargo_avoid_whole_workspace', 1)
 call ale#Set('rust_cargo_default_feature_behavior', 'default')
 call ale#Set('rust_cargo_include_features', '')
+call ale#Set('rust_cargo_use_clippy', 0)
+call ale#Set('rust_cargo_clippy_options', '')
 
 function! ale_linters#rust#cargo#GetCargoExecutable(bufnr) abort
     if ale#path#FindNearestFile(a:bufnr, 'Cargo.toml') isnot# ''
@@ -20,28 +22,21 @@ function! ale_linters#rust#cargo#GetCargoExecutable(bufnr) abort
     endif
 endfunction
 
-function! ale_linters#rust#cargo#VersionCheck(buffer) abort
-    return !ale#semver#HasVersion('cargo')
-    \   ? 'cargo --version'
-    \   : ''
-endfunction
-
-function! ale_linters#rust#cargo#GetCommand(buffer, version_output) abort
-    let l:version = ale#semver#GetVersion('cargo', a:version_output)
-
+function! ale_linters#rust#cargo#GetCommand(buffer, version) abort
     let l:use_check = ale#Var(a:buffer, 'rust_cargo_use_check')
-    \   && ale#semver#GTE(l:version, [0, 17, 0])
+    \   && ale#semver#GTE(a:version, [0, 17, 0])
     let l:use_all_targets = l:use_check
     \   && ale#Var(a:buffer, 'rust_cargo_check_all_targets')
-    \   && ale#semver#GTE(l:version, [0, 22, 0])
+    \   && ale#semver#GTE(a:version, [0, 22, 0])
     let l:use_examples = l:use_check
     \   && ale#Var(a:buffer, 'rust_cargo_check_examples')
-    \   && ale#semver#GTE(l:version, [0, 22, 0])
+    \   && ale#semver#GTE(a:version, [0, 22, 0])
     let l:use_tests = l:use_check
     \   && ale#Var(a:buffer, 'rust_cargo_check_tests')
-    \   && ale#semver#GTE(l:version, [0, 22, 0])
+    \   && ale#semver#GTE(a:version, [0, 22, 0])
 
     let l:include_features = ale#Var(a:buffer, 'rust_cargo_include_features')
+
     if !empty(l:include_features)
         let l:include_features = ' --features ' . ale#Escape(l:include_features)
     endif
@@ -59,6 +54,7 @@ function! ale_linters#rust#cargo#GetCommand(buffer, version_output) abort
     endif
 
     let l:default_feature_behavior = ale#Var(a:buffer, 'rust_cargo_default_feature_behavior')
+
     if l:default_feature_behavior is# 'all'
         let l:include_features = ''
         let l:default_feature = ' --all-features'
@@ -68,23 +64,34 @@ function! ale_linters#rust#cargo#GetCommand(buffer, version_output) abort
         let l:default_feature = ''
     endif
 
+    let l:subcommand = l:use_check ? 'check' : 'build'
+    let l:clippy_options = ''
+
+    if ale#Var(a:buffer, 'rust_cargo_use_clippy')
+        let l:subcommand = 'clippy'
+        let l:clippy_options = ' ' . ale#Var(a:buffer, 'rust_cargo_clippy_options')
+    endif
+
     return l:nearest_cargo_prefix . 'cargo '
-    \   . (l:use_check ? 'check' : 'build')
+    \   . l:subcommand
     \   . (l:use_all_targets ? ' --all-targets' : '')
     \   . (l:use_examples ? ' --examples' : '')
     \   . (l:use_tests ? ' --tests' : '')
     \   . ' --frozen --message-format=json -q'
     \   . l:default_feature
     \   . l:include_features
+    \   . l:clippy_options
 endfunction
 
 call ale#linter#Define('rust', {
 \   'name': 'cargo',
-\   'executable_callback': 'ale_linters#rust#cargo#GetCargoExecutable',
-\   'command_chain': [
-\       {'callback': 'ale_linters#rust#cargo#VersionCheck'},
-\       {'callback': 'ale_linters#rust#cargo#GetCommand'},
-\   ],
+\   'executable': function('ale_linters#rust#cargo#GetCargoExecutable'),
+\   'command': {buffer -> ale#semver#RunWithVersionCheck(
+\       buffer,
+\       ale_linters#rust#cargo#GetCargoExecutable(buffer),
+\       '%e --version',
+\       function('ale_linters#rust#cargo#GetCommand'),
+\   )},
 \   'callback': 'ale#handlers#rust#HandleRustErrors',
 \   'output_stream': 'both',
 \   'lint_file': 1,

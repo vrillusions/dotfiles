@@ -18,16 +18,16 @@ function! ale_linters#javascript#jshint#GetCommand(buffer) abort
         let l:command .= ' --config ' . ale#Escape(l:jshint_config)
     endif
 
-    let l:command .= ' -'
+    let l:command .= ' --filename %s -'
 
     return l:command
 endfunction
 
 call ale#linter#Define('javascript', {
 \   'name': 'jshint',
-\   'executable_callback': ale#node#FindExecutableFunc('javascript_jshint', [
+\   'executable': {b -> ale#node#FindExecutable(b, 'javascript_jshint', [
 \       'node_modules/.bin/jshint',
-\   ]),
-\   'command_callback': 'ale_linters#javascript#jshint#GetCommand',
+\   ])},
+\   'command': function('ale_linters#javascript#jshint#GetCommand'),
 \   'callback': 'ale#handlers#unix#HandleAsError',
 \})

@@ -28,9 +28,9 @@ verbose () {
 # set script_dir to location this script is running in
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # set this here or can't use after getopts
-SCRIPT_NAME="$(basename $0)"
+#SCRIPT_NAME="$(basename "$0")"
 # full command which can be printed out if needed
-SCRIPT_CMD="$*"
+#SCRIPT_CMD="$*"
 
 
 ### Option Handling
@@ -41,7 +41,7 @@ VERBOSE=${VERBOSE:-"false"}
 while getopts ":hvr:" opt; do
     case $opt in
     h)
-        echo "Usage: $(basename $0) [OPTION] [filename]"
+        echo "Usage: $(basename "$0") [OPTION] [filename]"
         echo 'Description of command'
         echo
         echo 'Options:'
@@ -66,7 +66,7 @@ while getopts ":hvr:" opt; do
         ;;
     esac
 done
-shift `expr $OPTIND - 1`
+shift $(( OPTIND - 1 ))
 verbose "Additional arguments after options: $*"
 
 
@@ -98,13 +98,13 @@ import_repo () {
     repo_commit="$3"
 
     log "Importing ${repo_name}"
-    cd ${SCRIPT_DIR}
-    [ -d ${repo_name} ] && rm -rf ${repo_name}
+    cd "${SCRIPT_DIR}"
+    [ -d "${repo_name}" ] && rm -rf "${repo_name}"
     # In order for git describe to work this has to be a full clone, or at least
     # to a depth that contains a tag.
-    git clone -q ${repo_url} ${repo_name}
-    cd ${repo_name}
-    git checkout -q ${repo_commit}
+    git clone -q "${repo_url}" "${repo_name}"
+    cd "${repo_name}"
+    git checkout -q "${repo_commit}"
     git submodule -q update --init --recursive
     git describe --always --long --tags >GIT_VERSION.txt
     if [[ "$(uname -s)" == 'Darwin' ]]; then
@@ -128,20 +128,20 @@ read -p "Continue with reload [y/N]? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     # These are listed in alphabetical order of the destination folder
-    import_repo "https://github.com/w0rp/ale" ale v2.1.0
-    import_repo "https://github.com/pearofducks/ansible-vim.git" ansible-vim 1.0
+    import_repo "https://github.com/w0rp/ale" ale v2.4.0
+    import_repo "https://github.com/pearofducks/ansible-vim.git" ansible-vim 2.0
     #import_repo "https://github.com/moll/vim-bbye.git" bbye v1.0.1
     #import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
-    import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig a459b8c
-    import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
+    import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig 68f8136d
+    #import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 5.0.0
     import_repo "https://github.com/weynhamz/vim-plugin-minibufexpl.git" minibufexpl 349a9fb
-    import_repo "https://github.com/rodjek/vim-puppet.git" puppet d881b93
+    import_repo "https://github.com/rodjek/vim-puppet.git" puppet b2ae19b3
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
-    import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold f29ac75
+    import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold aa0371d9
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized 528a59f
-    import_repo "https://github.com/ervandew/supertab.git" supertab 9f7da6d
+    import_repo "https://github.com/ervandew/supertab.git" supertab 40fe711
     import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 85b5753
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.3.0
     import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner 0.4.0
