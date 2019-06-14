@@ -321,6 +321,12 @@ defaults write com.apple.Terminal NewTabWorkingDirectoryBehavior -int 1
 defaults write com.apple.Terminal NewWindowWorkingDirectoryBehavior -int 1
 
 
+# MacVIM {{{1
+#####
+# make title bar transparent
+defaults write org.vim.MacVim MMTitlebarAppearsTransparent -bool true
+
+
 # Print notice to restart {{{1
 # First turn of command printing now
 set +x
