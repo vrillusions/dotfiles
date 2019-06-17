@@ -70,6 +70,9 @@ cp ~/dotfiles/share/fonts/Inconsolata.otf ~/Library/Fonts/
 
 # General {{{1
 #####
+# Enable dark mode
+defaults write ${global_domain} AppleInterfaceStyle -string "dark"
+
 # Enable auto text substitution
 defaults write ${global_domain} WebAutomaticTextReplacementEnabled -bool true
 
@@ -128,6 +131,9 @@ defaults write ${global_domain} ApplePressAndHoldEnabled -bool false
 # Set short delay till repeat and then set repeat rate fast
 defaults write ${global_domain} InitialKeyRepeat -int 15
 defaults write ${global_domain} KeyRepeat -int 2
+
+# Reduce motion (does a more subtle fade instead of stuff moving around)
+defaults write com.apple.universalaccess reduceMotion -bool true
 
 
 # Script Editor {{{1
