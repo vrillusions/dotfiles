@@ -131,17 +131,9 @@ user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (def
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
 
 // Autoplay options
-// Disable autoplay of videos (Prior to v63.0)
-//user_pref("media.autoplay.enabled", false);
-// Starting with v63 the above option is ignored and instead of consists of
-// several options and defaults to allow autoplay again and none of this was
-// mentioned in release notes... Yeah a little salty over this Mozilla.
-// 0 - allow, 1 - block, 2 - ask
-user_pref("media.autoplay.default", 1);
-// Makes setting visible in preferences
-user_pref("media.autoplay.ask-permission", true);
-// Don't autoplay muted videos either.
-user_pref("media.autoplay.allow-muted", false);
+// As of v69 these settings got revamped to now block video and audio
+// 0 - allow, 1 - block audio, 5 - block audio and video
+user_pref("media.autoplay.default", 5);
 // will autoplay media if you hover mouse over it. Unsure if that includes
 // video with audio.  At least in v63.0 this doesn't seem to work correctly.
 // For example with all above options accuweather.com will still autoplay some
