@@ -189,6 +189,11 @@ let g:SimpylFold_docstring_preview = 1  " Show first line of docstring
 " XMLEdit {{{2
 let g:xmledit_enable_html = 1   " Enable for html files
 
+" ansible-vim {{{2
+let g:ansible_unindent_after_newline = 1  " reset indent on double space
+let g:ansible_extra_keywords_highlight = 1  " highlight all the things
+let g:ansible_name_highlight = 'b'  " make name line brighter
+
 " Syntax file settings {{{1
 " Specified here to make sure they're set before syntax files are loaded
 "
