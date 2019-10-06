@@ -198,10 +198,11 @@ sp () {
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
 export LESSHISTFILE="${XDG_CONFIG_HOME}/less/lesshst"
+export PACKER_CACHE_DIR="${XDG_CACHE_HOME}/packer"
 export PYLINTHOME="${XDG_DATA_HOME}/pylint"
 export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
+export STEPPATH="${XDG_CONFIG_HOME}/step"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
-export PACKER_CACHE_DIR="${XDG_CACHE_HOME}/packer"
 
 
 # Bash specific options {{{1
