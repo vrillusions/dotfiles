@@ -138,7 +138,13 @@ defaults write com.apple.universalaccess reduceMotion -bool true
 
 # Script Editor {{{1
 # Add script menu to menu bar
-add_menu_item "/System/Library/CoreServices/Menu Extras/Script Menu.menu"
+# in mojave this is no longer a menu extra and is handled by... something else
+#add_menu_item "/System/Library/CoreServices/Menu Extras/Script Menu.menu"
+
+# Enable script menu
+# In mojave it seems that enabling this still doesn't get it to show and you
+# must open script editor.  Maybe try a small osascript to click the button
+defaults write com.apple.scriptmenu ScriptMenuEnabled -bool true
 
 # Show scripts in /Library/Scripts
 defaults write com.apple.scriptmenu ShowLibraryScripts -bool true
@@ -157,6 +163,9 @@ xattr -d com.apple.FinderInfo ~/Library 2>/dev/null || true
 
 # Disable warning when emptying trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Auto empty trash items over 30 days old
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # Default to list view
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
@@ -225,6 +234,9 @@ defaults write com.apple.dock hide-mirror -bool true
 # Dim apps that are hidden
 defaults write com.apple.dock showhidden -bool true
 
+# Don't show recent apps
+defaults write com.apple.dock show-recents -bool false
+
 # Set icon size
 defaults write com.apple.dock tilesize -int 32
 
@@ -242,6 +254,10 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Disable rearranging spaces based on use
 defaults write com.apple.dock mru-spaces -bool false
+
+# Add an extra space to end of Dock so running apps are separated
+defaults write com.apple.dock persistent-apps \
+    -array-add '{"tile-type"="spacer-tile";}'
 
 
 # Messages {{{1
