@@ -205,6 +205,14 @@ export STEPPATH="${XDG_CONFIG_HOME}/step"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 
 
+# OS X specific options {{{1
+if [[ "${OSTYPE:-}" =~ ^darwin ]]; then
+    # Catalina defaults to zsh and will complain if you are using bash. This will
+    # silence that
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+fi  # end if os x check
+
+
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
 # See bash(1) for more options
