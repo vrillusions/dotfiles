@@ -158,6 +158,12 @@ user_pref("browser.sessionstore.privacy_level_deferred", 2);
 user_pref("general.autoScroll", false);
 
 
+// -- Developer Tools settings --
+user_pref("devtools.theme", "dark");
+user_pref("devtools.netmonitor.persistlog", true);
+user_pref("devtools.webconsole.persistlog", true);
+
+
 // see http://www.tweakfactor.com/articles/tweaks/firefoxtweak/4.html
 // these are the quick and dirty ones to improve things
 /**
