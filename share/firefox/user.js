@@ -81,6 +81,9 @@ user_pref("plugin.state.flash", 1);
 user_pref("browser.discovery.enabled", false);
 // when going to websites
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
+// or anywhere else
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 
 // Set rel=noopener for target=_blank (search for nooperner for reasoning) (in v65)
 user_pref("dom.targetBlankNoOpener.enabled", true);
