@@ -213,6 +213,10 @@ if [[ "${OSTYPE:-}" =~ ^darwin ]]; then
 fi  # end if os x check
 
 
+# Additional environment variable options {{{1
+export HOMEBREW_NO_ANALYTICS=1
+
+
 # Bash specific options {{{1
 # don't put duplicate lines or lines that begin with a space in the history.
 # See bash(1) for more options
