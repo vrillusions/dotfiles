@@ -48,6 +48,8 @@ relink .bashrc       "${dotfiles}/bashrc"
 relink .bash_profile "${dotfiles}/bash_profile"
 relink .inputrc      "${dotfiles}/inputrc"
 
+relink .zshrc        "${dotfiles}/zshrc"
+
 relink .vim          "${dotfiles}/vim"
 relink .vimrc        "${dotfiles}/vimrc"
 
