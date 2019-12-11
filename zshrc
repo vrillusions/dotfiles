@@ -1,5 +1,9 @@
 # Plugins {{{1
 autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
+    . "$(brew --prefix)/share/zsh/site-functions"
+fi
 
 # git {{{2
 # See: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
@@ -17,6 +21,11 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:*' unstagedstr '*'
+
+
+# Key bindings {{{1
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
 
 # General Options {{{1
 setopt AUTO_CD
@@ -48,7 +57,6 @@ PROMPT=$'%(?..%F{red}%?\n)%F{green}%n@%m%f:%F{blue}%~%f %# '
 
 # Environment variables {{{1
 # Basics {{{2
-
 export EDITOR=vim
 
 # XDG Basedir Setup {{{2
