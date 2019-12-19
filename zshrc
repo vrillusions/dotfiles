@@ -91,6 +91,20 @@ if [[ -d "${XDG_DATA_HOME}/go" ]]; then
 fi
 
 
+# Functions {{{1
+# update_terminal_tab {{{2
+## Doesn't work
+#update_terminal_tab() {
+#    local tab_title="${USER}@${HOSTNAME}: "
+#    # Don't know how to replace the home part with '~'
+#    #local pathname="${$(PWD):s,${HOME},\~}"
+#    tab_title+="${PWD}"
+#    printf '\e]7;%s\a' "${tab_title}"
+#}
+#chpwd_functions+=('update_terminal_tab')
+#update_terminal_tab
+
+
 # OS X Specific {{{1
 if [[ $OSTYPE =~ '^darwin' ]]; then
     export COPYFILE_DISABLE=1
@@ -110,4 +124,4 @@ if [[ -f "${ZDOTDIR:-$HOME}/.zshrc_local" ]]; then
     source ${ZDOTDIR:-$HOME}/.zshrc_local
 fi
 
-# vim fdm=marker:
+# vim: fdm=marker:
