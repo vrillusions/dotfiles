@@ -64,6 +64,14 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
+# LS Colors {{{2
+# See http://geoff.greer.fm/lscolors/ for info on setting this
+# This works on Mac, untested on linux
+export CLICOLOR=1
+export LSCOLORS="gxfxcxdxbxegedabagacad"
+# This may be the version for linux
+#export LS_COLORS="di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+
 # Set application configs (when supported) to XDG locations {{{2
 export CCACHE_DIR="${XDG_CACHE_HOME}/ccache"
 export HTTPIE_CONFIG_DIR="${XDG_CONFIG_HOME}/httpie"
