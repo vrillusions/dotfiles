@@ -123,6 +123,9 @@ user_pref("browser.tabs.closeWindowWithLastTab", false);
 
 // Don't warn when going to about:config
 user_pref("general.warnOnAboutConfig", false);
+// Mozilla decided in v72 to change it, but doesn't transfer preference, guess another reminder
+// to check for what preferences change with each version... Thanks Mozilla
+user_pref("browser.aboutConfig.showWarning", false);
 
 // Spellcheck everywhere
 user_pref("layout.spellcheckDefault", 2);
