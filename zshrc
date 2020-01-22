@@ -5,6 +5,9 @@ if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
     . "$(brew --prefix)/share/zsh/site-functions"
 fi
 
+# Init path variable to be used throughout file {{{1
+typeset -U path
+
 # git {{{2
 # See: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
 # for configuration
@@ -91,12 +94,12 @@ export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
 
 # pyenv {{{2
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
-export PATH="${PYENV_ROOT}/bin:${PATH}"
+path=(${PYENV_ROOT}/bin $path)
 
 # go {{{2
 if [[ -d "${XDG_DATA_HOME}/go" ]]; then
     export GOPATH="${XDG_DATA_HOME}/go"
-    export PATH="${GOPATH}/bin:${PATH}"
+    path=(${GOPATH}/bin $path)
 fi
 
 
@@ -119,13 +122,19 @@ if [[ $OSTYPE =~ '^darwin' ]]; then
     export COPYFILE_DISABLE=1
 
     if [ -d '/Applications/MacVim.app/Contents/bin' ]; then
-        export PATH="/Applications/MacVim.app/Contents/bin:${PATH}"
+        path=(/Applications/MacVim.app/Contents/bin $path)
     fi
+    # For time being I've only run in to this on mac
+    path=(/usr/local/sbin $path)
 
     alias mvim='mvim --remote-silent'
     alias mvimstart='mvim ~/Documents/AppData/scratchpad.note ~/Documents/AppData/teddy.txt'
     alias vi=vim
 fi
+
+
+# Export updated path {{{1
+export PATH
 
 
 # Local settings if found {{{1
