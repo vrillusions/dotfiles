@@ -105,16 +105,17 @@ fi
 
 # Functions {{{1
 # update_terminal_tab {{{2
-## Doesn't work
-#update_terminal_tab() {
-#    local tab_title="${USER}@${HOSTNAME}: "
-#    # Don't know how to replace the home part with '~'
-#    #local pathname="${$(PWD):s,${HOME},\~}"
-#    tab_title+="${PWD}"
-#    printf '\e]7;%s\a' "${tab_title}"
-#}
-#chpwd_functions+=('update_terminal_tab')
-#update_terminal_tab
+update_terminal_tab() {
+    local tab_tltle
+    #tab_title="${USER}@${HOSTNAME}: "
+    local pathname="${PWD/${HOME}/~}"
+    tab_title="${pathname}"
+    #tab_title+="${PWD}"
+    printf '\e]2;%s\a' "${tab_title}"
+}
+DISABLE_AUTO_TITLE="true"
+chpwd_functions+=('update_terminal_tab')
+update_terminal_tab
 
 
 # OS X Specific {{{1
