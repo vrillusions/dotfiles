@@ -163,6 +163,9 @@ user_pref("browser.sessionstore.privacy_level_deferred", 2);
 // Disable autoscroll when middle click and not over a link
 user_pref("general.autoScroll", false);
 
+// Don't prompt to rate firefox
+user_pref("app.normandy.enabled", false);
+
 
 // -- Developer Tools settings --
 user_pref("devtools.theme", "dark");
