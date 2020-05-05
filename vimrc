@@ -47,6 +47,7 @@ set shortmess+=I                " don't show intro message when starting vim
 set viminfo+=n~/.vim/.viminfo   " user directory in windows is ~/.vim as well for this reason
 set lazyredraw                  " don't redraw screen so often
 set foldlevel=1                 " close all but top folds
+set complete+=kspell            " complete with current spelling word list
 
 " Format options {{{1
 set formatoptions+=1            " don't wrap on a single letter
@@ -193,6 +194,11 @@ let g:xmledit_enable_html = 1   " Enable for html files
 let g:ansible_unindent_after_newline = 1  " reset indent on double space
 let g:ansible_extra_keywords_highlight = 1  " highlight all the things
 let g:ansible_name_highlight = 'b'  " make name line brighter
+
+" python-sytnax {{{2
+"let g:python_highlight_all = 1  "set below as it works with ft-python-syntax
+let g:python_slow_sync = 0      " turn this on for slower systems
+
 
 " Syntax file settings {{{1
 " Specified here to make sure they're set before syntax files are loaded
