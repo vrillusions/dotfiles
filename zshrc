@@ -1,12 +1,23 @@
 # Plugins {{{1
-autoload -Uz compinit && compinit
+# Auto complete {{{2
 autoload -Uz bashcompinit && bashcompinit
+# Homebrew part must be set before calling compinit
 if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
-    . "$(brew --prefix)/share/zsh/site-functions"
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
+autoload -Uz compinit && compinit
+
+# Syntax highlighting {{{2
+if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
 
 # Init path variable to be used throughout file {{{1
 typeset -U path
+
 
 # git {{{2
 # See: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
@@ -29,6 +40,7 @@ zstyle ':vcs_info:*' unstagedstr '*'
 # Key bindings {{{1
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
+
 
 # General Options {{{1
 setopt AUTO_CD
@@ -114,7 +126,7 @@ update_terminal_tab() {
     printf '\e]2;%s\a' "${tab_title}"
 }
 DISABLE_AUTO_TITLE="true"
-chpwd_functions+=('update_terminal_tab')
+precmd_functions+=('update_terminal_tab')
 update_terminal_tab
 
 
@@ -131,6 +143,15 @@ if [[ $OSTYPE =~ '^darwin' ]]; then
     alias mvim='mvim --remote-silent'
     alias mvimstart='mvim ~/Documents/AppData/scratchpad.note ~/Documents/AppData/teddy.txt'
     alias vi=vim
+fi
+
+
+# Add extra paths {{{1
+if [[ -d "${HOME}/bin" ]]; then
+    path=(${HOME}/bin $path)
+fi
+if [[ -d "${HOME}/dotfiles/bin" ]]; then
+    path=(${HOME}/dotfiles/bin $path)
 fi
 
 

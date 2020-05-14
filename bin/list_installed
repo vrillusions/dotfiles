@@ -51,6 +51,7 @@ check_installed "rvm           " "$(command -v rvm &>/dev/null      && rvm --ver
 check_installed "screen        " "$(command -v screen &>/dev/null   && screen --version | awk '{print $3}')"
 check_installed "vim           " "$(command -v vim &>/dev/null      && vim --version | awk '/^VIM/ {print $5}')"
 check_installed "wget          " "$(command -v wget &>/dev/null     && wget --version | awk '/Wget.*built/ {print $3}')"
+check_installed "zsh           " "$(command -v zsh &>/dev/null      && zsh --version | awk '/^zsh/ {print $2}')"
 # Leaving this here as an example of dependencies
 #check_installed "node.js             " $(command -v -s node     && node --version)
 #check_installed "└─ npm              " $(command -v -s npm      && npm --version)
