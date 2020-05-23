@@ -107,6 +107,9 @@ export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
 # pyenv {{{2
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
 path=(${PYENV_ROOT}/bin $path)
+if which pyenv >/dev/null; then
+    eval "$(pyenv init -)"
+fi
 if which pyenv-virtualenv-init >/dev/null; then
     eval "$(pyenv virtualenv-init -)"
 fi
