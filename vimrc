@@ -126,8 +126,10 @@ let g:ale_linter_aliases = {
   \ 'ghmarkdown': 'markdown',
   \ }
 let g:ale_lint_delay = 2000  " Delay in msec
+let g:ale_enabled = 0        " Use <leader>a to toggle it on and off
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <Leader>a <Plug>(ale_toggle)
 
 " NERDTree {{{2
 map <Leader>n :NERDTreeToggle<CR>
