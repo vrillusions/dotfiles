@@ -20,7 +20,7 @@ user_pref("security.warn_viewing_mixed", false);
 
 // Set minimum tls version: (0 - SSLv3, 1 - TLSv1 (default in later versions), 2 - TLSv1.1, 3 - TLSv1.2)
 // SSLv3 should be avoided due to POODLE attack
-user_pref("security.tls.version.min", 1);
+user_pref("security.tls.version.min", 3);
 
 // Require that we pass OCSP validation or don't continue
 user_pref("security.OCSP.require", true);
@@ -165,6 +165,11 @@ user_pref("general.autoScroll", false);
 
 // Don't prompt to rate firefox
 user_pref("app.normandy.enabled", false);
+
+// Be redirected to actaul release notes on update instead of pushing some service
+user_pref("startup.homepage_override_url", "https://www.mozilla.org/%LOCALE%/%APP%/%VERSION%/releasenotes/");
+// Also disable the what's new icon in header
+user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
 
 // -- Developer Tools settings --
