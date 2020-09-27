@@ -167,7 +167,8 @@ user_pref("general.autoScroll", false);
 user_pref("app.normandy.enabled", false);
 
 // Be redirected to actaul release notes on update instead of pushing some service
-user_pref("startup.homepage_override_url", "https://www.mozilla.org/%LOCALE%/%APP%/%VERSION%/releasenotes/");
+user_pref("startup.homepage_override_url", "https://www.mozilla.org/firefox/%VERSION%/releasenotes/");
+user_pref("app.releaseNotesURL", "https://www.mozilla.org/firefox/%VERSION%/releasenotes/");
 // Also disable the what's new icon in header
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
