@@ -83,3 +83,5 @@
 	required = true
 [pull]
 	rebase = true
+[diff "osa"]
+	textconv = osadecompile

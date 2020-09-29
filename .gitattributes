@@ -3,3 +3,6 @@
 
 # Don't mess with line endings in vim/bundle/ since those are external
 vim/bundle/** -text=auto
+
+# Decompile applescript files for diffing
+*.scpt filter=osa

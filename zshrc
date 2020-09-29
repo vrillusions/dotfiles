@@ -46,7 +46,6 @@ bindkey '^[[B' down-line-or-search
 setopt AUTO_CD
 setopt NO_CASE_GLOB
 setopt CORRECT
-setopt CORRECT_ALL
 
 
 # History options {{{1
@@ -97,6 +96,7 @@ export PYLINTHOME="${XDG_DATA_HOME}/pylint"
 export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
 export STEPPATH="${XDG_CONFIG_HOME}/step"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
+export HELM_HOME="${XDG_CONFIG_HOME}/helm"
 
 # Homebrew settings {{{2
 export HOMEBREW_NO_ANALYTICS=1
