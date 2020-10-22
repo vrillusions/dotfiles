@@ -85,3 +85,7 @@
 	rebase = true
 [diff "osa"]
 	textconv = osadecompile
+[maintenance "gc"]
+	enabled = true
+[maintenance "commit-graph"]
+	enabled = true
