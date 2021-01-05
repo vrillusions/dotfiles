@@ -172,6 +172,10 @@ user_pref("app.releaseNotesURL", "https://www.mozilla.org/firefox/%VERSION%/rele
 // Also disable the what's new icon in header
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
+// Force default search to DuckDuckGo as something seems to change it
+user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
+user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
+
 
 // -- Developer Tools settings --
 user_pref("devtools.theme", "dark");
