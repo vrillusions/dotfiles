@@ -36,14 +36,23 @@ log () {
     printf "%b\n" "$(date +"%Y-%m-%dT%H:%M:%S%z") $*"
 }
 
+# these are both formated as regexp OR such as:
+#   (signingkey|email)
+# sections to exclude, don't include the []s
+exclude_sections='(maintenance)'
+# keys to exclude, note this currently will check for key under any section
+exclude_keys='(signingkey|email|repo )'
+
 
 # This assumes this script is located in script subfolder of repo
 cd "${script_dir}/.."
 
 # Turning off exit on error as diff exits non zero if changes are made
 set +e
-diff -u -B <(grep -vE '^\s*(signingkey|email)' gitconfig) \
-    <(grep -vE '^\s*(signingkey|email)' gitconfig.versioned)
+diff -u -B <(grep -vE "^\s*${exclude_keys}" gitconfig \
+        | grep -vE "^\[${exclude_sections}\]") \
+    <(grep -vE "^\s*${exclude_keys}" gitconfig.versioned \
+        | grep -vE "^\[${exclude_sections}\]")
 declare -i retcode=$?
 set -e
 

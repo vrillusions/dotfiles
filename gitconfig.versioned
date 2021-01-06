@@ -32,6 +32,7 @@
 	graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	lg = log -p
 	lgs = log --oneline --decorate
+	mr = maintenance register
 	pa = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
 	permission-reset = "!git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply"
 	pr = pull --rebase
