@@ -164,6 +164,7 @@ let g:ctrlp_clear_cache_on_exit = 0  " persist cache files
 
 " todotag {{{2
 let g:todotag_owner = 'teddy'  " Just always go by teddy since it's shorter than 'vrillusions'
+iab NOTE: NOTE:<C-R>=GetTodoComment()><CR>
 
 " securemodelines {{{2
 " have to specify full list
