@@ -135,6 +135,8 @@ defaults write ${global_domain} KeyRepeat -int 2
 # Reduce motion (does a more subtle fade instead of stuff moving around)
 defaults write com.apple.universalaccess reduceMotion -bool true
 
+# Show all extensions
+defaults write ${global_domain} AppleShowAllExtensions -bool true
 
 # Script Editor {{{1
 # Add script menu to menu bar
@@ -331,6 +333,14 @@ defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
 # Stop the 'try the new safari' popup (wtf apple?)
 defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
 defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 10.99
+
+
+# Siri {{{1
+#####
+# Hide, Disable it, and Don't ask me to enable it
+defaults write com.apple.Siri StatusMenuVisible -bool false
+defaults write com.apple.Siri UserHasDeclinedEnable -bool true
+defaults write com.apple.assistant.support 'Assistant Enabled' -bool false
 
 
 # Terminal {{{1
