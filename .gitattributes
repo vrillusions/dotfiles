@@ -16,3 +16,10 @@ vim/bundle/** -text=auto
 #
 # Instead using just diff.  The gitconfig in repo is setup automatically
 *.scpt diff=osa
+
+# These are predefined by git but are still opt in
+*.sh diff=bash
+*.md diff=markdown
+*.mkd diff=markdown
+*.markdown diff=markdown
+*.py diff=python
