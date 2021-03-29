@@ -35,6 +35,9 @@ if has("gui_macvim")
     set lines=45 columns=126    " width is to allow nerdTree
     "set guifont=Inconsolata:h16
     set guifont=Office\ Code\ Pro\ D\ Light:h14
+    " Next two go together
+    "set guifont=Fira\ Code:h12
+    "set macligatures
 elseif has("win32") || has("win64")
     " Windows
     set lines=50 columns=126    " width is 106 to allow 100 + line numbers

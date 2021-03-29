@@ -5,4 +5,14 @@
 vim/bundle/** -text=auto
 
 # Decompile applescript files for diffing
-*.scpt filter=osa
+# See https://github.com/doekman/osagitfilter/ for setup or just run following:
+# This didn't seem to work for me though:
+#
+# git config filter.osa.clean "$HOME/dotfiles/bin/osagitfilter clean %f"
+# git config filter.osa.smudge "$HOME/dotfiles/bin/osagitfilter smudge %f"
+# git config filter.osa.required "true"
+#
+#*.scpt filter=osa
+#
+# Instead using just diff.  The gitconfig in repo is setup automatically
+*.scpt diff=osa
