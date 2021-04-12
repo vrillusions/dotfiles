@@ -7,6 +7,10 @@ if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
 fi
 autoload -Uz compinit && compinit
 
+# Run help {{{2
+unalias run-help
+autoload run-help
+
 # Syntax highlighting {{{2
 if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -30,7 +34,7 @@ precmd_vcs_info() {
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '%F{green}(%b %c%u)%f'
+zstyle ':vcs_info:git:*' formats '%F{green}(%b %m%c%u)%f'
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '+'
@@ -45,7 +49,9 @@ bindkey '^[[B' down-line-or-search
 # General Options {{{1
 setopt AUTO_CD
 setopt NO_CASE_GLOB
-setopt CORRECT
+# Doesn't seem to ever be useful
+#setopt CORRECT
+setopt MARK_DIRS
 
 
 # History options {{{1
@@ -56,13 +62,13 @@ setopt APPEND_HISTORY
 unsetopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY_TIME
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
+setopt HIST_SAVE_NO_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-SAVEHIST=10000
-HISTSIZE=1000000
+SAVEHIST=1000000
+HISTSIZE=10000000
 
 
 # Prompt setting (((1
@@ -103,6 +109,10 @@ export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_GITHUB_API_TOKEN='set in .zshrc_local'
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
+
+# Node settings {{{2
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm-cache"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # pyenv {{{2
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
