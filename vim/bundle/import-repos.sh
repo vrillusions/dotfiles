@@ -137,7 +137,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig 68f8136d
     #import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 5.0.0
+    import_repo "https://github.com/iamcco/markdown-preview.nvim.git" markdown-preview e5bfe9b
     import_repo "https://github.com/weynhamz/vim-plugin-minibufexpl.git" minibufexpl 349a9fb
+    import_repo "https://github.com/mustache/vim-mustache-handlebars.git" mustache fcc1401
     import_repo "https://github.com/rodjek/vim-puppet.git" puppet b2ae19b3
     import_repo "https://github.com/vim-python/python-syntax.git" python-syntax c1c5baf
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
@@ -151,6 +153,12 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     log "Finished"
 fi
 
+echo ' - markdown-preview note -'
+echo 'you will need to go in to markdown-preview folder and run'
+echo
+echo '  npm install --production'
+echo
+echo 'anywhere you wish to use the plugin'
 
 # SECONDS is a bash builtin
 verbose "Script ran for ${SECONDS} seconds"

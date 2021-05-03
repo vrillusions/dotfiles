@@ -142,6 +142,10 @@ let NERDTreeShowHidden = 1          " Including hidden
 " Ignored files for NERDTree
 let NERDTreeIgnore=[ '\.py?$', '\.DS_Store' ]
 
+" Markdow-preview {{{2
+let g:mkdp_filetypes = ['markdown', 'ghmarkdown']
+noremap <C-m> :MarkdownPreviewToggle<CR>
+
 " MiniBufExpl {{{2
 " With one line it doesn't keep current file highlighted
 "let g:miniBufExplMaxSize = 1         " max number of lines (default is 0)

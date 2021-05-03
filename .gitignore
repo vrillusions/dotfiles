@@ -3,5 +3,6 @@ vim/.netrwhist
 vim/.viminfo
 vim/NERDTreeBookmarks
 /vim/bundle/*/doc/tags
+vim/bundle/markdown-preview/node_modules
 *.py?
 share/windows/keyboard_layouts/us_modified/vr_kbd01/
