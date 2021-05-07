@@ -47,6 +47,7 @@ bindkey '^[[B' down-line-or-search
 
 
 # General Options {{{1
+setopt +o NOMATCH  # don't print errors for things like 'curl example.com/?param=1'
 setopt AUTO_CD
 setopt NO_CASE_GLOB
 # Doesn't seem to ever be useful
