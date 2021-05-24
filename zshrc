@@ -8,7 +8,8 @@ fi
 autoload -Uz compinit && compinit
 
 # Run help {{{2
-unalias run-help
+# Don't complain if alias isn't set which happens when manually sourcing file in same terminal
+unalias run-help 2>/dev/null || true
 autoload run-help
 
 # Syntax highlighting {{{2
@@ -119,6 +120,10 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
 path=(${PYENV_ROOT}/bin $path)
 if which pyenv >/dev/null; then
+    # this and above two lines should go in a zprofile I guess but haven't
+    # had issues keeping everything in zshrc
+    # until updated everywhere, hide error message
+    eval "$(pyenv init --path)" 2>/dev/null || true
     eval "$(pyenv init -)"
 fi
 if which pyenv-virtualenv-init >/dev/null; then
@@ -130,6 +135,20 @@ if [[ -d "${XDG_DATA_HOME}/go" ]]; then
     export GOPATH="${XDG_DATA_HOME}/go"
     path=(${GOPATH}/bin $path)
 fi
+
+
+# Aliases {{{1
+# simple aliases {{{2
+alias tf=terraform
+# fyi <esc>-h will run help on command cursor is on
+alias help=run-help
+
+# suffix aliases {{{2
+alias -s tfvar=vim
+
+# global aliases {{{2
+# this is more an example, use a global alias to be able to pipe commands to it
+alias -g gp=grep
 
 
 # Functions {{{1
