@@ -147,6 +147,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/altercation/vim-colors-solarized.git" solarized 528a59f
     import_repo "https://github.com/ervandew/supertab.git" supertab 40fe711
     import_repo "https://github.com/gagoar/StripWhiteSpaces.git" StripWhiteSpaces 85b5753
+    import_repo "https://github.com/hashivim/vim-terraform" terraform 9166d42
     import_repo "https://github.com/vrillusions/vim-todotag.git" todotag 0.3.0
     import_repo "https://github.com/vimoutliner/vimoutliner.git" vimoutliner 0.4.0
     import_repo "https://github.com/sukima/xmledit.git" xmledit v1.10.5

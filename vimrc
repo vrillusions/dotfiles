@@ -206,6 +206,14 @@ let g:ansible_name_highlight = 'b'  " make name line brighter
 "let g:python_highlight_all = 1  "set below as it works with ft-python-syntax
 let g:python_slow_sync = 0      " turn this on for slower systems
 
+" terraform {{{2
+let g:terraform_align = 0          " auto align settings (it says with
+                                   " Tabularize so need that installed before
+                                   " enabling this)
+let g:terraform_fold_sections = 1  " auto fold sections
+let g:terraform_fmt_on_save = 0    " format terraform on save
+                                   " altenative is run ':TerraformFmt'
+
 
 " Syntax file settings {{{1
 " Specified here to make sure they're set before syntax files are loaded
