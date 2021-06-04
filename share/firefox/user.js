@@ -48,6 +48,9 @@ user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 user_pref("browser.ssl_override_behavior", 2);
 
+// Don't support scripting in pdf
+user_pref("pdfjs.enableScripting", false);
+
 
 // -- Privacy / resource usage preferences --
 // Don't do dns lookup when I hover over links
@@ -175,6 +178,9 @@ user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 // Force default search to DuckDuckGo as something seems to change it
 user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
 user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
+
+// Show compact view option in customize
+user_pref("browser.compactmode.show", true)
 
 
 // -- Developer Tools settings --
