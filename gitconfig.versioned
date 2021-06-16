@@ -10,7 +10,7 @@
 [diff]
 	renamelimit = 0
 [alias]
-	br = branch
+	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]%(color:reset)%(if)%(upstream)%(then) -> %(color:cyan)%(upstream:short) %(color:red)%(upstream:track)%(end)' --sort=-committerdate
 	brl = branch --format '%(HEAD) %(refname:short)%(if)%(upstream)%(then) -> %(color:red)%(upstream:short) %(color:cyan)%(upstream:track)%(end)'
 	changelog = shortlog --no-merges --format=\"[%h] %s\"
 	ci = commit
@@ -37,8 +37,8 @@
 	permission-reset = "!git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply"
 	pr = pull --rebase
 	prp = pull --rebase --prune
-	ps = push --recurse-submodules=check
 	psf = push --recurse-submodules=check --force-with-lease
+	pso = push -u origin HEAD --recurse-submodules=check
 	reflg = reflog --format='%C(auto)%h %<|(17)%gd %C(blue)%ci%C(auto) %d %s'
 	restore = checkout --
 	sd = "!f(){ date=$(date \"+%Y-%m-%dT%H:%M:%S%z\") && git stash save \"$date $@\"; }; f"
@@ -57,6 +57,7 @@
 	unstage = reset HEAD --
 	unwip = "!f(){ git log -n 1 | grep -q -c 'wip' && git reset HEAD~1; }; f"
 	wip = "!f(){ git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m 'wip'; }; f"
+	last = log -1 HEAD
 [advice]
 	statusHints = false
 [gc]
