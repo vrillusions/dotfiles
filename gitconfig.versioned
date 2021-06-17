@@ -37,6 +37,7 @@
 	permission-reset = "!git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply"
 	pr = pull --rebase
 	prp = pull --rebase --prune
+	ps = push --recurse-submodules=check
 	psf = push --recurse-submodules=check --force-with-lease
 	pso = push -u origin HEAD --recurse-submodules=check
 	reflg = reflog --format='%C(auto)%h %<|(17)%gd %C(blue)%ci%C(auto) %d %s'
