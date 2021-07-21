@@ -138,6 +138,7 @@ user_pref("browser.search.openintab", true); // from searching
 user_pref("browser.urlbar.openintab", true); // from url bar
 user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (default)
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
+user_pref("browser.tabs.loadInBackground", false); // Load new tabs in foreground
 
 // Autoplay options
 // As of v69 these settings got revamped to now block video and audio
@@ -174,6 +175,9 @@ user_pref("startup.homepage_override_url", "https://www.mozilla.org/firefox/%VER
 user_pref("app.releaseNotesURL", "https://www.mozilla.org/firefox/%VERSION%/releasenotes/");
 // Also disable the what's new icon in header
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
+// Actually just don't show release notes at all (commented out as I do want this on
+// one computer but not on all the others)
+//user_pref("browser.startup.homepage_override.mstone", "ignore");
 
 // Force default search to DuckDuckGo as something seems to change it
 user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
