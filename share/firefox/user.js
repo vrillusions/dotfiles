@@ -138,7 +138,8 @@ user_pref("browser.search.openintab", true); // from searching
 user_pref("browser.urlbar.openintab", true); // from url bar
 user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (default)
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
-user_pref("browser.tabs.loadInBackground", false); // Load new tabs in foreground
+// Comment out as some computers I want it to load in background and others I don't
+//user_pref("browser.tabs.loadInBackground", false); // Load new tabs in foreground
 
 // Autoplay options
 // As of v69 these settings got revamped to now block video and audio
