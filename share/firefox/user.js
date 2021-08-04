@@ -77,7 +77,8 @@ user_pref("network.captive-portal-service.enabled", false);
 // 0 - never activate
 // 1 - ask to activate
 // 2 - always activate
-user_pref("plugin.state.flash", 1);
+// RIP flash
+//user_pref("plugin.state.flash", 1);
 
 // Don't recommend extensions
 // on addon page
@@ -138,6 +139,7 @@ user_pref("browser.search.openintab", true); // from searching
 user_pref("browser.urlbar.openintab", true); // from url bar
 user_pref("browser.tabs.opentabfor.middleclick", true); //when middle-click (default)
 user_pref("browser.tabs.opentabfor.searchdialog", true); //from search dialog (when search box is hidden)
+user_pref("browser.tabs.tooltipsShowPidAndActiveness", true); // Shows extra info on tooltip
 // Comment out as some computers I want it to load in background and others I don't
 //user_pref("browser.tabs.loadInBackground", false); // Load new tabs in foreground
 
