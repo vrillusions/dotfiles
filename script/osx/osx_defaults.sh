@@ -138,6 +138,20 @@ defaults write com.apple.universalaccess reduceMotion -bool true
 # Show all extensions
 defaults write ${global_domain} AppleShowAllExtensions -bool true
 
+
+# Trackpad {{{1
+#####
+# Turn off trackpad if mouse is connected (aka stop cat from walking across
+# laptop and causing random things to open)
+# Even though it's a true/false thing plist export has it as an integer
+defaults write com.apple.AppleMultitouchTrackpad USBMouseStopsTrackpad -int 1
+
+# Enable dragging by double tap an item and without lifting finger after second
+# tap drag the item around.  A delay is included so when at edge of trackpad you
+# can lift finger and reposition.
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
+
+
 # Script Editor {{{1
 # Add script menu to menu bar
 # in mojave this is no longer a menu extra and is handled by... something else
