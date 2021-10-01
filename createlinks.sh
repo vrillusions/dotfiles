@@ -76,19 +76,20 @@ fi
 # put lftprc in XDG directory
 rm -f "${HOME}/.lftprc"
 create_dir "${XDG_CONFIG_HOME}/lftp"
-cd "${XDG_CONFIG_HOME}/lftp"
-relink rc "${dotfiles}/lftprc"
+cd "${XDG_CONFIG_HOME}/lftp" && relink rc "${dotfiles}/lftprc"
 
 # put screenrc in XDG directory
 rm -f "${HOME}/.screenrc"
 create_dir "${XDG_CONFIG_HOME}/screen"
-cd "${XDG_CONFIG_HOME}/screen"
-relink screenrc "${dotfiles}/screenrc"
+cd "${XDG_CONFIG_HOME}/screen" && relink screenrc "${dotfiles}/screenrc"
 
 # put yamllint config in XDG directory
 create_dir "${XDG_CONFIG_HOME}/yamllint"
-cd "${XDG_CONFIG_HOME}/yamllint"
-relink config "${dotfiles}/yamllint-config.yml"
+cd "${XDG_CONFIG_HOME}/yamllint" && relink config "${dotfiles}/yamllint-config.yml"
+
+# put yamllint config in XDG directory
+create_dir "${XDG_CONFIG_HOME}/yt-dlp"
+cd "${XDG_CONFIG_HOME}/yt-dlp" && relink config "${dotfiles}/yt-dlp.conf"
 
 # Comment out since bloomfilter doesn't seem to work. Use -r wordlist instead
 ## see if we need to generate bloom filter for apg
