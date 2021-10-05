@@ -187,7 +187,9 @@ user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
 user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
 
 // Show compact view option in customize
-user_pref("browser.compactmode.show", true)
+user_pref("browser.compactmode.show", true);
+// But always make it compact
+user_pref("browser.uidensity", 1);
 
 
 // -- Developer Tools settings --
