@@ -1,5 +1,6 @@
 /* Make custom changes here
  *
+ * NOTEPAD++ APPEARS TO BE WORKING AS OF 2021-10 BUT MAY WANT TO VERIFY OCCASIONALLY
  * DO NOT EDIT WITH NOTEPAD++ ON WINDOWS, IT WILL BREAK THE HARD LINK THAT EXISTS
  * GVIM ON WINDOWS WORKS CORRECTLY
  *
@@ -89,6 +90,9 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 
+// Don't suggest sponsored content
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+
 // Set rel=noopener for target=_blank (search for nooperner for reasoning) (in v65)
 user_pref("dom.targetBlankNoOpener.enabled", true);
 
@@ -104,6 +108,10 @@ user_pref("browser.newtab.preload", false);
 // Set default home page
 user_pref("browser.startup.homepage", "https://www.google.com");
 user_pref("browser.startup.page", 3);
+
+// Set default search engine since something keeps changing it
+user_pref("browser.search.defaultenginename", "DuckDuckGo");
+user_pref("browser.search.defaultenginename.US",. "DuckDuckGo");
 
 // Open searches in new tab
 user_pref("browser.search.openintab", true);
