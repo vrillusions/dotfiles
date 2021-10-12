@@ -1,121 +1,221 @@
-The NERD Tree
-=============
+# The NERDTree [![Vint](https://github.com/preservim/nerdtree/workflows/Vint/badge.svg)](https://github.com/preservim/nerdtree/actions?workflow=Vint)
 
-Intro
------
+## Introduction
 
-The NERD tree allows you to explore your filesystem and to open files and
-directories. It presents the filesystem to you in the form of a tree which you
-manipulate with the keyboard and/or mouse. It also allows you to perform
-simple filesystem operations.
+The NERDTree is a file system explorer for the Vim editor. Using this plugin, users can visually browse complex directory hierarchies, quickly open files for reading or editing, and perform basic file system operations.
 
-The following features and functionality are provided by the NERD tree:
+![NERDTree Screenshot](https://github.com/preservim/nerdtree/raw/master/screenshot.png)
 
-  * Files and directories are displayed in a hierarchical tree structure
-  * Different highlighting is provided for the following types of nodes:
-    * files
-    * directories
-    * sym-links
-    * windows .lnk files
-    * read-only files
-    * executable files
-  * Many (customisable) mappings are provided to manipulate the tree:
-    * Mappings to open/close/explore directory nodes
-    * Mappings to open files in new/existing windows/tabs
-    * Mappings to change the current root of the tree
-    * Mappings to navigate around the tree
-    * ...
-  * Directories and files can be bookmarked.
-  * Most NERD tree navigation can also be done with the mouse
-  * Filtering of tree content (can be toggled at runtime)
-    * custom file filters to prevent e.g. vim backup files being displayed
-    * optional displaying of hidden files (. files)
-    * files can be "turned off" so that only directories are displayed
-  * The position and size of the NERD tree window can be customised
-  * The order in which the nodes in the tree are listed can be customised.
-  * A model of your filesystem is created/maintained as you explore it. This
-    has several advantages:
-    * All filesystem information is cached and is only re-read on demand
-    * If you revisit a part of the tree that you left earlier in your
-      session, the directory nodes will be opened/closed as you left them
-  * The script remembers the cursor position and window position in the NERD
-    tree so you can toggle it off (or just close the tree window) and then
-    reopen it (with NERDTreeToggle) the NERD tree window will appear exactly
-    as you left it
-  * You can have a separate NERD tree for each tab, share trees across tabs,
-    or a mix of both.
-  * By default the script overrides the default file browser (netrw), so if
-    you :edit a directory a (slightly modified) NERD tree will appear in the
-    current window
-  * A programmable menu system is provided (simulates right clicking on a node)
-    * one default menu plugin is provided to perform basic filesystem
-      operations (create/delete/move/copy files/directories)
-  * There's an API for adding your own keymappings
+## Installation
 
-Installation
-------------
+Use your favorite plugin manager to install this plugin. [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen), [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim), [junegunn/vim-plug](https://github.com/junegunn/vim-plug), and [Shougo/dein.vim](https://github.com/Shougo/dein.vim) are some of the more popular ones. A lengthy discussion of these and other managers can be found on [vi.stackexchange.com](https://vi.stackexchange.com/questions/388/what-is-the-difference-between-the-vim-plugin-managers). Basic instructions are provided below, but please **be sure to read, understand, and follow all the safety rules that come with your ~~power tools~~ plugin manager.**
 
-####[pathogen.vim](https://github.com/tpope/vim-pathogen)
+If you have no favorite, or want to manage your plugins without 3rd-party dependencies, consider using Vim 8+ packages, as described in Greg Hurrell's excellent Youtube video: [Vim screencast #75: Plugin managers](https://www.youtube.com/watch?v=X2_R3uxDN6g).
 
-    cd ~/.vim/bundle
-    git clone https://github.com/scrooloose/nerdtree.git
-
-Then reload vim, run `:Helptags`, and check out `:help NERD_tree.txt`.
+<details>
+<summary>Pathogen</summary>
+Pathogen is more of a runtime path manager than a plugin manager. You must clone the plugins' repositories yourself to a specific location, and Pathogen makes sure they are available in Vim.
 
 
-####[apt-vim](https://github.com/egalpin/apt-vim)
+1. In the terminal,
+    ```bash
+    git clone https://github.com/preservim/nerdtree.git ~/.vim/bundle/nerdtree
+    ```
+1. In your `vimrc`,
+    ```vim
+    call pathogen#infect()
+    syntax on
+    filetype plugin indent on
+    ```
+1. Restart Vim, and run `:helptags ~/.vim/bundle/nerdtree/doc/` or `:Helptags`.
+</details>
 
-    apt-vim install -y https://github.com/scrooloose/nerdtree.git
+<details>
+  <summary>Vundle</summary>
+
+1. Install Vundle, according to its instructions.
+1. Add the following text to your `vimrc`.
+    ```vim
+    call vundle#begin()
+      Plugin 'preservim/nerdtree'
+    call vundle#end()
+    ```
+1. Restart Vim, and run the `:PluginInstall` statement to install your plugins.
+</details>
+
+<details>
+  <summary>Vim-Plug</summary>
+
+1. Install Vim-Plug, according to its instructions.
+1. Add the following text to your `vimrc`.
+```vim
+call plug#begin()
+  Plug 'preservim/nerdtree'
+call plug#end()
+```
+1. Restart Vim, and run the `:PlugInstall` statement to install your plugins.
+</details>
+
+<details>
+  <summary>Dein</summary>
+
+1. Install Dein, according to its instructions.
+1. Add the following text to your `vimrc`.
+    ```vim
+    call dein#begin()
+      call dein#add('preservim/nerdtree')
+    call dein#end()
+    ```
+1. Restart Vim, and run the `:call dein#install()` statement to install your plugins.
+</details>
+
+<details>
+<summary>Vim 8+ packages</summary>
+
+If you are using Vim version 8 or higher you can use its built-in package management; see `:help packages` for more information. Just run these commands in your terminal:
+
+```bash
+git clone https://github.com/preservim/nerdtree.git ~/.vim/pack/vendor/start/nerdtree
+vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c q
+```
+</details>
+
+## Getting Started
+After installing NERDTree, the best way to learn it is to turn on the Quick Help. Open NERDTree with the `:NERDTree` command, and press `?` to turn on the Quick Help, which will show you all the mappings and commands available in the NERDTree. Of course, your most complete source of information is the documentation: `:help NERDTree`.
+
+## NERDTree Plugins
+NERDTree can be extended with custom mappings and functions using its built-in API. The details of this API and are described in the included documentation. Several plugins have been written, and are available on Github for installation like any other plugin. The plugins in this list are maintained (or not) by their respective owners, and certain combinations may be incompatible.
+
+* [Xuyuanp/nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin): Shows Git status flags for files and folders in NERDTree.
+* [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons): Adds filetype-specific icons to NERDTree files and folders,
+* [tiagofumo/vim-nerdtree-syntax-highlight](https://github.com/tiagofumo/vim-nerdtree-syntax-highlight): Adds syntax highlighting to NERDTree based on filetype.
+* [scrooloose/nerdtree-project-plugin](https://github.com/scrooloose/nerdtree-project-plugin): Saves and restores the state of the NERDTree between sessions.
+* [PhilRunninger/nerdtree-buffer-ops](https://github.com/PhilRunninger/nerdtree-buffer-ops): 1) Highlights open files in a different color. 2) Closes a buffer directly from NERDTree.
+* [PhilRunninger/nerdtree-visual-selection](https://github.com/PhilRunninger/nerdtree-visual-selection): Enables NERDTree to open, delete, move, or copy multiple Visually-selected files at once.
+
+If any others should be listed, mention them in an issue or pull request.
 
 
+## Frequently Asked Questions
 
-Faq
+In the answers to these questions, you will see code blocks that you can put in your `vimrc` file.
+
+### How can I map a specific key or shortcut to open NERDTree?
+
+NERDTree doesn't create any shortcuts outside of the NERDTree window, so as not to overwrite any of your other shortcuts. Use the `nnoremap` command in your `vimrc`. You, of course, have many keys and NERDTree commands to choose from. Here are but a few examples.
+```vim
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+```
+
+### How do I open NERDTree automatically when Vim starts?
+Each code block below is slightly different, as described in the `" Comment lines`.
+
+```vim
+" Start NERDTree and leave the cursor in it.
+autocmd VimEnter * NERDTree
+```
 ---
+```vim
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+```
+---
+```vim
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+```
+---
+```vim
+" Start NERDTree. If a file is specified, move the cursor to its window.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+```
+---
+```vim
+" Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+```
+---
+```vim
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+```
 
-> Is there any support for `git` flags?
+### How can I close Vim or a tab automatically when NERDTree is the last window?
 
-Yes, install [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin).
+```vim
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+```
+---
+```vim
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+```
 
+### How can I prevent other buffers replacing NERDTree in its window?
 
-> Can I have the nerdtree on every tab automatically?
+```vim
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+```
 
-Nope. If this is something you want then chances are you aren't using tabs and
-buffers as they were intended to be used. Read this
-http://stackoverflow.com/questions/102384/using-vims-tabs-like-buffers
+### Can I have the same NERDTree on every tab automatically?
 
-If you are interested in this behaviour then consider [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
+```vim
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+```
+or change your NERDTree-launching shortcut key like so:
+```vim
+" Mirror the NERDTree before showing it. This makes it the same on all tabs.
+nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+```
 
-> How can I open a NERDTree automatically when vim starts up?
+### How can I change the default arrows?
 
-Stick this in your vimrc: `autocmd vimenter * NERDTree`
+```vim
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+```
+The preceding values are the non-Windows default arrow symbols. Setting these variables to empty strings will remove the arrows completely and shift the entire tree two character positions to the left. See `:h NERDTreeDirArrowExpandable` for more details.
 
-> How can I open a NERDTree automatically when vim starts up if no files were specified?
+### Can NERDTree access remote files via scp or ftp?
 
-Stick this in your vimrc
+Short answer: No, and there are no plans to add that functionality. However, Vim ships with a plugin that does just that. It's called netrw, and by adding the following lines to your `.vimrc`, you can use it to open files over the `scp:`, `ftp:`, or other protocols, while still using NERDTree for all local files. The function seamlessly makes the decision to open NERDTree or netrw, and other supported protocols can be added to the regular expression.
 
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+```vim
+" Function to open the file or NERDTree or netrw.
+"   Returns: 1 if either file explorer was opened; otherwise, 0.
+function! s:OpenFileOrExplorer(...)
+    if a:0 == 0 || a:1 == ''
+        NERDTree
+    elseif filereadable(a:1)
+        execute 'edit '.a:1
+        return 0
+    elseif a:1 =~? '^\(scp\|ftp\)://' " Add other protocols as needed.
+        execute 'Vexplore '.a:1
+    elseif isdirectory(a:1)
+        execute 'NERDTree '.a:1
+    endif
+    return 1
+endfunction
 
-> How can I map a specific key or shortcut to open NERDTree?
+" Auto commands to handle OS commandline arguments
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc()==1 && !exists('s:std_in') | if <SID>OpenFileOrExplorer(argv()[0]) | wincmd p | enew | wincmd p | endif | endif
 
-Stick this in your vimrc to open NERDTree with `Ctrl+n` (you can set whatever key you want):
+" Command to call the OpenFileOrExplorer function.
+command! -n=? -complete=file -bar Edit :call <SID>OpenFileOrExplorer('<args>')
 
-    map <C-n> :NERDTreeToggle<CR>
-
-> How can I close vim if the only window left open is a NERDTree?
-
-Stick this in your vimrc:
-
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-> Can I have different highlighting for different file extensions?
-
-See here: https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
-
-> How can I change default arrows?
-
-Use these variables in your vimrc. Note that below are default arrow symbols
-
-    let g:NERDTreeDirArrows = 1
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
+" Command-mode abbreviation to replace the :edit Vim command.
+cnoreabbrev e Edit
+```

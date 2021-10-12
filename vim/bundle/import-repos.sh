@@ -136,11 +136,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
     import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig 68f8136d
     #import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
-    import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 5.0.0
+    import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 6.10.16
     import_repo "https://github.com/iamcco/markdown-preview.nvim.git" markdown-preview e5bfe9b
     import_repo "https://github.com/weynhamz/vim-plugin-minibufexpl.git" minibufexpl 349a9fb
     import_repo "https://github.com/mustache/vim-mustache-handlebars.git" mustache fcc1401
-    import_repo "https://github.com/rodjek/vim-puppet.git" puppet b2ae19b3
+    import_repo "https://github.com/rodjek/vim-puppet.git" puppet 980147f
     import_repo "https://github.com/vim-python/python-syntax.git" python-syntax c1c5baf
     import_repo "https://github.com/ciaranm/securemodelines.git" securemodelines 9751f29
     import_repo "https://github.com/tmhedberg/SimpylFold.git" SimpylFold aa0371d9
