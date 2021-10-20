@@ -1,0 +1,24 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Defaults
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Yaml files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown treats trailing whitespace special
+[*.md]
+trim_trailing_whitespace = false
+
+# Script Editor uses tabs
+[*.applescript]
+indent_style = tab

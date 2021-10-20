@@ -26,3 +26,4 @@ tell application "Microsoft Outlook"
 end tell
 
 log "Deleted " & delete_count & " messages"
+
