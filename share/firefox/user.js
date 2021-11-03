@@ -199,6 +199,9 @@ user_pref("browser.compactmode.show", true);
 // But always make it compact
 user_pref("browser.uidensity", 1);
 
+// Don't warn when I quit firefox (new undocumented "feature" of FF 94
+user_pref("browser.warnOnQuitShortcut", false);
+
 
 // -- Developer Tools settings --
 user_pref("devtools.theme", "dark");
