@@ -116,7 +116,7 @@ function clean_dir() {
         log "Cleaning ${source_dir}"
         cd "${source_dir}"
         find . -type f -mtime +"${days}" -not -name ".gitignore" -print0 \
-            | xargs ${xargs_opts} rm -f
+            | xargs "${xargs_opts[@]}" rm -f
     else
         log "${source_dir} is not a directory" >&2
         exit 100
@@ -136,15 +136,19 @@ if [[ "$*" == "install" ]]; then
 else
     # We use xargs here in case there's a lot of files to delete and rm can't
     # handle a lot of files at once.
-    xargs_opts='-n 200 -0'
+    xargs_opts=(-n 200 -0)
     if [[ "$(uname -s)" != 'Darwin' ]]; then
         # Not on mac so should have the "-r" option available
-        xargs_opts="${xargs_opts} -r"
+        xargs_opts+=(-r)
     fi
 
-    clean_dir "${backup_dir}"
-    clean_dir "${undo_dir}"
+    clean_dir "${backup_dir}" &
+    clean_dir "${undo_dir}" &
 fi
+
+
+verbose "Waiting for background tasks to finish"
+wait
 
 log "Finished"
 
