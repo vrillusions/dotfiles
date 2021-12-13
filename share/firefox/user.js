@@ -111,7 +111,12 @@ user_pref("browser.startup.page", 3);
 
 // Set default search engine since something keeps changing it
 user_pref("browser.search.defaultenginename", "DuckDuckGo");
-user_pref("browser.search.defaultenginename.US",. "DuckDuckGo");
+user_pref("browser.search.defaultenginename.US", "DuckDuckGo");
+// At least as of v95 (possibly older) above options don't seem to do anything and are
+// actually controlled by these.  Though sometimes even with these set the search gets
+// set to something else.
+user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
+user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
 
 // Open searches in new tab
 user_pref("browser.search.openintab", true);
