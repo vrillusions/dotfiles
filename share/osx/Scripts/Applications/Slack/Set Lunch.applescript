@@ -1,3 +1,5 @@
+-- requires: https://github.com/samknight/slack_applescript
+
 tell script "Slack"
 	focus workspace "IBM Watson Health"
 	
