@@ -11,7 +11,8 @@ tell script "Slack"
 	set status "Lunch" with icon ":lunch-break2:"
 	delay 0.5
 	pressReturn()
-	delay 0.25
+	-- it says it set the status but then doesn't so add some extra delay here
+	delay 2
 	set do not disturb for "12 hours"
 end tell
 
