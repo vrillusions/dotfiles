@@ -345,8 +345,11 @@ defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
 # Safari {{{1
 #####
 # Stop the 'try the new safari' popup (wtf apple?)
+defaults write com.apple.coreservices.uiagent CSUIHasSafariBeenLaunched -bool true
 defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
-defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 10.99
+defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 99.99
+defaults write com.apple.Safari DefaultBrowserDateOfLastPrompt -date '2050-01-01T00:00:00Z'
+defaults write com.apple.Safari DefaultBrowserPromptingState -int 2
 
 
 # Siri {{{1
