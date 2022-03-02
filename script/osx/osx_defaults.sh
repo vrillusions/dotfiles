@@ -304,6 +304,20 @@ defaults write com.apple.mail SpellCheckingBehavior -string "InlineSpellChecking
 defaults write com.apple.mail WebAutomaticSpellingCorrectionEnabled -bool false
 
 
+# Outlook {{{1
+defaults write com.microsoft.Outlook Compose_messages_in_HTML_by_default -bool false
+# Hide `My Computer` section
+defaults write com.microsoft.Outlook HideFoldersOnMyComputerRootInFolderList -bool true
+# Couldn't find pref for always use dark mode but with dark mode stil want white
+# background for emails or they don't look right
+defaults write com.microsoft.Outlook LightModePreferredForReadAndCompose -bool true
+defaults write com.microsoft.Outlook NumberOfSecondsBeforeMarkingAsRead -int 1
+# Add online meeting to all meetings
+defaults write com.microsoft.Outlook OLCalendarEveryMeetingOnline -bool true
+# Use build in Calendar application to show reminders
+defaults write com.microsoft.Outlook ShowReminders -bool false
+
+
 # Address Book {{{1
 #####
 # Enable debug menu in address book
