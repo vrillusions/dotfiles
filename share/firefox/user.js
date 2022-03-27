@@ -207,6 +207,11 @@ user_pref("browser.uidensity", 1);
 // Don't warn when I quit firefox (new undocumented "feature" of FF 94
 user_pref("browser.warnOnQuitShortcut", false);
 
+// Only needed for windows but don't have firefox handle magnet links
+// May need to manually set option in settings to your bittorent client
+// since I can't find the preference to change
+user_pref("network.protocol-handler.expose.magnet", false);
+
 
 // -- Developer Tools settings --
 user_pref("devtools.theme", "dark");
