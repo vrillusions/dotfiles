@@ -17,7 +17,6 @@ $BREW cask update
 
 $CASKIN 0xed
 $CASKIN appcleaner
-#$CASKIN audacity # N/A
 $CASKIN bitbar
 $CASKIN charlessoft-timetracker
 $CASKIN cyberduck
@@ -28,7 +27,6 @@ $CASKIN istumbler
 $CASKIN libreoffice
 ##$CASKIN logitech-control-center  # always have issues with this
 $CASKIN logitech-unifying
-$CASKIN onyx
 $CASKIN qlcolorcode
 $CASKIN qlimagesize
 $CASKIN qlmarkdown
@@ -36,7 +34,6 @@ $CASKIN qlstephen
 $CASKIN sequel-pro
 $CASKIN smcfancontrol
 $CASKIN sqlitebrowser
-$CASKIN torbrowser
 #$CASKIN wireshark  # gave install error
 $CASKIN wkhtmltopdf
 $CASKIN xca

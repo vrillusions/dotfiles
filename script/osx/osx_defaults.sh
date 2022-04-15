@@ -71,6 +71,7 @@ cp ~/dotfiles/share/fonts/Inconsolata.otf ~/Library/Fonts/
 # General {{{1
 #####
 # Enable dark mode
+# XXX: this didn't seem to work
 defaults write ${global_domain} AppleInterfaceStyle -string "dark"
 
 # Enable auto text substitution
