@@ -37,6 +37,7 @@ set vb                          " I really mean it
 set t_vb=                       " not a sound
 set scrolloff=3                 " start scrolling 3 lines before end
 set sidescrolloff=3             " same, but for columns
+set display+=lastline           " always try to show paragraph's last line
 set hidden                      " hide buffers when I switch
 set splitbelow                  " make new split behavior more 'natural'
 set splitright
@@ -48,6 +49,7 @@ set viminfo+=n~/.vim/.viminfo   " user directory in windows is ~/.vim as well fo
 set lazyredraw                  " don't redraw screen so often
 set foldlevel=1                 " close all but top folds
 set complete+=kspell            " complete with current spelling word list
+set nrformats=alpha             " removes octal and hex and adds alpha for ctrl-a/x
 
 " Format options {{{1
 set formatoptions+=1            " don't wrap on a single letter
