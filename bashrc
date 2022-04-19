@@ -155,6 +155,8 @@ alias la='ls -aF'
 alias lf='ls -FA'
 alias ll='ls -lAF'
 
+alias dc='docker-compose'
+
 # Default to gpg v2 if it exists
 command -v gpg2 2>/dev/null && alias gpg=gpg2
 

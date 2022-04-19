@@ -143,6 +143,8 @@ fi
 alias tf=terraform
 # fyi <esc>-h will run help on command cursor is on
 alias help=run-help
+# alias for docker-compose
+alias dc=docker-compose
 
 # suffix aliases {{{2
 alias -s tfvar=vim
