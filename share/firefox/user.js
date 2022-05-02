@@ -63,6 +63,10 @@ user_pref("network.http.speculative-parallel-limit", 0);
 // Don't prefetch links that say they should be prefetched
 user_pref("network.prefetch-next", false);
 
+// Or any other prefetch options I can find in config
+user_pref("network.dns.disablePrefetchFromHTTPS", true);
+user_pref("network.predictor.enable-prefetch", false);
+
 // Enable tracking protection (blocks sites that track visits across web)
 user_pref("privacy.trackingprotection.enabled", true);
 user_pref("privacy.trackingprotection.ui.enabled", true);
@@ -92,6 +96,13 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", 
 
 // Don't suggest sponsored content
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+
+// Don't promote vpn everywhere
+user_pref("browser.contentblocking.report.hide_vpn_banner", true);
+user_pref("browser.vpn_promo.enabled", false);
+
+// Disable toolkit telemetry
+user_pref("toolkit.telemetry.enabled", false);
 
 // Set rel=noopener for target=_blank (search for nooperner for reasoning) (in v65)
 user_pref("dom.targetBlankNoOpener.enabled", true);
