@@ -134,7 +134,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     import_repo "https://github.com/ConradIrwin/vim-bracketed-paste" bracketed-paste c4c639f3c
     #import_repo "https://github.com/ngn/vim-buf.git" vim-buf 3048e7b
     import_repo "https://github.com/kien/ctrlp.vim.git" ctrlp 1.79
-    import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig 68f8136d
+    import_repo "https://github.com/editorconfig/editorconfig-vim.git" editorconfig v1.1.1
     #import_repo "https://github.com/thinca/vim-localrc.git" localrc v0.2.0
     import_repo "https://github.com/scrooloose/nerdtree.git" nerdtree 6.10.16
     import_repo "https://github.com/iamcco/markdown-preview.nvim.git" markdown-preview e5bfe9b
