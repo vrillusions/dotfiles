@@ -134,7 +134,8 @@ defaults write ${global_domain} InitialKeyRepeat -int 15
 defaults write ${global_domain} KeyRepeat -int 2
 
 # Reduce motion (does a more subtle fade instead of stuff moving around)
-defaults write com.apple.universalaccess reduceMotion -bool true
+echo "FIXME: This gives a permission denied error"
+defaults write com.apple.universalaccess reduceMotion -bool true || true
 
 # Show all extensions
 defaults write ${global_domain} AppleShowAllExtensions -bool true

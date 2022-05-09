@@ -2,7 +2,7 @@
 # Auto complete {{{2
 autoload -Uz bashcompinit && bashcompinit
 # Homebrew part must be set before calling compinit
-if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
+if [ ! command -v brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 autoload -Uz compinit && compinit
@@ -13,7 +13,7 @@ unalias run-help 2>/dev/null || true
 autoload run-help
 
 # Syntax highlighting {{{2
-if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+if [ ! command -v brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
