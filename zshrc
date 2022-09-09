@@ -199,6 +199,23 @@ fi
 export PATH
 
 
+# zsh plugins {{{1
+# zoxide {{{2
+if command -v zoxide 1>/dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
+# zsh-autosuggestions (requires brew)
+if command -v brew info 1>/dev/null; then
+    # brew install zsh-autosuggestions
+    _autosuggestions_script="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    if [[ -r "$_autosuggestions_script" ]]; then
+        source ${_autosuggestions_script}
+    fi
+    unset _autosuggestions_script
+fi
+
+
 # Local settings if found {{{1
 if [[ -f "${ZDOTDIR:-$HOME}/.zshrc_local" ]]; then
     source ${ZDOTDIR:-$HOME}/.zshrc_local
