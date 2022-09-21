@@ -21,6 +21,16 @@ readonly script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #     <replace string> <replace with>
 replacements_file="${script_dir}/replacements.txt"
 
+# User dictionary file at least in Montery is located elsewhere
+# starting with montery (maybe older)
+text_replacements_db="/Users/teddy/Library/KeyboardServices/TextReplacements.db"
+# before montery
+#text_replacements_db="~/Library/Dictionaries/CoreDataUbiquitySupport/$USER~*/UserDictionary/local/store/UserDictionary.db"
+
+
+echo "This hasn't been updated for Mac OS Montery" >&2
+exit 1
+
 
 echo "WARNING THE FOLLOWING IS A DESTRUCTIVE PROCESS"
 echo "This will wipe all current text replacements and replace with the"
