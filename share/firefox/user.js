@@ -223,6 +223,12 @@ user_pref("browser.warnOnQuitShortcut", false);
 // since I can't find the preference to change
 user_pref("network.protocol-handler.expose.magnet", false);
 
+// Attempt to not default to webp images.  By default this is set to something
+// similar to 'image/webp,*/*' and now sets it to '*/*' so doesn't give priority
+// to webp but it will still download it if server provides it, which it could
+// determine via user agent
+user_pref("image.http.accept", "*/*");
+
 
 // -- Developer Tools settings --
 user_pref("devtools.theme", "dark");
