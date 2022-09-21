@@ -1,6 +1,10 @@
 # Plugins {{{1
 # Auto complete {{{2
 autoload -Uz bashcompinit && bashcompinit
+# Unsure why homebrew isn't being initialized, more like how this ever worked unless it was via bash completion
+if [[ -f '/opt/homebrew/bin/brew' ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 # Homebrew part must be set before calling compinit
 if [ ! command -v brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
