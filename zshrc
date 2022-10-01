@@ -184,6 +184,15 @@ if [[ $OSTYPE =~ '^darwin' ]]; then
     # For time being I've only run in to this on mac
     path=(/usr/local/sbin $path)
 
+    # -- experiment with TouchID for sudo --
+    sudo() {
+      unset -f sudo
+      if [[ "$(uname)" == 'Darwin' ]] && ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
+        sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
+      fi
+      sudo "$@"
+    }
+
     alias mvim='mvim --remote-silent'
     alias mvimstart='mvim ~/Documents/AppData/scratchpad.note ~/Documents/AppData/teddy.txt'
     alias vi=vim
