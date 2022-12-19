@@ -173,6 +173,11 @@ DISABLE_AUTO_TITLE="true"
 precmd_functions+=('update_terminal_tab')
 update_terminal_tab
 
+# Set namespace for kubectl {{{2
+kc_set_ns () {
+    kubectl config set-context --current --namespace="$@"
+}
+
 
 # OS X Specific {{{1
 if [[ $OSTYPE =~ '^darwin' ]]; then
