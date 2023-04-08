@@ -47,6 +47,7 @@ relink .bash         "${dotfiles}/bash"
 relink .bashrc       "${dotfiles}/bashrc"
 relink .bash_profile "${dotfiles}/bash_profile"
 relink .inputrc      "${dotfiles}/inputrc"
+relink .wgetrc      "${dotfiles}/wgetrc"
 
 relink .zshrc        "${dotfiles}/zshrc"
 

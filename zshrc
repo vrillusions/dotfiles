@@ -77,6 +77,15 @@ SAVEHIST=1000000
 HISTSIZE=10000000
 
 
+# Path hashing {{{1
+# Leaving commented out for now but may want to set these if I get command not found errors
+#setopt NO_HASH_DIRS
+#setopt NO_HASH_CMDS
+# Don't trust hash on command completion.  This may cause performance issues on slower machines
+# but those machines also don't have all this dotfiles stuff setup on it
+zstyle ":completion:*:commands" rehash 1
+
+
 # Prompt setting (((1
 PROMPT=$'%(?..%F{red}%?\n)%F{green}%n@%m%f:%F{blue}%~%f %# '
 
