@@ -9,6 +9,10 @@
  *
  * Any important changes you make in about:config should be transfered here in
  * case the generated file gets overwritten or reset
+ *
+ * This is the source file that lists every preference. Sometimes it will have
+ * comments explaining what a setting does.  Though not all the time.
+ * https://searchfox.org/mozilla-central/source/modules/libpref/init/StaticPrefList.yaml
  */
 
 // -- Security Options --
@@ -178,6 +182,16 @@ user_pref("media.autoplay.default", 5);
 // sound as you navigate around site.  Reloading a page will respect the
 // default autoplay option set above.  TL;DR: Don't expect it to always work.
 user_pref("media.autoplay.enabled.user-gestures-needed", true);
+// in v78 the above preference got changed to this.
+// 0 - sticky user gesture activation (default)
+// 1 - transient user gesture activation
+// 2 - click-to-play
+// ref: https://wiki.mozilla.org/Media/block-autoplay
+user_pref("media.autoplay.blocking_policy", 1);
+// wether to allow autoplay on extension background pages (default true)
+user_pref("media.autoplay.allow-extension-background-pages", false);
+// unsure on what this does but everyone says to enable it (default false)
+user_pref("media.autoplay.block-event.enabled", true);
 
 // FF 4.0 settings
 // When saving state between browser restarts it has saved session cookies for a
