@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>428</string>
+	<string>521.1</string>
 	<key>AMApplicationVersion</key>
-	<string>2.7</string>
+	<string>2.10</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -74,7 +74,11 @@
 
 IFS=$'\n'
 targdir=/Users/${USER}/Desktop
-pattern=Screen\ Shot\ ????-??-??\ at\ *M.png
+# In older versions of mac it was 'Screen Shot' instead of 'Screenshot'
+# in later versions. note you have to adjust some stuff in loop below
+# if you change this to something that adds or removes spaces
+#pattern=Screen\ Shot\ ????-??-??\ at\ *M.png
+pattern=Screenshot\ ????-??-??\ at\ *M.png
 
 
 cd $targdir
@@ -99,11 +103,19 @@ if [ $count -gt 0 ]; then
       # done
       #echo parts count: ${#parts}
 
-      fdate=${parts[2]}
-      ftime=${parts[4]}
+      # -- begin customizing based on file prefix --
+      # this is if prefix is 'Screen Shot'
+      #fdate=${parts[2]}
+      #ftime=${parts[4]}
+      #suffix=${parts[5]}
+      # -- this is if the prefix is 'Screenshot' --
+      fdate=${parts[1]}
+      ftime=${parts[3]}
+      suffix=${parts[4]}
+      # -- end customizing based on file prefix --
+      
       fdate=(${fdate//-/ })
       ftime=(${ftime//./ })
-      suffix=${parts[5]}
       suffix=${suffix:0:2}
       #echo suffix: ${suffix}
       if [[ $suffix =~ ^PM ]] ; then
@@ -190,9 +202,9 @@ fi</string>
 					<key>1</key>
 					<dict>
 						<key>default value</key>
-						<string></string>
+						<false/>
 						<key>name</key>
-						<string>source</string>
+						<string>CheckedForUserDefaultShell</string>
 						<key>required</key>
 						<string>0</string>
 						<key>type</key>
@@ -203,9 +215,9 @@ fi</string>
 					<key>2</key>
 					<dict>
 						<key>default value</key>
-						<false/>
+						<string></string>
 						<key>name</key>
-						<string>CheckedForUserDefaultShell</string>
+						<string>source</string>
 						<key>required</key>
 						<string>0</string>
 						<key>type</key>
@@ -243,9 +255,9 @@ fi</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.000000:253.000000</string>
+				<string>309.000000:834.000000</string>
 				<key>nibPath</key>
-				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<true/>
