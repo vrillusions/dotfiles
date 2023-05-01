@@ -2,11 +2,11 @@
 # Auto complete {{{2
 autoload -Uz bashcompinit && bashcompinit
 # Unsure why homebrew isn't being initialized, more like how this ever worked unless it was via bash completion
-if [[ -f '/opt/homebrew/bin/brew' ]]; then
+if [[ -x '/opt/homebrew/bin/brew' ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 # Homebrew part must be set before calling compinit
-if [ type brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
+if [ type brew &>/dev/null ] && [[ -r "$(brew --prefix)/share/zsh/site-functions" ]]; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 autoload -Uz compinit && compinit
@@ -15,13 +15,6 @@ autoload -Uz compinit && compinit
 # Don't complain if alias isn't set which happens when manually sourcing file in same terminal
 unalias run-help 2>/dev/null || true
 autoload run-help
-
-# Syntax highlighting {{{2
-if [ type brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
 
 
 # Init path variable to be used throughout file {{{1
@@ -133,14 +126,16 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 # pyenv {{{2
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
 path=(${PYENV_ROOT}/bin $path)
-if which pyenv >/dev/null; then
+if [ type pyenv &>/dev/null ]; then
     # this and above two lines should go in a zprofile I guess but haven't
     # had issues keeping everything in zshrc
     # until updated everywhere, hide error message
     eval "$(pyenv init --path)" 2>/dev/null || true
     eval "$(pyenv init -)"
 fi
-if which pyenv-virtualenv-init >/dev/null; then
+# the command on file system has the dash after pyenv but when running it
+# the dash is omitted.
+if [ type pyenv-virtualenv-init &>/dev/null ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
@@ -172,7 +167,7 @@ fi
 
 # global aliases {{{2
 # this is more an example, use a global alias to be able to pipe commands to it
-alias -g gp=grep
+#alias -g gp=grep
 
 
 # Functions {{{1
@@ -246,7 +241,7 @@ export PATH
 
 # zsh plugins {{{1
 # fzf (optional dependency of zoxide) {{{2
-[ -f "${XDG_CONFIG_HOME}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME}"/fzf/fzf.zsh
+[ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ] && source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
 
 # zoxide {{{2
 if [ type zoxide &>/dev/null ]; then
@@ -255,17 +250,27 @@ fi
 
 # zsh-autosuggestions (requires brew) {{{2
 if [ type brew &>/dev/null ]; then
+    _brew_prefix="$(brew --prefix)"
     # brew install zsh-autosuggestions
-    _autosuggestions_script="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    _autosuggestions_script="${_brew_prefix}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     if [[ -r "$_autosuggestions_script" ]]; then
         source ${_autosuggestions_script}
     fi
     unset _autosuggestions_script
+
+    # Syntax highlighting {{{2
+    _syntax_highlighting_script="${_brew_prefix}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    if [[ -r "${_syntax_highlighting_script}" ]]; then
+        source ${_syntax_highlighting_script}
+    fi
+    unset _syntax_highlighting_script
+    unset _brew_prefix
 fi
 
 
+
 # Local settings if found {{{1
-if [[ -f "${ZDOTDIR:-$HOME}/.zshrc_local" ]]; then
+if [[ -r "${ZDOTDIR:-$HOME}/.zshrc_local" ]]; then
     source ${ZDOTDIR:-$HOME}/.zshrc_local
 fi
 
