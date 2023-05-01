@@ -1,13 +1,15 @@
 # Plugins {{{1
 # Auto complete {{{2
 autoload -Uz bashcompinit && bashcompinit
-# Unsure why homebrew isn't being initialized, more like how this ever worked unless it was via bash completion
-if [[ -x '/opt/homebrew/bin/brew' ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 # Homebrew part must be set before calling compinit
-if [ type brew &>/dev/null ] && [[ -r "$(brew --prefix)/share/zsh/site-functions" ]]; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+# At some point the past homebrew was set to /opt/homebrew/bin/brew instead of /usr/local/bin/brew and required
+# setting the full path
+if type brew &>/dev/null; then
+    eval "$(brew shellenv)"
+    _brew_prefix="$(brew --prefix)"
+    if [[ -d "${_brew_prefix}/share/zsh/site-functions" ]]; then
+        FPATH="${_brew_prefix}/share/zsh/site-functions:${FPATH}"
+    fi
 fi
 autoload -Uz compinit && compinit
 
@@ -126,7 +128,7 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 # pyenv {{{2
 export PYENV_ROOT="${HOME}/.local/share/pyenv"
 path=(${PYENV_ROOT}/bin $path)
-if [ type pyenv &>/dev/null ]; then
+if type pyenv &>/dev/null; then
     # this and above two lines should go in a zprofile I guess but haven't
     # had issues keeping everything in zshrc
     # until updated everywhere, hide error message
@@ -135,7 +137,7 @@ if [ type pyenv &>/dev/null ]; then
 fi
 # the command on file system has the dash after pyenv but when running it
 # the dash is omitted.
-if [ type pyenv-virtualenv-init &>/dev/null ]; then
+if type pyenv-virtualenv-init &>/dev/null; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
@@ -158,7 +160,7 @@ alias dc=docker-compose
 alias -s tfvar=vim
 
 # docker aliases {{{2
-if [ type docker &>/dev/null ]; then
+if type docker &>/dev/null; then
     alias dcon='docker context'
     alias dconls='docker context ls'
     alias dcons='docker context show'
@@ -244,13 +246,12 @@ export PATH
 [ -r "${XDG_CONFIG_HOME}/fzf/fzf.zsh" ] && source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
 
 # zoxide {{{2
-if [ type zoxide &>/dev/null ]; then
+if type zoxide &>/dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
 # zsh-autosuggestions (requires brew) {{{2
-if [ type brew &>/dev/null ]; then
-    _brew_prefix="$(brew --prefix)"
+if type brew &>/dev/null; then
     # brew install zsh-autosuggestions
     _autosuggestions_script="${_brew_prefix}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     if [[ -r "$_autosuggestions_script" ]]; then
