@@ -6,7 +6,7 @@ if [[ -f '/opt/homebrew/bin/brew' ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 # Homebrew part must be set before calling compinit
-if [ ! command -v brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
+if [ type brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 autoload -Uz compinit && compinit
@@ -17,7 +17,7 @@ unalias run-help 2>/dev/null || true
 autoload run-help
 
 # Syntax highlighting {{{2
-if [ ! command -v brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+if [ type brew &>/dev/null ] && [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -125,7 +125,6 @@ export HOMEBREW_NO_ANALYTICS=1
 #export HOMEBREW_GITHUB_API_TOKEN='set in .zshrc_local'
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
-export HOMEBREW_UPDATE_REPORT_ALL_FORMULAE=1
 
 # Node settings {{{2
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm-cache"
@@ -163,6 +162,14 @@ alias dc=docker-compose
 # suffix aliases {{{2
 alias -s tfvar=vim
 
+# docker aliases {{{2
+if [ type docker &>/dev/null ]; then
+    alias dcon='docker context'
+    alias dconls='docker context ls'
+    alias dcons='docker context show'
+    alias dconu='docker context use'
+fi
+
 # global aliases {{{2
 # this is more an example, use a global alias to be able to pipe commands to it
 alias -g gp=grep
@@ -198,15 +205,22 @@ if [[ $OSTYPE =~ '^darwin' ]]; then
     # For time being I've only run in to this on mac
     path=(/usr/local/sbin $path)
 
-    # -- experiment with TouchID for sudo --
-    sudo() {
-      unset -f sudo
-      if [[ "$(uname)" == 'Darwin' ]] && ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
-        sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
-      fi
-      sudo "$@"
-    }
-
+    # -- use TouchID for sudo --
+    # Only issue I've run in to is if the computer does not have it this really confuses things when
+    # in recovery mode and using terminal.  Also this may be buggy when you have more than one user
+    # as it only goes by if the first user has setup touchid
+    declare -i touchid_count
+    touchid_count=$(bioutil -c | awk '/fingerprint/ {print $3}' | head -1)
+    if [[ $touchid_count > 0 ]]; then
+        sudo() {
+            unset -f sudo
+            if [[ "$(uname)" == 'Darwin' ]] && ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
+                sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
+            fi
+            sudo "$@"
+        }
+    fi
+    unset _autosuggestions_script
     alias mvim='mvim --remote-silent'
     alias mvimstart='mvim ~/Documents/AppData/scratchpad.note ~/Documents/AppData/teddy.txt'
     alias vi=vim
@@ -214,6 +228,10 @@ fi
 
 
 # Add extra paths {{{1
+# Don't use this much but this is the offical user bin directory according to XDG Base Directory
+if [[ -d "${HOME}/.local/bin" ]]; then
+    path=(${HOME}/.local/bin $path)
+fi
 if [[ -d "${HOME}/bin" ]]; then
     path=(${HOME}/bin $path)
 fi
@@ -227,13 +245,16 @@ export PATH
 
 
 # zsh plugins {{{1
+# fzf (optional dependency of zoxide) {{{2
+[ -f "${XDG_CONFIG_HOME}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME}"/fzf/fzf.zsh
+
 # zoxide {{{2
-if command -v zoxide 1>/dev/null; then
+if [ type zoxide &>/dev/null ]; then
     eval "$(zoxide init zsh)"
 fi
 
-# zsh-autosuggestions (requires brew)
-if command -v brew info 1>/dev/null; then
+# zsh-autosuggestions (requires brew) {{{2
+if [ type brew &>/dev/null ]; then
     # brew install zsh-autosuggestions
     _autosuggestions_script="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     if [[ -r "$_autosuggestions_script" ]]; then
