@@ -12,6 +12,11 @@ if type brew &>/dev/null; then
     fi
 fi
 autoload -Uz compinit && compinit
+# I keep swapping between turning this on and off but mention the option here since it took a bit to find the
+# correct command to enable this
+# Uses a menu style of completion vs needing to mash tab a bunch of times
+#zstyle ':completion:*' menu yes select
+
 
 # Run help {{{2
 # Don't complain if alias isn't set which happens when manually sourcing file in same terminal
@@ -194,7 +199,12 @@ kc_set_ns () {
 
 # OS X Specific {{{1
 if [[ $OSTYPE =~ '^darwin' ]]; then
+    # this disables copying '._*' files which aren't needed and just an annoyance on other OSes
     export COPYFILE_DISABLE=1
+    # disables ~/.zsh_sessions/ files as they're empty anyway because of the append history options
+    # NOTE: This won't work.  The below line must be placed in ~/.zprofile in order to be set before
+    # mac loads the system zshrc file
+    export SHELL_SESSIONS_DISABLE=1
 
     if [ -d '/Applications/MacVim.app/Contents/bin' ]; then
         path=(/Applications/MacVim.app/Contents/bin $path)
