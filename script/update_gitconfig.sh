@@ -39,6 +39,8 @@ log () {
 # these are both formated as regexp OR such as:
 #   (signingkey|email)
 # sections to exclude, don't include the []s
+# TODO: Not sure how the section exclusion works other than the actual
+# name of section itself.
 exclude_sections='(maintenance)'
 # keys to exclude, note this currently will check for key under any section
 exclude_keys='(signingkey|email|repo )'
@@ -72,8 +74,8 @@ else
     read -n 1 -p "Continue?" __unused
 fi
 
-diff -u -B <(grep -vE '^\s*(signingkey|email)' gitconfig) \
-    <(grep -vE '^\s*(signingkey|email)' gitconfig.versioned) \
+diff -u -B <(grep -vE "^\s*${exclude_keys}" gitconfig) \
+    <(grep -vE "^\s*${exclude_keys}" gitconfig.versioned) \
     | patch --no-backup-if-mismatch -p2 gitconfig
 
 log "Change finished successfully"
