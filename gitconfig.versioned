@@ -5,6 +5,8 @@
 [core]
 	# Set autocrlf to true if on windows
 	autocrlf = input
+[init]
+	defaultBranch = master
 [color]
 	ui = auto
 [diff]
