@@ -111,6 +111,10 @@ user_pref("toolkit.telemetry.enabled", false);
 // Set rel=noopener for target=_blank (search for nooperner for reasoning) (in v65)
 user_pref("dom.targetBlankNoOpener.enabled", true);
 
+// Enable global privacy control (v120+)
+user_pref("privacy.globalprivacycontrol.enabled", true);
+user_pref("privacy.globalprivacycontrol.was_ever_enabled", true);
+
 
 // -- Other UI tweaks not related to performance articles below --
 // Don't use new tab page
