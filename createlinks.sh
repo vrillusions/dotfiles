@@ -88,7 +88,7 @@ cd "${XDG_CONFIG_HOME}/screen" && relink screenrc "${dotfiles}/screenrc"
 create_dir "${XDG_CONFIG_HOME}/yamllint"
 cd "${XDG_CONFIG_HOME}/yamllint" && relink config "${dotfiles}/yamllint-config.yml"
 
-# put yamllint config in XDG directory
+# put yt-dlp config in XDG directory
 create_dir "${XDG_CONFIG_HOME}/yt-dlp"
 cd "${XDG_CONFIG_HOME}/yt-dlp" && relink config "${dotfiles}/yt-dlp.conf"
 
